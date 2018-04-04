@@ -8,6 +8,8 @@ public class Main {
 
         EntitySet entitySet = new EntitySet(20);
 
+        System.out.println("test");
+
         MasterSquirrel masterSquirrel = new MasterSquirrel(
                 0, 1000, new XY(random.nextInt(50), random.nextInt(50))) {
             @Override
