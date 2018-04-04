@@ -6,8 +6,6 @@ public class Main {
 
         Random random = new Random();
 
-        System.out.println("Test");
-
         EntitySet entitySet = new EntitySet(20);
 
         MasterSquirrel masterSquirrel = new MasterSquirrel(
