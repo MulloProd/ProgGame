@@ -30,13 +30,6 @@ public abstract class Entity {
     }
 
     public String toString(){
-        if (this instanceof MiniSquirrel){
-            return "MiniSquirrel";
-        }
-        else if(this instanceof MasterSquirrel){
-            return "MasterSquirrel";
-        }
-
-        return "test";
+        return this.getClass().getSuperclass().getSimpleName() + ", Energy: " + energy + "/" + startEnergy + ", Pos: " + position.X + "/" + position.Y;
     }
 }
