@@ -1,0 +1,6 @@
+
+*.xml
+*.class
+*.class
+out/production/ProgGame/Entity.class
+*.class

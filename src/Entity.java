@@ -1,8 +1,8 @@
 public abstract class Entity {
-    protected final int ID;
-    protected int energy;
-    protected final int startEnergy;
-    protected XY position;
+    private final int ID;
+    private int energy;
+    private final int startEnergy;
+    private XY position;
 
     public Entity(int id, int energy, XY position) {
         ID = id;
@@ -22,12 +22,19 @@ public abstract class Entity {
     }
 
     public void setEnergy(int newEnergy){
+<<<<<<< HEAD
         energy = newEnergy;
         toString("Die neue Energie von " + this.getClass().getSimpleName() + " beträgt " + newEnergy + ".\n");
     }
 
     public int getID() {
         return ID;
+=======
+        if(newEnergy < startEnergy)
+            energy = newEnergy;
+        else
+            energy = newEnergy;
+>>>>>>> 52c1d1a71a927899be529fbac1f44c06765cfa0a
     }
 
     public int AddEnergy(int value){
@@ -40,6 +47,10 @@ public abstract class Entity {
             energy = startEnergy;
             return difference;
         }
+    }
+
+    public int getID() {
+        return ID;
     }
 
     public String toString(){
