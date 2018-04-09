@@ -1,8 +1,9 @@
+import java.io.IOException;
 import java.util.Random;
 
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
 
         Random random = new Random();
 
@@ -22,11 +23,16 @@ public class Main {
 
         System.out.println(entitySet.toString());
 
-        masterSquirrel.sendEnergy(miniSquirrel, 20);
+        miniSquirrel.setEnergy(20);
 
         System.out.println(entitySet.toString());
 
+        masterSquirrel.sendEnergy(miniSquirrel, 70);
 
-        //HandOperatedMasterSquirrel.catchOperation();
+        System.out.println(entitySet.toString());
+
+        HandOperatedMasterSquirrel.catchOperation();
+
+        System.out.println(entitySet.toString());
     }
 }

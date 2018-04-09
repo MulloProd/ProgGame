@@ -23,20 +23,30 @@ public abstract class Entity {
 
     public void setEnergy(int newEnergy){
         energy = newEnergy;
+        toString("Die neue Energie von " + this.getClass().getSimpleName() + " beträgt " + newEnergy + ".\n");
     }
 
     public int getID() {
         return ID;
     }
 
-    public void AddEnergy(int value){
-        if(energy + value < startEnergy)
+    public int AddEnergy(int value){
+        if(energy + value < startEnergy) {
             energy += value;
-        else
+            return 0;
+        }
+        else{
+            int difference = energy + value - startEnergy;
             energy = startEnergy;
+            return difference;
+        }
     }
 
     public String toString(){
         return this.getClass().getSimpleName() + ", Energy: " + energy + "/" + startEnergy + ", Pos: " + position.X + "/" + position.Y;
+    }
+
+    private static void toString(String string){
+        System.out.println(string);
     }
 }

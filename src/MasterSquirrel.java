@@ -12,15 +12,27 @@ public class MasterSquirrel extends Entity{
         if(checkSquirrel(entity)){
             MiniSquirrel miniSquirrel = (MiniSquirrel) entity;
 
-            miniSquirrel.AddEnergy(miniEnergy);
+            int difference = miniSquirrel.AddEnergy(miniEnergy);
 
-            AddEnergy(-miniEnergy);
+            if(difference>0) {
+                AddEnergy(-(miniSquirrel.startEnergy-difference));
+                toString("Mastersquirrel übergibt " + (miniSquirrel.startEnergy-difference) + " Energie an Minisquirrel.\n");
+            }
+            else {
+                AddEnergy(-miniEnergy);
+                toString("Mastersquirrel übergibt " + miniEnergy + " Energie an Minisquirrel.\n");
+            }
+
         }
     }
 
     @Override
     public void nextStep() {
 
+    }
+
+    private static void toString(String string){
+        System.out.println(string);
     }
 
 }
