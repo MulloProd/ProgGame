@@ -17,6 +17,7 @@ public class Main {
 
         entitySet.addEntity(masterSquirrel);
         entitySet.addEntity(miniSquirrel);
+        entitySet.addEntity(miniSquirrel2);
         entitySet.deleteEntity(miniSquirrel2);
 
         System.out.println(entitySet.toString());

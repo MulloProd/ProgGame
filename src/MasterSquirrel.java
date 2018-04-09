@@ -1,7 +1,7 @@
 public class MasterSquirrel extends Entity{
 
     public MasterSquirrel(int id, int energy, XY position) {
-        super(id, 1000, position);
+        super(id, energy, position);
     }
 
     public boolean checkSquirrel(Entity entity){
@@ -12,16 +12,9 @@ public class MasterSquirrel extends Entity{
         if(checkSquirrel(entity)){
             MiniSquirrel miniSquirrel = (MiniSquirrel) entity;
 
-            //(miniSquirrel.getEnergie()+ energie>=100)?MiniSquirrel.setEnergie(100):MiniSquirrel.setEnergie(MiniSquirrel.energie + energie);
+            miniSquirrel.AddEnergy(miniEnergy);
 
-            if(miniSquirrel.getEnergy()+ miniEnergy>=100){
-                miniSquirrel.setEnergy(100);
-            }
-            else{
-                miniSquirrel.setEnergy(miniSquirrel.energy + miniEnergy);
-            }
-
-            energy -= energy - miniEnergy;
+            AddEnergy(-miniEnergy);
         }
     }
 
