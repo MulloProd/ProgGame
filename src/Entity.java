@@ -21,6 +21,10 @@ public abstract class Entity {
         return energy;
     }
 
+    public void setEnergy(int newEnergy){
+        energy = newEnergy;
+    }
+
     public int getID() {
         return ID;
     }

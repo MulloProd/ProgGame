@@ -1,6 +1,4 @@
-public abstract class MasterSquirrel extends Entity{
-
-    public static int energie;
+public class MasterSquirrel extends Entity{
 
     public MasterSquirrel(int id, int energy, XY position) {
         super(id, 1000, position);
@@ -10,27 +8,26 @@ public abstract class MasterSquirrel extends Entity{
         return entity instanceof MiniSquirrel;
     }
 
-    public static void setEnergie(int newEnergie){
-        energie = newEnergie;
-    }
-
-    public int getEnergie(){
-        return energie;
-    }
-
-    public void sendEnergie(Entity entity, int energie){
+    public void sendEnergy(Entity entity, int miniEnergy){
         if(checkSquirrel(entity)){
             MiniSquirrel miniSquirrel = (MiniSquirrel) entity;
 
             //(miniSquirrel.getEnergie()+ energie>=100)?MiniSquirrel.setEnergie(100):MiniSquirrel.setEnergie(MiniSquirrel.energie + energie);
 
-            if(miniSquirrel.getEnergie()+ energie>=100){
-                MiniSquirrel.setEnergie(100);
+            if(miniSquirrel.getEnergy()+ miniEnergy>=100){
+                miniSquirrel.setEnergy(100);
             }
             else{
-                MiniSquirrel.setEnergie(MiniSquirrel.energie + energie);
+                miniSquirrel.setEnergy(miniSquirrel.energy + miniEnergy);
             }
+
+            energy -= energy - miniEnergy;
         }
+    }
+
+    @Override
+    public void nextStep() {
+
     }
 
 }

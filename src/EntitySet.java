@@ -2,7 +2,6 @@ public class EntitySet {
 
     private Entity[] set;
     private int length;
-    private int test;
 
     public EntitySet (int length){
         set = new Entity[length];
