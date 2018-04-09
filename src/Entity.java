@@ -29,11 +29,14 @@ public abstract class Entity {
         return ID;
     }
 
-    public void UpdateEnergy(int value){
-        energy += value;
+    public void AddEnergy(int value){
+        if(energy + value < startEnergy)
+            energy += value;
+        else
+            energy = startEnergy;
     }
 
     public String toString(){
-        return this.getClass().getSuperclass().getSimpleName() + ", Energy: " + energy + "/" + startEnergy + ", Pos: " + position.X + "/" + position.Y;
+        return this.getClass().getSimpleName() + ", Energy: " + energy + "/" + startEnergy + ", Pos: " + position.X + "/" + position.Y;
     }
 }
