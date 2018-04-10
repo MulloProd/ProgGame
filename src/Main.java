@@ -36,5 +36,14 @@ public class Main {
         masterSquirrel.nextStep();
 
         System.out.println(entitySet.toString());
+
+        while(true){
+
+            char op = (char)System.in.read();
+            System.in.read(new byte[System.in.available()]);
+
+            if(op == '\r' || op == '\n')
+                entitySet.nextStep();
+        }
     }
 }

@@ -29,7 +29,8 @@ public class EntitySet {
 
     public void nextStep() throws IOException {
         for(Entity e : set){
-            e.nextStep();
+            if(e!=null)
+                e.nextStep();
         }
     }
 
