@@ -24,27 +24,22 @@ public class Main {
         entitySet.addEntity(badPlant);
 
         System.out.println(entitySet.toString());
+
+        //Loeschen einer Entity
         entitySet.deleteEntity(miniSquirrel2);
-
         System.out.println(entitySet.toString());
+
+        //Energie setzen einer Entity
         miniSquirrel.setEnergy(20);
-
         System.out.println(entitySet.toString());
+
+        //Energie senden
         masterSquirrel.sendEnergy(miniSquirrel, 80);
-
-        System.out.println(entitySet.toString());
-        masterSquirrel.nextStep();
-
         System.out.println(entitySet.toString());
 
         while(true){
-
-            char op = (char)System.in.read();
-            System.in.read(new byte[System.in.available()]);
-
-            if(op == '\r' || op == '\n')
-                entitySet.nextStep();
-
+            entitySet.nextStep();
+            System.out.println(entitySet.toString());
 
             if(masterSquirrel.testTile() != null){
                 Entity other = masterSquirrel.testTile();
