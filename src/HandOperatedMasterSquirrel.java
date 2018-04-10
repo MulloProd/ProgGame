@@ -13,19 +13,19 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
             System.in.read(new byte[System.in.available()]);
 
             switch (op){
-                case '4':
+                case ('a'):
                     toString("LEFT");
                     position = position.ADD(new XY(-1,0));
                     return;
-                case '6':
+                case ('d'):
                     toString("RIGHT");
                     position = position.ADD(new XY(1,0));
                     return;
-                case '8':
+                case ('w'):
                     toString("UP");
                     position = position.ADD(new XY(0,1));
                     return;
-                case '2':
+                case ('s'):
                     toString("DOWN");
                     position = position.ADD(new XY(0,-1));
                     return;
