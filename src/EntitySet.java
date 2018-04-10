@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class EntitySet {
 
     private Entity[] set;
@@ -25,7 +27,7 @@ public class EntitySet {
         }
     }
 
-    public void nextStep(){
+    public void nextStep() throws IOException {
         for(Entity e : set){
             e.nextStep();
         }

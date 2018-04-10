@@ -1,12 +1,12 @@
 import java.io.IOException;
 
-public abstract class HandOperatedMasterSquirrel extends MasterSquirrel {
+public class HandOperatedMasterSquirrel extends MasterSquirrel {
 
     public HandOperatedMasterSquirrel(int id, int energy, XY position) {
         super(id, energy, position);
     }
 
-    public static void catchOperation() throws IOException {
+    public void nextStep() throws IOException {
 
         while(true){
             char op = (char)System.in.read();

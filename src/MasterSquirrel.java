@@ -1,4 +1,6 @@
-public class MasterSquirrel extends Entity{
+import java.io.IOException;
+
+public abstract class MasterSquirrel extends Entity{
 
     public MasterSquirrel(int id, int energy, XY position) {
         super(id, energy, position);
@@ -25,10 +27,8 @@ public class MasterSquirrel extends Entity{
         }
     }
 
-    @Override
-    public void nextStep() {
 
-    }
+
 
     private static void toString(String string){
         System.out.println(string);

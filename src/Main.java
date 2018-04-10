@@ -9,32 +9,31 @@ public class Main {
 
         EntitySet entitySet = new EntitySet(20);
 
-        MasterSquirrel masterSquirrel = new MasterSquirrel(
-                0, 1000, new XY(random.nextInt(50), random.nextInt(50)));
-        MiniSquirrel miniSquirrel = new MiniSquirrel(
-                1, 50, new XY(random.nextInt(50), random.nextInt(50)), masterSquirrel);
-        MiniSquirrel miniSquirrel2 = new MiniSquirrel(
-                2, 50, new XY(random.nextInt(50), random.nextInt(50)), masterSquirrel);
+        MasterSquirrel masterSquirrel = new HandOperatedMasterSquirrel(0, 1000, new XY(random.nextInt(50), random.nextInt(50)));
+        MiniSquirrel miniSquirrel = new MiniSquirrel(1, 50, new XY(random.nextInt(50), random.nextInt(50)), masterSquirrel);
+        MiniSquirrel miniSquirrel2 = new MiniSquirrel(2, 50, new XY(random.nextInt(50), random.nextInt(50)), masterSquirrel);
+        GoodPlant goodPlant = new GoodPlant(3, 20, new XY(random.nextInt(50), random.nextInt(50)));
+        GoodPlant goodPlant2 = new GoodPlant(4, 10, new XY(random.nextInt(50), random.nextInt(50)));
+        BadPlant badPlant = new BadPlant(5, 20, new XY(random.nextInt(50), random.nextInt(50)));
 
         entitySet.addEntity(masterSquirrel);
         entitySet.addEntity(miniSquirrel);
         entitySet.addEntity(miniSquirrel2);
+        entitySet.addEntity(goodPlant);
+        entitySet.addEntity(goodPlant2);
+        entitySet.addEntity(badPlant);
 
         System.out.println(entitySet.toString());
-
         entitySet.deleteEntity(miniSquirrel2);
 
         System.out.println(entitySet.toString());
-
         miniSquirrel.setEnergy(20);
 
         System.out.println(entitySet.toString());
-
         masterSquirrel.sendEnergy(miniSquirrel, 80);
 
         System.out.println(entitySet.toString());
-
-        HandOperatedMasterSquirrel.catchOperation();
+        masterSquirrel.nextStep();
 
         System.out.println(entitySet.toString());
     }

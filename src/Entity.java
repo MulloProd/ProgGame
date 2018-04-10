@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public abstract class Entity {
     private final int ID;
     private int energy;
@@ -11,7 +13,7 @@ public abstract class Entity {
         this.position = position;
     }
 
-    public abstract void nextStep();
+    public abstract void nextStep() throws IOException;
 
     public XY getPosition() {
         return position;
