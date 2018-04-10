@@ -5,6 +5,6 @@ public class BadBeast extends Entity {
 
     @Override
     public void nextStep() {
-        position.ADD(XY.RandomVector());
+        position = position.ADD(XY.RandomVector());
     }
 }

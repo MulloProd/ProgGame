@@ -15,6 +15,7 @@ public class Main {
         GoodPlant goodPlant = new GoodPlant(3, 20, new XY(21, 20));
         GoodPlant goodPlant2 = new GoodPlant(4, 10, new XY(random.nextInt(50), random.nextInt(50)));
         BadPlant badPlant = new BadPlant(5, 20, new XY(random.nextInt(50), random.nextInt(50)));
+        GoodBeast goodBeast = new GoodBeast(5, 20, new XY(random.nextInt(50), random.nextInt(50)));
 
         entitySet.addEntity(masterSquirrel);
         entitySet.addEntity(miniSquirrel);
@@ -22,6 +23,7 @@ public class Main {
         entitySet.addEntity(goodPlant);
         entitySet.addEntity(goodPlant2);
         entitySet.addEntity(badPlant);
+        entitySet.addEntity(goodBeast);
 
         System.out.println(entitySet.toString());
 

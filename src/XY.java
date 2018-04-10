@@ -14,7 +14,7 @@ public final class XY {
     }
 
     public static XY RandomVector(){
-        XY temp = new XY(new Random().nextInt(1)-1, new Random().nextInt(1)-1);
+        XY temp = new XY(new Random().nextInt(3)-1, new Random().nextInt(3)-1);
         return temp;
     }
 }
