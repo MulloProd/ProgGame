@@ -27,7 +27,15 @@ public abstract class MasterSquirrel extends Entity{
         }
     }
 
+    public Entity testTile(){
+        for(Entity e : EntitySet.set){
+            if(e != null && e.position == position){
+                return e;
+            }
+        }
 
+        return null;
+    }
 
 
     private static void toString(String string){

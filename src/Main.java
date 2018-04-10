@@ -44,6 +44,25 @@ public class Main {
 
             if(op == '\r' || op == '\n')
                 entitySet.nextStep();
+
+
+            if(masterSquirrel.testTile() != null){
+                Entity other = masterSquirrel.testTile();
+                switch(other.getClass().getSimpleName()){
+                    case "GoodPlant":
+                        masterSquirrel.AddEnergy(other.getEnergy());
+                        break;
+                    case "BadPlant":
+                        masterSquirrel.AddEnergy(-other.getEnergy());
+                        break;
+                    case "GoodBeast":
+                        masterSquirrel.AddEnergy(other.getEnergy());
+                        break;
+                    case "BadBeast":
+                        masterSquirrel.AddEnergy(-other.getEnergy());
+                        break;
+                }
+            }
         }
     }
 }

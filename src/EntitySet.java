@@ -2,7 +2,7 @@ import java.io.IOException;
 
 public class EntitySet {
 
-    private Entity[] set;
+    public static Entity[] set;
     private int length;
 
     public EntitySet (int length){
