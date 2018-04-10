@@ -15,19 +15,19 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
             switch (op){
                 case ('a'):
                     toString("LEFT");
-                    position = position.ADD(new XY(-1,0));
+                    move(-1,0);
                     return;
                 case ('d'):
                     toString("RIGHT");
-                    position = position.ADD(new XY(1,0));
+                    move(1,0);
                     return;
                 case ('w'):
                     toString("UP");
-                    position = position.ADD(new XY(0,1));
+                    move(0,1);
                     return;
                 case ('s'):
                     toString("DOWN");
-                    position = position.ADD(new XY(0,-1));
+                    move(0,-1);
                     return;
                 default:
                     System.out.println("Keine Richtung ausgewählt!\nBitte erneut auswählen.");
@@ -36,6 +36,10 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
         }
 
 
+    }
+
+    private void move(int x, int y){
+        position = position.ADD(new XY(x,y));
     }
 
     private static void toString(String direction){
