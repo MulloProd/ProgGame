@@ -29,7 +29,7 @@ public abstract class MasterSquirrel extends Entity{
 
     public Entity testTile(){
         for(Entity e : EntitySet.set){
-            if(e != null && e.position == position){
+            if(e != null && e.position.X == position.X && e.position.Y == position.Y && !(e instanceof MasterSquirrel)){
                 return e;
             }
         }
