@@ -36,7 +36,7 @@ public abstract class Entity {
     }
 
     public int AddEnergy(int value){
-        if(energy + value < startEnergy) {
+        if(energy + value <= startEnergy) {
             energy += value;
             return 0;
         }

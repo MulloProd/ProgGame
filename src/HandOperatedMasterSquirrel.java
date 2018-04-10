@@ -35,7 +35,7 @@ public abstract class HandOperatedMasterSquirrel extends MasterSquirrel {
     }
 
     private static void toString(String direction){
-        System.out.println("Mastersquirrel turns: " + direction + "\n");
+        System.out.println("\nMastersquirrel turns: " + direction + "\n");
     }
 
 }

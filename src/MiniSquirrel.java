@@ -1,7 +1,13 @@
 public class MiniSquirrel extends MasterSquirrel {
 
-    public MiniSquirrel(int id, int energy, XY position) {
+    private MasterSquirrel masterSquirrel;
+
+    public MiniSquirrel(int id, int energy, XY position, MasterSquirrel masterSquirrel) {
         super(id, energy, position);
+
+        masterSquirrel.AddEnergy(-energy);
+
+        this.masterSquirrel = masterSquirrel;
     }
 
     @Override

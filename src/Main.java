@@ -12,13 +12,16 @@ public class Main {
         MasterSquirrel masterSquirrel = new MasterSquirrel(
                 0, 1000, new XY(random.nextInt(50), random.nextInt(50)));
         MiniSquirrel miniSquirrel = new MiniSquirrel(
-                1, 50, new XY(random.nextInt(50), random.nextInt(50)));
+                1, 50, new XY(random.nextInt(50), random.nextInt(50)), masterSquirrel);
         MiniSquirrel miniSquirrel2 = new MiniSquirrel(
-                2, 50, new XY(random.nextInt(50), random.nextInt(50)));
+                2, 50, new XY(random.nextInt(50), random.nextInt(50)), masterSquirrel);
 
         entitySet.addEntity(masterSquirrel);
         entitySet.addEntity(miniSquirrel);
         entitySet.addEntity(miniSquirrel2);
+
+        System.out.println(entitySet.toString());
+
         entitySet.deleteEntity(miniSquirrel2);
 
         System.out.println(entitySet.toString());
@@ -27,7 +30,7 @@ public class Main {
 
         System.out.println(entitySet.toString());
 
-        masterSquirrel.sendEnergy(miniSquirrel, 70);
+        masterSquirrel.sendEnergy(miniSquirrel, 80);
 
         System.out.println(entitySet.toString());
 
