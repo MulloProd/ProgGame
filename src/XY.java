@@ -9,11 +9,11 @@ public final class XY {
         Y = y;
     }
 
-    public XY ADD(XY vector){
+    public XY add(XY vector){
         return new XY(X+vector.X, Y+vector.Y);
     }
 
-    public static XY RandomVector(){
+    public static XY randomVector(){
         XY temp = new XY(new Random().nextInt(3)-1, new Random().nextInt(3)-1);
         return temp;
     }

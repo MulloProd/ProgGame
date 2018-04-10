@@ -2,6 +2,8 @@ import java.io.IOException;
 
 public class HandOperatedMasterSquirrel extends MasterSquirrel {
 
+
+
     public HandOperatedMasterSquirrel(int id, int energy, XY position) {
         super(id, energy, position);
     }
@@ -39,7 +41,7 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
     }
 
     private void move(int x, int y){
-        position = position.ADD(new XY(x,y));
+        setPosition(getPosition().add(new XY(x,y)));
     }
 
     private static void toString(String direction){

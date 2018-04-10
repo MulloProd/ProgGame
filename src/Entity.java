@@ -4,7 +4,7 @@ public abstract class Entity {
     private final int ID;
     private int energy;
     protected final int startEnergy;
-    protected XY position;
+    private XY position;
 
     public Entity(int id, int energy, XY position) {
         ID = id;
@@ -19,17 +19,12 @@ public abstract class Entity {
         return position;
     }
 
-    public int getEnergy() {
-        return energy;
+    public void setPosition(XY position){
+        this.position = position;
     }
 
-    public void setEnergy(int newEnergy){
-        energy = newEnergy;
-        toString("Die neue Energie von " + this.getClass().getSimpleName() + " beträgt " + newEnergy + ".\n");
-        if(newEnergy < startEnergy)
-            energy = newEnergy;
-        else
-            energy = newEnergy;
+    public int getEnergy() {
+        return energy;
     }
 
     public int getID() {
@@ -37,7 +32,7 @@ public abstract class Entity {
 
     }
 
-    public int AddEnergy(int value){
+    public int updateEnergy(int value){
         if(energy + value <= startEnergy) {
             energy += value;
             return 0;
@@ -53,7 +48,4 @@ public abstract class Entity {
         return this.getClass().getSimpleName() + ", Energy: " + energy + "/" + startEnergy + ", Pos: " + position.X + "/" + position.Y;
     }
 
-    private static void toString(String string){
-        System.out.println(string);
-    }
 }

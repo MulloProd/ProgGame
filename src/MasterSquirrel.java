@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public abstract class MasterSquirrel extends Entity{
 
     public MasterSquirrel(int id, int energy, XY position) {
@@ -14,14 +12,14 @@ public abstract class MasterSquirrel extends Entity{
         if(checkSquirrel(entity)){
             MiniSquirrel miniSquirrel = (MiniSquirrel) entity;
 
-            int difference = miniSquirrel.AddEnergy(miniEnergy);
+            int difference = miniSquirrel.updateEnergy(miniEnergy);
 
             if(difference>0) {
-                AddEnergy(-(miniEnergy-difference));
+                updateEnergy(-(miniEnergy-difference));
                 toString("Mastersquirrel übergibt " + (miniEnergy-difference) + " Energie an Minisquirrel.\n");
             }
             else {
-                AddEnergy(-miniEnergy);
+                updateEnergy(-miniEnergy);
                 toString("Mastersquirrel übergibt " + miniEnergy + " Energie an Minisquirrel.\n");
             }
         }
@@ -29,7 +27,7 @@ public abstract class MasterSquirrel extends Entity{
 
     public Entity testTile(){
         for(Entity e : EntitySet.set){
-            if(e != null && e.position.X == position.X && e.position.Y == position.Y && !(e instanceof MasterSquirrel)){
+            if(e != null && e.getPosition().X == getPosition().X && e.getPosition().Y == getPosition().Y && !(e instanceof MasterSquirrel)){
                 return e;
             }
         }

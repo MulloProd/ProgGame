@@ -16,7 +16,7 @@ public class Main {
         GoodPlant goodPlant2 = new GoodPlant(4, 10, new XY(random.nextInt(50), random.nextInt(50)));
         BadPlant badPlant = new BadPlant(5, 20, new XY(random.nextInt(50), random.nextInt(50)));
         GoodBeast goodBeast = new GoodBeast(5, 20, new XY(random.nextInt(50), random.nextInt(50)));
-        
+
 
         entitySet.addEntity(masterSquirrel);
         entitySet.addEntity(miniSquirrel);
@@ -26,14 +26,6 @@ public class Main {
         entitySet.addEntity(badPlant);
         entitySet.addEntity(goodBeast);
 
-        System.out.println(entitySet.toString());
-
-        //Loeschen einer Entity
-        entitySet.deleteEntity(miniSquirrel2);
-        System.out.println(entitySet.toString());
-
-        //Energie setzen einer Entity
-        miniSquirrel.setEnergy(20);
         System.out.println(entitySet.toString());
 
         //Energie senden
@@ -46,13 +38,13 @@ public class Main {
             if (masterSquirrel.testTile() != null) {
                 Entity other = masterSquirrel.testTile();
                 if (other instanceof GoodPlant) {
-                    masterSquirrel.AddEnergy(other.getEnergy());
+                    masterSquirrel.updateEnergy(other.getEnergy());
                 } else if (other instanceof BadPlant) {
-                    masterSquirrel.AddEnergy(-other.getEnergy());
+                    masterSquirrel.updateEnergy(-other.getEnergy());
                 } else if (other instanceof GoodBeast) {
-                    masterSquirrel.AddEnergy(other.getEnergy());
+                    masterSquirrel.updateEnergy(other.getEnergy());
                 } else if (other instanceof BadBeast) {
-                    masterSquirrel.AddEnergy(-other.getEnergy());
+                    masterSquirrel.updateEnergy(-other.getEnergy());
                 }
 
                 entitySet.deleteEntity(other);
