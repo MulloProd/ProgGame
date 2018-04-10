@@ -27,7 +27,8 @@ public class EntitySet {
 
     public void nextStep(){
         for(Entity e : set){
-            e.nextStep();
+            if(e!=null)
+                e.nextStep();
         }
     }
 
