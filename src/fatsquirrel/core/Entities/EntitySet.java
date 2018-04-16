@@ -1,34 +1,32 @@
 package fatsquirrel.core.Entities;
 
-import fatsquirrel.core.Entities.Entity;
+import javafx.collections.transformation.SortedList;
 
 import java.io.IOException;
+import java.util.*;
 
 public class EntitySet {
 
-    public static Entity[] set;
-    private int length;
+    public List<Entity> set = new ArrayList<Entity>();
 
-    public EntitySet (int length){
-        set = new Entity[length];
-        this.length = length;
-    }
-    public void addEntity(Entity newEntity){
-        for(int i = 0; i< length; i++){
-            if(set[i] == null){
-                set[i] = newEntity;
-                break;
-            }
+    public int getNextFreeID(){
+        int runner = 0;
+        for(int i=0;i<set.size();i++){
+            if(set.get(i).getID()>runner)
+                return runner;
+            else
+                runner++;
         }
+        return runner;
+    }
+
+    public void addEntity(Entity newEntity){
+        set.add(newEntity);
+        Collections.sort(set, (e1, e2) -> (e1.getID() > e2.getID()) ? 1 : -1);
     }
 
     public void deleteEntity(Entity oldEntity){
-        for(int i = 0; i<length; i++) {
-            if (i == oldEntity.getID()) {
-                set[i] = null;
-                break;
-            }
-        }
+        set.remove(oldEntity);
     }
 
     public void nextStep() throws IOException {
@@ -41,9 +39,9 @@ public class EntitySet {
     public String toString(){
         String allEntities = "";
 
-        for(int i = 0; i<length; i++){
-            if (set[i] != null) {
-                allEntities += set[i].toString() + "\n";
+        for(int i = 0; i<set.size(); i++){
+            if (set.get(i) != null) {
+                allEntities += set.get(i).toString() + "\n";
             }
         }
 

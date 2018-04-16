@@ -28,7 +28,7 @@ public abstract class MasterSquirrel extends Entity{
             }
         }
     }
-
+/*
     public Entity testTile(){
         for(Entity e : EntitySet.set){
             if(e != null && e.getPosition().X == getPosition().X && e.getPosition().Y == getPosition().Y && !(e instanceof MasterSquirrel)){
@@ -37,7 +37,7 @@ public abstract class MasterSquirrel extends Entity{
         }
 
         return null;
-    }
+    }*/
 
 
     private static void toString(String string){

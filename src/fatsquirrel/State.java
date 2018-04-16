@@ -1,6 +1,7 @@
 package fatsquirrel;
 
 import fatsquirrel.core.Board;
+import fatsquirrel.core.FlattenedBoard;
 
 public class State {
     private int Highscore;
@@ -20,5 +21,9 @@ public class State {
 
     public void setHighscore(int highscore) {
         Highscore = highscore;
+    }
+
+    public FlattenedBoard flattenedBoard(){
+        return board.flatten();
     }
 }
