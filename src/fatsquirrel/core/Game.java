@@ -1,3 +1,5 @@
+package fatsquirrel.core;
+
 public abstract class Game {
 
     public void run(){

@@ -1,3 +1,7 @@
+package fatsquirrel.core.Entities;
+
+import fatsquirrel.*;
+
 public abstract class MasterSquirrel extends Entity{
 
     public MasterSquirrel(int id, int energy, XY position) {

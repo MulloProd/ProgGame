@@ -1,3 +1,5 @@
+package fatsquirrel;
+
 import java.util.Random;
 
 public final class XY {

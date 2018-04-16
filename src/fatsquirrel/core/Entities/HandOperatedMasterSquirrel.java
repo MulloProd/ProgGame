@@ -1,3 +1,7 @@
+package fatsquirrel.core.Entities;
+
+import fatsquirrel.XY;
+
 import java.io.IOException;
 
 public class HandOperatedMasterSquirrel extends MasterSquirrel {

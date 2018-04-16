@@ -1,3 +1,7 @@
+package fatsquirrel.core.Entities;
+
+import fatsquirrel.XY;
+
 public class GoodPlant extends Entity {
     public GoodPlant(int id, int energy, XY position) {
         super(id, energy, position);

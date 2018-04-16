@@ -1,3 +1,7 @@
+package fatsquirrel.core.Entities;
+
+import fatsquirrel.core.Entities.Entity;
+
 import java.io.IOException;
 
 public class EntitySet {

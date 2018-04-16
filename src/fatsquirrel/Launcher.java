@@ -1,7 +1,11 @@
+package fatsquirrel;
+
+import fatsquirrel.core.Entities.*;
+
 import java.io.IOException;
 import java.util.Random;
 
-public class Main {
+public class Launcher {
 
     public static void main(String[] args) throws IOException {
 

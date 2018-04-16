@@ -1,3 +1,7 @@
+package fatsquirrel.core.Entities;
+
+import fatsquirrel.XY;
+
 public class MiniSquirrel extends MasterSquirrel {
 
     private MasterSquirrel masterSquirrel;
