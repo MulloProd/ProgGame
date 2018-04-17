@@ -3,6 +3,8 @@ package fatsquirrel.core;
 import fatsquirrel.XY;
 import fatsquirrel.core.Entities.EntitySet;
 import fatsquirrel.core.Entities.*;
+
+import java.io.IOException;
 import java.util.Random;
 
 public class Board {
@@ -16,6 +18,10 @@ public class Board {
         width = BoardConfig.getSize().X;
         entities = new Entity[width][height];
         createRandomBoard();
+    }
+
+    public void updateEntitySet() throws IOException {
+        entitySet.nextStep();
     }
 
     private void createRandomBoard() throws Exception {

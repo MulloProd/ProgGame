@@ -3,8 +3,8 @@ package fatsquirrel.core;
 import fatsquirrel.XY;
 
 public class BoardConfig {
-    private static final XY size = new XY(50, 20);
-    private static final int wallCount = 136;
+    private static final XY size = new XY(50, 10);
+    private static final int wallCount = 116;
     private static final int beastCount = 4;
     private static final int plantCount = 4;
 

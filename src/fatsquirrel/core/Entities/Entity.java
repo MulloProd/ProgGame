@@ -49,7 +49,7 @@ public abstract class Entity {
     }
 
     public String toString(){
-        return this.getClass().getSimpleName() + ", Energy: " + energy + "/" + startEnergy + ", Pos: " + position.X + "/" + position.Y;
+        return this.getClass().getSimpleName() + "(" + ID + ")" + ", Energy: " + energy + "/" + startEnergy + ", Pos: " + position.X + "/" + position.Y;
     }
 
 }

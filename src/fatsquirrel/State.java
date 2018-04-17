@@ -3,16 +3,18 @@ package fatsquirrel;
 import fatsquirrel.core.Board;
 import fatsquirrel.core.FlattenedBoard;
 
+import java.io.IOException;
+
 public class State {
     private int Highscore;
-    Board board;
+    private Board board;
 
     public State(Board board){
         this.board = board;
     }
 
-    public void update(){
-
+    public void update() throws IOException {
+        board.updateEntitySet();
     }
 
     public int getHighscore() {

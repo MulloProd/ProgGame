@@ -2,6 +2,8 @@ package fatsquirrel.core;
 
 import fatsquirrel.State;
 
+import java.io.IOException;
+
 public abstract class Game {
 
     private final State state;
@@ -10,7 +12,7 @@ public abstract class Game {
         this.state = state;
     }
 
-    public void run(){
+    public void run() throws IOException {
         while(true){
             render();
             processInput();
@@ -18,8 +20,8 @@ public abstract class Game {
         }
     }
 
-    private void update() {
-
+    private void update() throws IOException {
+        state.update();
     }
 
     public abstract void processInput();
