@@ -2,7 +2,7 @@ package fatsquirrel.core.Entities;
 
 import fatsquirrel.*;
 
-public abstract class MasterSquirrel extends Entity{
+public abstract class MasterSquirrel extends PlayerEntity{
 
     public MasterSquirrel(int id, int energy, XY position) {
         super(id, energy, position);

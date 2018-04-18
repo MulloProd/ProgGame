@@ -29,10 +29,10 @@ public class EntitySet {
         set.remove(oldEntity);
     }
 
-    public void nextStep() throws IOException {
+    public void nextStep(EntityContext entityContext) throws IOException {
         for(Entity e : set){
             if(e!=null)
-                e.nextStep();
+                e.nextStep(entityContext);
         }
     }
 

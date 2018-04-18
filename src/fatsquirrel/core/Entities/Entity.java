@@ -4,7 +4,7 @@ import fatsquirrel.XY;
 
 import java.io.IOException;
 
-public abstract class Entity implements EntityContext {
+public abstract class Entity {
     private final int ID;
     private int energy;
     protected final int startEnergy;
@@ -17,7 +17,7 @@ public abstract class Entity implements EntityContext {
         this.position = position;
     }
 
-    public abstract void nextStep() throws IOException;
+    public abstract void nextStep(EntityContext entityContext) throws IOException;
 
     public XY getPosition() {
         return position;

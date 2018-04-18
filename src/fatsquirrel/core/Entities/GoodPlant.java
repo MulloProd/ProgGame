@@ -8,7 +8,7 @@ public class GoodPlant extends Entity {
     }
 
     @Override
-    public void nextStep() {
+    public void nextStep(EntityContext entityContext) {
         int i = 0;
     }
 }

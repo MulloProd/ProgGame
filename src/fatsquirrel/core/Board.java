@@ -21,7 +21,7 @@ public class Board {
     }
 
     public void updateEntitySet() throws IOException {
-        entitySet.nextStep();
+        entitySet.nextStep(flatten());
     }
 
     private void createRandomBoard() throws Exception {

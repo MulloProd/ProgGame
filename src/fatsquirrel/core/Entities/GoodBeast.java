@@ -8,7 +8,7 @@ public class GoodBeast extends Entity {
     }
 
     @Override
-    public void nextStep() {
+    public void nextStep(EntityContext entityContext) {
         setPosition(getPosition().add(XY.randomVector()));
     }
 }

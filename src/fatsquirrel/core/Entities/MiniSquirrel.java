@@ -2,7 +2,7 @@ package fatsquirrel.core.Entities;
 
 import fatsquirrel.XY;
 
-public class MiniSquirrel extends MasterSquirrel {
+public class MiniSquirrel extends PlayerEntity {
 
     private MasterSquirrel masterSquirrel;
 
@@ -15,7 +15,7 @@ public class MiniSquirrel extends MasterSquirrel {
     }
 
     @Override
-    public void nextStep() {
+    public void nextStep(EntityContext entityContext) {
 
     }
 }

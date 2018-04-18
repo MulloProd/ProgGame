@@ -8,7 +8,7 @@ public class BadPlant extends Entity {
     }
 
     @Override
-    public void nextStep() {
+    public void nextStep(EntityContext entityContext) {
 
     }
 }

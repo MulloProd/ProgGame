@@ -12,7 +12,7 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
         super(id, energy, position);
     }
 
-    public void nextStep() throws IOException {
+    public void nextStep(EntityContext entityContext) throws IOException {
     /*
         while(true){
             char op = (char)System.in.read();
