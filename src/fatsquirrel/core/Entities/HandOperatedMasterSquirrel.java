@@ -13,7 +13,7 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
     }
 
     public void nextStep() throws IOException {
-
+    /*
         while(true){
             char op = (char)System.in.read();
             System.in.read(new byte[System.in.available()]);
@@ -40,7 +40,7 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
                     break;
             }
         }
-
+    */
 
     }
 

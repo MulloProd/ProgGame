@@ -27,6 +27,9 @@ public class ConsoleUI implements UI {
                     case GoodPlant:
                         System.out.print("o");
                         break;
+                    case HandOperatedMasterSquirrel:
+                        System.out.print("M");
+                        break;
                     case MasterSquirrel:
                         System.out.print("S");
                         break;
@@ -38,5 +41,6 @@ public class ConsoleUI implements UI {
             }
             System.out.println();
         }
+
     }
 }

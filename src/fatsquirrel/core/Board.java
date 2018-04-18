@@ -27,13 +27,14 @@ public class Board {
     private void createRandomBoard() throws Exception {
         //Wände erstellen
         int counter = BoardConfig.getWallCount();
-        //Surrounding Wall
+        //Surrounding Wall, horizontal
         for(int i=0;i<entities.length && counter>0;i++){
             if(setTile(i,0,new Wall(entitySet.getNextFreeID(), -10, new XY(i,0))))
                 counter--;
             if(counter>0 && setTile(i,entities[i].length-1,new Wall(entitySet.getNextFreeID(), -10, new XY(i,entities[i].length-1))))
                 counter--;
         }
+        //Surrounding Wall, vertical
         for(int i=0;i<entities[0].length&&counter>0;i++){
             if(setTile(0,i,new Wall(entitySet.getNextFreeID(), -10, new XY(0,1))))
                 counter--;
@@ -78,6 +79,15 @@ public class Board {
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
             if(setTile(x,y,new GoodBeast(entitySet.getNextFreeID(), 200, new XY(x,y))))
+                counter--;
+        }
+
+        //HandOperatedMasterSquirrels erstellen
+        counter = BoardConfig.getMasterSquirrelCount();
+        while(counter>0){
+            int x = new Random().nextInt(width-1);
+            int y = new Random().nextInt(height-1);
+            if(setTile(x,y,new HandOperatedMasterSquirrel(entitySet.getNextFreeID(), 1000, new XY(x,y))))
                 counter--;
         }
     }

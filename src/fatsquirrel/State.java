@@ -6,7 +6,7 @@ import fatsquirrel.core.FlattenedBoard;
 import java.io.IOException;
 
 public class State {
-    private int Highscore;
+    private int highscore;
     private Board board;
 
     public State(Board board){
@@ -18,11 +18,11 @@ public class State {
     }
 
     public int getHighscore() {
-        return Highscore;
+        return highscore;
     }
 
     public void setHighscore(int highscore) {
-        Highscore = highscore;
+        this.highscore = highscore;
     }
 
     public FlattenedBoard flattenedBoard(){

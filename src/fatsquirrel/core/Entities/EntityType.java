@@ -1,7 +1,7 @@
 package fatsquirrel.core.Entities;
 
 public class EntityType {
-    public enum Types{Wall,BadPlant,GoodPlant,BadBeast,GoodBeast, MasterSquirrel,MiniSquirrel,None}
+    public enum Types{Wall,BadPlant,GoodPlant,BadBeast,GoodBeast,HandOperatedMasterSquirrel,MasterSquirrel,MiniSquirrel,None}
     private Types type;
 
     public EntityType(Class c){
@@ -21,6 +21,9 @@ public class EntityType {
                     break;
                 case "GoodBeast":
                     type = Types.GoodBeast;
+                    break;
+                case "HandOperatedMasterSquirrel":
+                    type = Types.HandOperatedMasterSquirrel;
                     break;
                 case "MasterSquirrel":
                     type = Types.MasterSquirrel;

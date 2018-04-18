@@ -4,7 +4,7 @@ import fatsquirrel.XY;
 
 import java.io.IOException;
 
-public abstract class Entity {
+public abstract class Entity implements EntityContext {
     private final int ID;
     private int energy;
     protected final int startEnergy;
