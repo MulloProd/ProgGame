@@ -24,7 +24,7 @@ public abstract class Game {
         state.update();
     }
 
-    public abstract void processInput();
+    public abstract void processInput() throws IOException;
 
     public abstract void render();
 

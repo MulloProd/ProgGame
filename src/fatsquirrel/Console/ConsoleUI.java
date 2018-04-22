@@ -3,6 +3,8 @@ package fatsquirrel.Console;
 import fatsquirrel.UI;
 import fatsquirrel.core.BoardView;
 
+import java.io.IOException;
+
 public class ConsoleUI implements UI {
     @Override
     public void render(BoardView view) {
@@ -36,11 +38,32 @@ public class ConsoleUI implements UI {
                     case MiniSquirrel:
                         System.out.print("s");
                         break;
-
                 }
             }
             System.out.println();
         }
+    }
 
+    @Override
+    public MoveCommand getCommand() throws IOException {
+
+        while(true){
+            char op = (char)System.in.read();
+            System.in.read(new byte[System.in.available()]);
+
+            switch (op){
+                case ('a'):
+                    return new MoveCommand(-1,0);
+                case ('d'):
+                    return new MoveCommand(1,0);
+                case ('w'):
+                    return new MoveCommand(0,1);
+                case ('s'):
+                    return new MoveCommand(0,-1);
+                default:
+                    System.out.println("Keine Richtung ausgewählt!\nBitte erneut auswählen.");
+                    break;
+            }
+        }
     }
 }

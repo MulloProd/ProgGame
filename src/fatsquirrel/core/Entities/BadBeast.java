@@ -9,6 +9,7 @@ public class BadBeast extends Entity {
 
     @Override
     public void nextStep(EntityContext entityContext) {
-        setPosition(getPosition().add(XY.randomVector()));
+        //setPosition(getPosition().add(XY.randomVector()));
+        entityContext.tryMove(this, XY.randomVector());
     }
 }

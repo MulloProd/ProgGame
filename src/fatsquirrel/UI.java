@@ -1,9 +1,12 @@
 package fatsquirrel;
 
+import fatsquirrel.Console.MoveCommand;
 import fatsquirrel.core.BoardView;
+
+import java.io.IOException;
 
 public interface UI {
 
-    //public MoveCommand getCommand();
-    public void render(BoardView view);
+    void render(BoardView view);
+    MoveCommand getCommand() throws IOException;
 }

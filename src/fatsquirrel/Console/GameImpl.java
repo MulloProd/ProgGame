@@ -3,21 +3,29 @@ package fatsquirrel.Console;
 import fatsquirrel.State;
 import fatsquirrel.UI;
 import fatsquirrel.core.BoardView;
+import fatsquirrel.core.Entities.Entity;
+import fatsquirrel.core.Entities.HandOperatedMasterSquirrel;
+import fatsquirrel.core.Entities.Wall;
 import fatsquirrel.core.Game;
 
+import java.io.IOException;
+import java.util.function.Consumer;
+
 public class GameImpl extends Game {
+
+    ConsoleUI consoleUI = new ConsoleUI();
+
     public GameImpl(State state) {
         super(state);
     }
 
     @Override
-    public void processInput() {
-
+    public void processInput() throws IOException {
+        MoveCommand moveCommand = consoleUI.getCommand();
     }
 
     @Override
     public void render() {
-        UI ui = new ConsoleUI();
-        ui.render(getState().flattenedBoard());
+        consoleUI.render(getState().flattenedBoard());
     }
 }

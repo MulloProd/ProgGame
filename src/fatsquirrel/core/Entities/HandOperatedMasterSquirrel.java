@@ -1,46 +1,24 @@
 package fatsquirrel.core.Entities;
 
+import fatsquirrel.Console.MoveCommand;
 import fatsquirrel.XY;
 
 import java.io.IOException;
 
 public class HandOperatedMasterSquirrel extends MasterSquirrel {
 
-
+    XY position;
 
     public HandOperatedMasterSquirrel(int id, int energy, XY position) {
         super(id, energy, position);
+        this.position = position;
     }
 
-    public void nextStep(EntityContext entityContext) throws IOException {
-    /*
-        while(true){
-            char op = (char)System.in.read();
-            System.in.read(new byte[System.in.available()]);
+    public void nextStep(EntityContext entityContext) {
 
-            switch (op){
-                case ('a'):
-                    toString("LEFT");
-                    move(-1,0);
-                    return;
-                case ('d'):
-                    toString("RIGHT");
-                    move(1,0);
-                    return;
-                case ('w'):
-                    toString("UP");
-                    move(0,1);
-                    return;
-                case ('s'):
-                    toString("DOWN");
-                    move(0,-1);
-                    return;
-                default:
-                    System.out.println("Keine Richtung ausgewählt!\nBitte erneut auswählen.");
-                    break;
-            }
-        }
-    */
+        //Testweise nach rechts laufen lassen
+        XY xy = new XY (1,0);
+        entityContext.tryMove(this, xy);
 
     }
 
