@@ -22,6 +22,7 @@ public class GameImpl extends Game {
     @Override
     public void processInput() throws IOException {
         MoveCommand moveCommand = consoleUI.getCommand();
+        //moveCommand.moveEntity();
     }
 
     @Override

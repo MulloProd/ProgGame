@@ -39,13 +39,12 @@ public class FlattenedBoard implements EntityContext, BoardView {
     @Override
     public void tryMove(GoodBeast goodBeast, XY moveDirection) {
 
-    }
+        if(moveDirection.X == 0 && moveDirection.Y == 0)
+            return;
 
-    @Override
-    public void tryMove(BadBeast badBeast, XY moveDirection) {
         for(int i = 0; i < entities.length; i++){
             for(int j = 0; j < entities[0].length; j++){
-                if(entities[i][j] == badBeast){
+                if(entities[i][j] == goodBeast){
                     if(entities[i+moveDirection.X][j+moveDirection.Y] instanceof Wall){
 
                     }
@@ -61,7 +60,30 @@ public class FlattenedBoard implements EntityContext, BoardView {
     }
 
     @Override
+    public void tryMove(BadBeast badBeast, XY moveDirection) {
+        if(moveDirection.X == 0 && moveDirection.Y == 0)
+            return;
+        for(int i = 0; i < entities.length; i++){
+            for(int j = 0; j < entities[0].length; j++){
+                if(entities[i][j] == badBeast){
+                    if(entities[i+moveDirection.X][j+moveDirection.Y] instanceof Wall){
+
+                    }
+                    else{
+                        entities[i+moveDirection.X][j+moveDirection.Y] = entities[i][j];
+                        entities[i][j] = null;
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
     public void tryMove(MasterSquirrel masterSquirrel, XY moveDirection) {
+
+        if(moveDirection.X == 0 && moveDirection.Y == 0)
+            return;
 
         for(int i = 0; i < entities.length; i++){
             for(int j = 0; j < entities[0].length; j++){
@@ -86,7 +108,24 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
     @Override
     public PlayerEntity nearestPlayerEntity(XY pos) {
-        return null;
+
+        PlayerEntity nearestPlayerEntity = null;
+        int xDiff = width;
+        int yDiff = height;
+
+        for(int i = 0; i < entities.length; i++) {
+            for (int j = 0; j < entities[0].length; j++) {
+                if(entities[i][j] instanceof PlayerEntity){
+                    if(Math.abs(pos.X-i)+Math.abs(pos.Y-j)<xDiff+yDiff){
+                        xDiff = Math.abs(pos.X-i);
+                        yDiff = Math.abs(pos.Y-j);
+                        nearestPlayerEntity = (PlayerEntity)entities[i][j];
+                    }
+                }
+            }
+        }
+
+        return nearestPlayerEntity;
     }
 
     @Override
