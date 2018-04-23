@@ -10,6 +10,9 @@ public abstract class Entity {
     protected final int startEnergy;
     private XY position;
 
+    public int collisionCounter = 0;
+    public int nextStepCounter = 0;
+
     public Entity(int id, int energy, XY position) {
         ID = id;
         startEnergy = energy;

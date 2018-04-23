@@ -10,7 +10,6 @@ public class FlattenedBoard implements EntityContext, BoardView {
     private final Entity[][] entities;
     private final int width;
     private final int height;
-    private int collisionCounter = 0;
 
     public FlattenedBoard(Entity[][] entities, int width, int height){
         this.entities = entities;
@@ -45,16 +44,11 @@ public class FlattenedBoard implements EntityContext, BoardView {
         for(int i = 0; i < entities.length; i++){
             for(int j = 0; j < entities[0].length; j++){
                 if(entities[i][j] == goodBeast){
-                    if(entities[i+moveDirection.X][j+moveDirection.Y] instanceof Wall || entities[i+moveDirection.X][j+moveDirection.Y] instanceof GoodPlant
-                            || entities[i+moveDirection.X][j+moveDirection.Y] instanceof BadPlant){
-
-                    }
-                    else{
+                    if(entities[i+moveDirection.X][j+moveDirection.Y] == null){
                         entities[i+moveDirection.X][j+moveDirection.Y] = entities[i][j];
                         entities[i][j] = null;
                         return;
                     }
-
                 }
             }
         }
@@ -67,11 +61,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
         for(int i = 0; i < entities.length; i++){
             for(int j = 0; j < entities[0].length; j++){
                 if(entities[i][j] == badBeast){
-                    if(entities[i+moveDirection.X][j+moveDirection.Y] instanceof Wall || entities[i+moveDirection.X][j+moveDirection.Y] instanceof GoodPlant
-                            || entities[i+moveDirection.X][j+moveDirection.Y] instanceof BadPlant){
-
-                    }
-                    else{
+                    if(entities[i+moveDirection.X][j+moveDirection.Y] == null){
                         entities[i+moveDirection.X][j+moveDirection.Y] = entities[i][j];
                         entities[i][j] = null;
                         return;
@@ -90,18 +80,18 @@ public class FlattenedBoard implements EntityContext, BoardView {
         for(int i = 0; i < entities.length; i++){
             for(int j = 0; j < entities[0].length; j++){
                 if(entities[i][j] == masterSquirrel){
-                    if(entities[i+moveDirection.X][j+moveDirection.Y] instanceof Wall){
+                    if(entities[i+moveDirection.X][j+moveDirection.Y] == null){
+                        entities[i+moveDirection.X][j+moveDirection.Y] = entities[i][j];
+                        entities[i][j] = null;
+                        return;
+                    }
+                    else if(entities[i+moveDirection.X][j+moveDirection.Y] instanceof Wall){
                         masterSquirrel.collisionCounter=3;
                         masterSquirrel.updateEnergy(-50);
                     }
                     else if(entities[i+moveDirection.X][j+moveDirection.Y] instanceof GoodPlant || entities[i+moveDirection.X][j+moveDirection.Y] instanceof BadPlant){
                         masterSquirrel.updateEnergy(entities[i+moveDirection.X][j+moveDirection.Y].getEnergy());
                         killAndReplace(entities[i+moveDirection.X][j+moveDirection.Y]);
-                    }
-                    else{
-                        entities[i+moveDirection.X][j+moveDirection.Y] = entities[i][j];
-                        entities[i][j] = null;
-                        return;
                     }
                 }
             }
@@ -173,6 +163,9 @@ public class FlattenedBoard implements EntityContext, BoardView {
         return entities;
     }
 
-    //Kollision
+
+    public void tryMove(Entity entity){
+
+    }
 
 }

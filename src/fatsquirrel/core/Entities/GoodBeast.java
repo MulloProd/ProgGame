@@ -5,17 +5,18 @@ import fatsquirrel.XY;
 public class GoodBeast extends Entity {
 
     private XY position;
-    private int nextStepCount = 4;
 
     public GoodBeast(int id, int energy, XY position) {
         super(id, energy, position);
         this.position = position;
+        nextStepCounter =4;
     }
 
     @Override
     public void nextStep(EntityContext entityContext) {
 
-        if(nextStepCount == 4) {
+        //nextStep nur bei jedem 4. Schritt
+        if(nextStepCounter == 4) {
             //setPosition(getPosition().add(XY.randomVector()));
             PlayerEntity playerEntity = entityContext.nearestPlayerEntity(position);
             XY playerEntityXY = playerEntity.getPosition();
@@ -60,13 +61,13 @@ public class GoodBeast extends Entity {
             else{
                 entityContext.tryMove(this, XY.randomVector());
             }
-            nextStepCount--;
+            nextStepCounter--;
         }
-        else if(nextStepCount == 1){
-            nextStepCount = 4;
+        else if(nextStepCounter == 1){
+            nextStepCounter = 4;
         }
         else{
-            nextStepCount--;
+            nextStepCounter--;
         }
 
     }
