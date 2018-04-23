@@ -42,21 +42,12 @@ public class GoodBeast extends Entity {
             //Differenzen summieren
             int sumDiff = xDiff+yDiff;
 
-            //Wenn näher als 6 Steps zum Squirrel, dann lauf weg, sonst random
-            if(sumDiff<=6) {
-                if(xNegativ && yNegativ){
-                    entityContext.tryMove(this, new XY(1,1));
-                }
-                else if(xNegativ && yNegativ == false){
-                    entityContext.tryMove(this, new XY(1,-1));
-                }
-                else if(xNegativ == false && yNegativ){
-                    entityContext.tryMove(this, new XY(-1,1));
-                }
-                else if(xNegativ == false && yNegativ == false){
-                    entityContext.tryMove(this, new XY(-1,-1));
-                }
+            int x = xNegativ?1:-1;
+            int y = yNegativ?1:-1;
 
+            //Wenn näher als 6 Steps zum Squirrel, dann lauf weg, sonst random
+            if(sumDiff<=6){
+                    entityContext.tryMove(this, new XY(x,y));
             }
             else{
                 entityContext.tryMove(this, XY.randomVector());
