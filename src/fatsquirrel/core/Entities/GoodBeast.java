@@ -17,7 +17,6 @@ public class GoodBeast extends Entity {
 
         //nextStep nur bei jedem 4. Schritt
         if(nextStepCounter == 4) {
-            //setPosition(getPosition().add(XY.randomVector()));
             PlayerEntity playerEntity = entityContext.nearestPlayerEntity(position);
             XY playerEntityXY = playerEntity.getPosition();
 
@@ -25,29 +24,26 @@ public class GoodBeast extends Entity {
             int xDiff = playerEntityXY.X - this.getPosition().X;
             int yDiff = playerEntityXY.Y - this.getPosition().Y;
 
-            //Wichtig fürs Weglaufen
-            boolean xNegativ = false;
-            boolean yNegativ = false;
+            //Vektor bestimmen
+            int xVector=0;
+            int yVector=0;
 
-            //Differenzen positiv darstellen
-            if (xDiff < 0) {
-                xDiff = Math.abs(xDiff);
-                xNegativ = true;
-            }
-            if (yDiff < 0){
-                yDiff = Math.abs(yDiff);
-                yNegativ = true;
-            }
+            if(xDiff<0)
+                xVector=1;
+            else if(xDiff>0)
+                xVector=-1;
+
+            if(yDiff<0)
+                yVector=1;
+            else if(yDiff>0)
+                yVector=-1;
 
             //Differenzen summieren
             int sumDiff = xDiff+yDiff;
 
-            int x = xNegativ?1:-1;
-            int y = yNegativ?1:-1;
-
-            //Wenn näher als 6 Steps zum Squirrel, dann lauf weg, sonst random
+            //Wenn näher als 6 Steps zum Squirrel, dann lauf weg vom Squirrel, sonst random
             if(sumDiff<=6){
-                    entityContext.tryMove(this, new XY(x,y));
+                entityContext.tryMove(this, new XY(xVector, yVector));
             }
             else{
                 entityContext.tryMove(this, XY.randomVector());
