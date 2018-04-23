@@ -4,6 +4,8 @@ import fatsquirrel.*;
 
 public abstract class MasterSquirrel extends PlayerEntity{
 
+    public int collisionCounter = 0;
+
     public MasterSquirrel(int id, int energy, XY position) {
         super(id, energy, position);
     }

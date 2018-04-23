@@ -89,7 +89,8 @@ public class FlattenedBoard implements EntityContext, BoardView {
             for(int j = 0; j < entities[0].length; j++){
                 if(entities[i][j] == masterSquirrel){
                     if(entities[i+moveDirection.X][j+moveDirection.Y] instanceof Wall){
-                        collisionCounter=3;
+                        masterSquirrel.collisionCounter=3;
+                        masterSquirrel.updateEnergy(-50);
                     }
                     else if(entities[i+moveDirection.X][j+moveDirection.Y] instanceof GoodPlant){
                         masterSquirrel.updateEnergy(entities[i+moveDirection.X][j+moveDirection.Y].getEnergy());
@@ -100,7 +101,6 @@ public class FlattenedBoard implements EntityContext, BoardView {
                         entities[i][j] = null;
                         return;
                     }
-
                 }
             }
         }

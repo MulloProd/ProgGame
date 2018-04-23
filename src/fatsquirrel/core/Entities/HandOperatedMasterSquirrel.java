@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class HandOperatedMasterSquirrel extends MasterSquirrel {
 
-    XY position;
+    private XY position;
 
     public HandOperatedMasterSquirrel(int id, int energy, XY position) {
         super(id, energy, position);
@@ -17,9 +17,13 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
     public void nextStep(EntityContext entityContext) {
 
         //Testweise nach rechts laufen lassen
-        XY xy = new XY (1,0);
-        entityContext.tryMove(this, xy);
-
+        if(collisionCounter==0){
+            XY xy = new XY (1,0);
+            entityContext.tryMove(this, xy);
+        }
+        else{
+            collisionCounter--;
+        }
     }
 
     private void move(int x, int y){
