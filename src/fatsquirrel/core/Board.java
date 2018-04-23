@@ -50,6 +50,15 @@ public class Board {
                 counter--;
         }
 
+        //HandOperatedMasterSquirrels erstellen
+        counter = BoardConfig.getMasterSquirrelCount();
+        while(counter>0){
+            int x = new Random().nextInt(width-1);
+            int y = new Random().nextInt(height-1);
+            if(setTile(x,y,new HandOperatedMasterSquirrel(entitySet.getNextFreeID(), 1000, new XY(x,y))))
+                counter--;
+        }
+
         //Planzen erstellen
         counter = BoardConfig.getPlantCount();
         while(counter>0){
@@ -82,14 +91,7 @@ public class Board {
                 counter--;
         }
 
-        //HandOperatedMasterSquirrels erstellen
-        counter = BoardConfig.getMasterSquirrelCount();
-        while(counter>0){
-            int x = new Random().nextInt(width-1);
-            int y = new Random().nextInt(height-1);
-            if(setTile(x,y,new HandOperatedMasterSquirrel(entitySet.getNextFreeID(), 1000, new XY(x,y))))
-                counter--;
-        }
+
     }
 
     //gibt TRUE zurück wenn setzen erfolgreich war
