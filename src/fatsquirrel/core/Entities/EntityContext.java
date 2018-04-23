@@ -1,5 +1,6 @@
 package fatsquirrel.core.Entities;
 
+import fatsquirrel.State;
 import fatsquirrel.XY;
 
 public interface EntityContext {
@@ -14,5 +15,5 @@ public interface EntityContext {
     void kill(Entity entity);
     void killAndReplace(Entity entity);
     EntityType getEntityType(XY xy);
-
+    State getState();
 }

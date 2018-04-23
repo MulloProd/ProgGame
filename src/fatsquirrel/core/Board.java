@@ -1,5 +1,6 @@
 package fatsquirrel.core;
 
+import fatsquirrel.State;
 import fatsquirrel.XY;
 import fatsquirrel.core.Entities.EntitySet;
 import fatsquirrel.core.Entities.*;
@@ -12,12 +13,17 @@ public class Board {
     private final int height;
     private final int width;
     private Entity[][] entities;
+    private State state;
 
     public Board() throws Exception {
         height = BoardConfig.getSize().Y;
         width = BoardConfig.getSize().X;
         entities = new Entity[width][height];
         createRandomBoard();
+    }
+
+    public void setState(State state){
+        this.state = state;
     }
 
     public void updateEntitySet() throws IOException {
@@ -106,6 +112,6 @@ public class Board {
     }
 
     public FlattenedBoard flatten(){
-        return new FlattenedBoard(entities, width, height);
+        return new FlattenedBoard(entities, width, height, state);
     }
 }

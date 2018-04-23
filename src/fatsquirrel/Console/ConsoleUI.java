@@ -57,9 +57,9 @@ public class ConsoleUI implements UI {
                 case ('d'):
                     return new MoveCommand(1,0);
                 case ('w'):
-                    return new MoveCommand(0,1);
-                case ('s'):
                     return new MoveCommand(0,-1);
+                case ('s'):
+                    return new MoveCommand(0,1);
                 default:
                     System.out.println("Keine Richtung ausgewählt!\nBitte erneut auswählen.");
                     break;

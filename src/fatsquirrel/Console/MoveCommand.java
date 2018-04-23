@@ -1,5 +1,6 @@
 package fatsquirrel.Console;
 
+import fatsquirrel.XY;
 import fatsquirrel.core.Entities.Entity;
 
 public class MoveCommand {
@@ -9,6 +10,10 @@ public class MoveCommand {
     public MoveCommand(int x, int y){
         this.x = x;
         this.y = y;
+    }
+
+    public XY getDirection(){
+        return new XY(x,y);
     }
 
     public void moveEntity(Entity entity){

@@ -1,5 +1,6 @@
 package fatsquirrel.core;
 
+import fatsquirrel.State;
 import fatsquirrel.XY;
 import fatsquirrel.core.Entities.*;
 
@@ -10,11 +11,13 @@ public class FlattenedBoard implements EntityContext, BoardView {
     private final Entity[][] entities;
     private final int width;
     private final int height;
+    private State state;
 
-    public FlattenedBoard(Entity[][] entities, int width, int height){
+    public FlattenedBoard(Entity[][] entities, int width, int height, State state){
         this.entities = entities;
         this.width = width;
         this.height = height;
+        this.state = state;
     }
 
     @Override
@@ -168,4 +171,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
     }
 
+    public State getState() {
+        return state;
+    }
 }

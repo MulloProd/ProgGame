@@ -18,7 +18,7 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
 
         //Testweise nach rechts laufen lassen
         if(collisionCounter==0){
-            XY xy = new XY (1,0);
+            XY xy = entityContext.getState().getLastInputVector();
             entityContext.tryMove(this, xy);
         }
         else{
