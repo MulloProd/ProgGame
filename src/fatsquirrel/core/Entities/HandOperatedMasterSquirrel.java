@@ -16,22 +16,12 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
 
     public void nextStep(EntityContext entityContext) {
 
-        //Testweise nach rechts laufen lassen
-        if(collisionCounter==0){
+        if(getCollisionCounter()==0){
             XY xy = entityContext.getState().getLastInputVector();
             entityContext.tryMove(this, xy);
         }
         else{
-            collisionCounter--;
+            setCollisionCounter(-1);
         }
     }
-
-    private void move(int x, int y){
-        setPosition(getPosition().add(new XY(x,y)));
-    }
-
-    private static void toString(String direction){
-        System.out.println("\nMastersquirrel turns: " + direction + "\n");
-    }
-
 }

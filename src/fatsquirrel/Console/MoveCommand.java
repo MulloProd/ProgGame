@@ -15,9 +15,4 @@ public class MoveCommand {
     public XY getDirection(){
         return new XY(x,y);
     }
-
-    public void moveEntity(Entity entity){
-
-
-    }
 }

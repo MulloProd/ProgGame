@@ -10,8 +10,8 @@ public abstract class Entity {
     protected final int startEnergy;
     private XY position;
 
-    public int collisionCounter = 0;
-    public int nextStepCounter = 0;
+    private int collisionCounter = 0;
+    private int nextStepCounter = 0;
 
     public Entity(int id, int energy, XY position) {
         ID = id;
@@ -40,7 +40,11 @@ public abstract class Entity {
     }
 
     public int updateEnergy(int value){
-        if(energy + value <= startEnergy) {
+        if(value==0){
+            energy=0;
+            return 0;
+        }
+        else if(energy + value <= startEnergy) {
             energy += value;
             return 0;
         }
@@ -55,4 +59,19 @@ public abstract class Entity {
         return this.getClass().getSimpleName() + "(" + ID + ")" + ", Energy: " + energy + "/" + startEnergy + ", Pos: " + position.X + "/" + position.Y;
     }
 
+    public int getCollisionCounter() {
+        return collisionCounter;
+    }
+
+    public void setCollisionCounter(int collisionCounter) {
+        this.collisionCounter = this.collisionCounter+collisionCounter;
+    }
+
+    public int getNextStepCounter() {
+        return nextStepCounter;
+    }
+
+    public void setNextStepCounter(int nextStepCounter) {
+        this.nextStepCounter = this.nextStepCounter+nextStepCounter;
+    }
 }

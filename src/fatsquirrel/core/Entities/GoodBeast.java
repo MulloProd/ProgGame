@@ -9,14 +9,14 @@ public class GoodBeast extends Entity {
     public GoodBeast(int id, int energy, XY position) {
         super(id, energy, position);
         this.position = position;
-        nextStepCounter =4;
+        setNextStepCounter(4);
     }
 
     @Override
     public void nextStep(EntityContext entityContext) {
 
         //nextStep nur bei jedem 4. Schritt
-        if(nextStepCounter == 4) {
+        if(getNextStepCounter() == 4) {
             PlayerEntity playerEntity = entityContext.nearestPlayerEntity(position);
             XY playerEntityXY = playerEntity.getPosition();
 
@@ -48,13 +48,13 @@ public class GoodBeast extends Entity {
             else{
                 entityContext.tryMove(this, XY.randomVector());
             }
-            nextStepCounter--;
+            setNextStepCounter(-1);
         }
-        else if(nextStepCounter == 1){
-            nextStepCounter = 4;
+        else if(getNextStepCounter() == 1){
+            setNextStepCounter(3);
         }
         else{
-            nextStepCounter--;
+            setNextStepCounter(-1);
         }
 
     }

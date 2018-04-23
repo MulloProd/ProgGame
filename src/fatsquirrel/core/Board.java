@@ -57,11 +57,20 @@ public class Board {
         }
 
         //HandOperatedMasterSquirrels erstellen
-        counter = BoardConfig.getMasterSquirrelCount();
+        counter = BoardConfig.getHandOperatedMasterSquirrelCount();
         while(counter>0){
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
             if(setTile(x,y,new HandOperatedMasterSquirrel(entitySet.getNextFreeID(), 1000, new XY(x,y))))
+                counter--;
+        }
+
+        //MiniSquirrels erstellen
+        counter = BoardConfig.getMiniSquirrelCount();
+        while (counter>0){
+            int x = new Random().nextInt(width-1);
+            int y = new Random().nextInt(height-1);
+            if(setTile(x,y,new MiniSquirrel(entitySet.getNextFreeID(), 200, new XY(x,y), entitySet.getRandomMasterSquirrel())))
                 counter--;
         }
 

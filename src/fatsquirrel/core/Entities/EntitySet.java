@@ -29,11 +29,26 @@ public class EntitySet {
         set.remove(oldEntity);
     }
 
+    public MasterSquirrel getRandomMasterSquirrel(){
+        List<Entity> masterSet = new ArrayList<>();
+
+        for(Entity entity : set){
+            if (entity instanceof MasterSquirrel){
+                masterSet.add(entity);
+            }
+        }
+
+        int randomMaster = new Random().nextInt(masterSet.size());
+
+        return (MasterSquirrel)masterSet.get(randomMaster);
+    }
+
     public void nextStep(EntityContext entityContext) throws IOException {
         for(Entity e : set){
             if(e!=null)
                 e.nextStep(entityContext);
         }
+        System.out.println(toString());
     }
 
     public String toString(){
