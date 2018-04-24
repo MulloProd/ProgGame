@@ -30,6 +30,10 @@ public abstract class Entity {
         this.position = position;
     }
 
+    public int getStartEnergy() {
+        return startEnergy;
+    }
+
     public int getEnergy() {
         return energy;
     }

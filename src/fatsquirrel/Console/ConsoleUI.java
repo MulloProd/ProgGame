@@ -24,19 +24,16 @@ public class ConsoleUI implements UI {
                         System.out.print("b");
                         break;
                     case BadPlant:
-                        System.out.print("P");
+                        System.out.print("X");
                         break;
                     case GoodPlant:
-                        System.out.print("o");
+                        System.out.print("O");
                         break;
                     case HandOperatedMasterSquirrel:
                         System.out.print("M");
                         break;
-                    case MasterSquirrel:
-                        System.out.print("S");
-                        break;
                     case MiniSquirrel:
-                        System.out.print("s");
+                        System.out.print("m");
                         break;
                 }
             }
