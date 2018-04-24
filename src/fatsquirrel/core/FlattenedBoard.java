@@ -39,34 +39,34 @@ public class FlattenedBoard implements EntityContext, BoardView {
         if(moveDirection.X == 0 && moveDirection.Y == 0)
             return;
 
-        int xMiniSquirrel = miniSquirrel.getPosition().X;
-        int yMiniSquirrel = miniSquirrel.getPosition().Y;
+        int x = miniSquirrel.getPosition().X+moveDirection.X;
+        int y = miniSquirrel.getPosition().Y+moveDirection.Y;
 
         //Noch Energy vorhanden
         if (miniSquirrel.getEnergy() >= 1) {
-            if(entities[xMiniSquirrel+moveDirection.X][yMiniSquirrel+moveDirection.Y] == null) {
+            if(entities[x][y] == null) {
                 moveEntityToNullSpace(miniSquirrel, moveDirection);
                 miniSquirrel.updateEnergy(-1);
             }
-            else if(entities[xMiniSquirrel+moveDirection.X][yMiniSquirrel+moveDirection.Y] instanceof MasterSquirrel){
+            else if(entities[x][y] instanceof MasterSquirrel){
                 //Kollision mit eigenem MasterSquirrel
-                if(entities[xMiniSquirrel+moveDirection.X][yMiniSquirrel+moveDirection.Y] == miniSquirrel.getMasterSquirrel()){
+                if(entities[x][y] == miniSquirrel.getMasterSquirrel()){
                     miniSquirrel.updateEnergy(-1);
-                    entities[xMiniSquirrel+moveDirection.X][yMiniSquirrel+moveDirection.Y].updateEnergy(miniSquirrel.getEnergy());
+                    entities[x][y].updateEnergy(miniSquirrel.getEnergy());
                     kill(miniSquirrel);
                 }
                 else {
                     kill(miniSquirrel);
                 }
             }
-            else if(entities[xMiniSquirrel+moveDirection.X][yMiniSquirrel+moveDirection.Y] instanceof MiniSquirrel){
-                MiniSquirrel miniSquirrelTemp = (MiniSquirrel)entities[xMiniSquirrel+moveDirection.X][yMiniSquirrel+moveDirection.Y];
+            else if(entities[x][y] instanceof MiniSquirrel){
+                MiniSquirrel miniSquirrelTemp = (MiniSquirrel)entities[x][y];
                 //Kollision mit fremden MiniSquirrel
                 if(miniSquirrel.getMasterSquirrel() != miniSquirrelTemp.getMasterSquirrel()){
                     miniSquirrel.updateEnergy(0);
-                    entities[xMiniSquirrel+moveDirection.X][yMiniSquirrel+moveDirection.Y].updateEnergy(0);
+                    entities[x][y].updateEnergy(0);
                     kill(miniSquirrel);
-                    kill(entities[xMiniSquirrel+moveDirection.X][yMiniSquirrel+moveDirection.Y]);
+                    kill(entities[x][y]);
                 }
             }
         }
