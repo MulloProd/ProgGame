@@ -1,4 +1,4 @@
-package fatsquirrel.CommandScanner;/*
+package fatsquirrel.Console;/*
 Vorgeheinsweise:
 1.Kommandoname eingeben und mit Enter bestätigen
 2.(optional)Paramenter eingeben und mit Enter bestätigen
@@ -7,6 +7,7 @@ Falls Kommando parameter erwartet und anschließend ein kommando eingegeben wird
     wird dieses nicht ausgeführt, da parameter erwartet wird
 Evtl später ändern das Kommando später mit Parameter in einer zeile eingelesen wird und mit leerzeichen getrennt wird.
  */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -19,7 +20,7 @@ public class CommandScanner {
     public Command next() throws IOException {
         String input = inputReader.readLine();
 
-        //Testen ob input inem kommandoname entspricht
+        //Testen ob input einem kommandoname entspricht
         for (int i = 0; i < commandTypeInfos.length; i++) {
             if (input.toLowerCase().equals(commandTypeInfos[i].getName())) {
                 Object[] params = new Object[commandTypeInfos[i].getParamTypes().length];
@@ -54,7 +55,7 @@ public class CommandScanner {
         return null;
     }
 
-    CommandScanner(CommandTypeInfo[] commandTypes, BufferedReader inputReader){
+    public CommandScanner(CommandTypeInfo[] commandTypes, BufferedReader inputReader){
         this.commandTypeInfos = commandTypes;
         this.inputReader = inputReader;
     }

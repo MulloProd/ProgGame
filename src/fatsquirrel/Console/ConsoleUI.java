@@ -44,6 +44,10 @@ public class ConsoleUI implements UI {
     @Override
     public MoveCommand getCommand() throws IOException {
 
+        CommandsProzessor commandsProzessor = new CommandsProzessor();
+        commandsProzessor.process();
+
+        /*
         while(true){
             char op = (char)System.in.read();
             System.in.read(new byte[System.in.available()]);
@@ -62,5 +66,7 @@ public class ConsoleUI implements UI {
                     break;
             }
         }
+        */
+        return null;
     }
 }

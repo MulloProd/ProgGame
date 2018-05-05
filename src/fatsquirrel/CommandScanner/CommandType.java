@@ -1,7 +1,7 @@
 package fatsquirrel.CommandScanner;
 
 //beispiel implementation vom interface, wird später gelöscht
-public enum MyFavoriteCommandType implements CommandTypeInfo {
+public enum CommandType implements CommandTypeInfo {
 
     HELP {
         @Override
@@ -48,10 +48,7 @@ public enum MyFavoriteCommandType implements CommandTypeInfo {
 
         @Override
         public Class[] getParamTypes() {
-            Class[] temp = new Class[2];
-            temp[0] = int.class;
-            temp[1] = int.class;
-            return temp;
+            return new Class[]{int.class, int.class};
         }
     },
     ADDF {
@@ -67,10 +64,7 @@ public enum MyFavoriteCommandType implements CommandTypeInfo {
 
         @Override
         public Class[] getParamTypes() {
-            Class[] temp = new Class[2];
-            temp[0] = float.class;
-            temp[1] = float.class;
-            return temp;
+            return new Class[]{float.class, float.class};
         }
     },
     ECHO {
@@ -86,10 +80,7 @@ public enum MyFavoriteCommandType implements CommandTypeInfo {
 
         @Override
         public Class[] getParamTypes() {
-            Class[] temp = new Class[2];
-            temp[0] = String.class;
-            temp[1] = int.class;
-            return temp;
+            return new Class[]{String.class, int.class};
         }
     }
 }
