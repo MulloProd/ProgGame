@@ -38,6 +38,8 @@ public class CommandsProzessor {
         }
     }
     private void help(){
-        outputStream.println("worked");
+        for(CommandType commandType: CommandType.values()){
+            outputStream.println("<" +commandType.getName() + "> - " + commandType.getHelpText());
+        }
     }
 }

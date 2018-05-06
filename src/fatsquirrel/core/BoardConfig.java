@@ -8,7 +8,6 @@ public class BoardConfig {
     private static final int beastCount = 3;
     private static final int plantCount = 3;
     private static final int handOperatedMasterSquirrelCount = 1;
-    private static final int miniSquirrelCount = 3;
 
     //später aus Datei laden
     public static XY getSize(){return size;}
@@ -20,5 +19,4 @@ public class BoardConfig {
     public static int getPlantCount(){return plantCount;}
 
     public static int getHandOperatedMasterSquirrelCount(){return handOperatedMasterSquirrelCount;}
-    public static int getMiniSquirrelCount(){return miniSquirrelCount;}
 }

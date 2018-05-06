@@ -1,13 +1,12 @@
 package fatsquirrel.core.Entities;
 
-import fatsquirrel.Console.MoveCommand;
 import fatsquirrel.XY;
 
-import java.io.IOException;
 
 public class HandOperatedMasterSquirrel extends MasterSquirrel {
 
     private XY position;
+    private boolean spawnMiniSquirrel = false;
 
     public HandOperatedMasterSquirrel(int id, int energy, XY position) {
         super(id, energy, position);
@@ -19,9 +18,17 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
         if(getCollisionCounter()==0){
             XY xy = entityContext.getState().getLastInputVector();
             entityContext.tryMove(this, xy);
+
+            if(spawnMiniSquirrel){}
+                //MiniSquirrel setzen
         }
         else{
             setCollisionCounter(-1);
         }
+    }
+
+
+    public void setSpawnMiniSquirrel(boolean spawnMiniSquirrel) {
+        this.spawnMiniSquirrel = spawnMiniSquirrel;
     }
 }

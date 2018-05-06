@@ -10,7 +10,7 @@ public class CommandsProzessor {
     PrintStream outputStream = System.out;
     BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
 
-    public void process() throws IOException {
+    public MoveCommand process() throws IOException {
         CommandScanner commandScanner = new CommandScanner(GameCommandType.values(), inputReader);
 
         while (true) { // the loop over all commands with one input line for every command
@@ -27,23 +27,35 @@ public class CommandsProzessor {
                     case ALL:
                         break;
                     case LEFT:
-                        break;
+                        return move(-1,0);
                     case UP:
-                        break;
+                        return move(0,-1);
                     case DOWN:
-                        break;
+                        return move(0,1);
                     case RIGHT:
-                        break;
+                        return move(1,0);
                     case MASTER_ENERGY:
                         break;
                     case SPAWN_MINI:
-                        outputStream.println((int)command.getParams()[0]);
-                        break;
+                        return spawn_mini((int)command.getParams()[0]);
                 }
             }
         }
     }
     private void help(){
-        outputStream.println("worked");
+        for(GameCommandType commandType: GameCommandType.values()){
+            outputStream.println("<" +commandType.getName() + "> - " + commandType.getHelpText());
+        }
+    }
+
+    private MoveCommand move(int x, int y){
+        return new MoveCommand(x,y, 0);
+    }
+
+    private MoveCommand spawn_mini (int miniEnergy){
+        //Position von MasterSquirrel holen und Random "davor" setzen
+        int x =0;
+        int y= 0;
+        return new MoveCommand(x,y, miniEnergy);
     }
 }

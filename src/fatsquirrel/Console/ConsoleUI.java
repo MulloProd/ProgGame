@@ -43,30 +43,7 @@ public class ConsoleUI implements UI {
 
     @Override
     public MoveCommand getCommand() throws IOException {
-
         CommandsProzessor commandsProzessor = new CommandsProzessor();
-        commandsProzessor.process();
-
-        /*
-        while(true){
-            char op = (char)System.in.read();
-            System.in.read(new byte[System.in.available()]);
-
-            switch (op){
-                case ('a'):
-                    return new MoveCommand(-1,0);
-                case ('d'):
-                    return new MoveCommand(1,0);
-                case ('w'):
-                    return new MoveCommand(0,-1);
-                case ('s'):
-                    return new MoveCommand(0,1);
-                default:
-                    System.out.println("Keine Richtung ausgewählt!\nBitte erneut auswählen.");
-                    break;
-            }
-        }
-        */
-        return null;
+        return commandsProzessor.process();
     }
 }

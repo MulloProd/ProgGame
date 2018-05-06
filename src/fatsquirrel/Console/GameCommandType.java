@@ -10,7 +10,7 @@ public enum GameCommandType implements CommandTypeInfo {
 
         @Override
         public String getHelpText() {
-            return "list all commands";
+            return "List all commands";
         }
 
         @Override
@@ -26,7 +26,7 @@ public enum GameCommandType implements CommandTypeInfo {
 
         @Override
         public String getHelpText() {
-            return "Exit the Game.";
+            return "Exits the game";
         }
 
         @Override

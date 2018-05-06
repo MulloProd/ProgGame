@@ -65,6 +65,7 @@ public class Board {
                 counter--;
         }
 
+        /*
         //MiniSquirrels erstellen
         counter = BoardConfig.getMiniSquirrelCount();
         while (counter>0){
@@ -73,6 +74,7 @@ public class Board {
             if(setTile(x,y,new MiniSquirrel(entitySet.getNextFreeID(), 200, new XY(x,y), entitySet.getRandomMasterSquirrel())))
                 counter--;
         }
+        */
 
         //Planzen erstellen
         counter = BoardConfig.getPlantCount();

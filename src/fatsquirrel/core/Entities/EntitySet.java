@@ -44,7 +44,7 @@ public class EntitySet {
     }
 
     public void nextStep(EntityContext entityContext) throws IOException {
-        System.out.println(toString());
+        //System.out.println(toString());
         for(Entity e : set){
             if(e!=null)
                 e.nextStep(entityContext);
