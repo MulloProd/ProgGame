@@ -20,7 +20,7 @@ public class GameImpl extends Game {
     }
 
     @Override
-    public void processInput() throws IOException {
+    public void processInput() throws IOException, NotEnoughEnergyException {
         getState().setLastInputVector(consoleUI.getCommand().getDirection());
 
         //Befehl zum Erzeugen von MiniSquirrels

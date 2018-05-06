@@ -1,5 +1,6 @@
 package fatsquirrel.core;
 
+import fatsquirrel.Console.NotEnoughEnergyException;
 import fatsquirrel.State;
 
 import java.io.IOException;
@@ -12,7 +13,7 @@ public abstract class Game {
         this.state = state;
     }
 
-    public void run() throws IOException {
+    public void run() throws IOException, NotEnoughEnergyException {
         while(true){
             render();
             processInput();
@@ -24,7 +25,7 @@ public abstract class Game {
         state.update();
     }
 
-    public abstract void processInput() throws IOException;
+    public abstract void processInput() throws IOException, NotEnoughEnergyException;
 
     public abstract void render();
 

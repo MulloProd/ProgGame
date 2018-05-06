@@ -10,7 +10,7 @@ public class CommandsProzessor {
     PrintStream outputStream = System.out;
     BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
 
-    public MoveCommand process() throws IOException {
+    public MoveCommand process() throws IOException, NotEnoughEnergyException {
         CommandScanner commandScanner = new CommandScanner(GameCommandType.values(), inputReader);
 
         while (true) { // the loop over all commands with one input line for every command
@@ -52,10 +52,17 @@ public class CommandsProzessor {
         return new MoveCommand(x,y, 0);
     }
 
-    private MoveCommand spawn_mini (int miniEnergy){
-        //Position von MasterSquirrel holen und Random "davor" setzen
+    private MoveCommand spawn_mini (int miniEnergy) throws NotEnoughEnergyException {
+        //Position und Energy von MasterSquirrel holen und Random "davor" setzen
+
+        //Wenn abzugebende Energie größer der eigenen ist -> Exception
+        if(miniEnergy>200)
+            throw new NotEnoughEnergyException("Mastersquirrel besitzt nur noch " + 200 + " Energie!");
+
         int x =0;
         int y= 0;
         return new MoveCommand(x,y, miniEnergy);
     }
 }
+
+
