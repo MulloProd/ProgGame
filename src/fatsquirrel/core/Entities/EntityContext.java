@@ -10,7 +10,6 @@ public interface EntityContext {
     void tryMove(GoodBeast goodBeast, XY moveDirection);
     void tryMove(BadBeast badBeast, XY moveDirection);
     void tryMove(MasterSquirrel masterSquirrel, XY moveDirection);
-    void spawnMiniSquirrel(MiniSquirrel miniSquirrel, XY position);
     PlayerEntity nearestPlayerEntity(XY pos);
 
     void kill(Entity entity);

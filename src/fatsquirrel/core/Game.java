@@ -12,7 +12,7 @@ public abstract class Game {
         this.state = state;
     }
 
-    public void run() throws IOException, NotEnoughEnergyException {
+    public void run() throws IOException {
         while(true){
             render();
             processInput();
@@ -24,7 +24,7 @@ public abstract class Game {
         state.update();
     }
 
-    public abstract void processInput() throws IOException, NotEnoughEnergyException;
+    public abstract void processInput() throws IOException;
 
     public abstract void render();
 

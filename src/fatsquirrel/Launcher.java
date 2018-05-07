@@ -15,7 +15,6 @@ public class Launcher {
         State state = new State(board);
         board.setState(state);
         Game game = new GameImpl(state);
-
         game.run();
     }
 }

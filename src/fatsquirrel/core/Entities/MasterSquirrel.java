@@ -28,17 +28,6 @@ public abstract class MasterSquirrel extends PlayerEntity{
             }
         }
     }
-/*
-    public Entity testTile(){
-        for(Entity e : EntitySet.set){
-            if(e != null && e.getPosition().X == getPosition().X && e.getPosition().Y == getPosition().Y && !(e instanceof MasterSquirrel)){
-                return e;
-            }
-        }
-
-        return null;
-    }*/
-
 
     private static void toString(String string){
         System.out.println(string);

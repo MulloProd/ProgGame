@@ -187,11 +187,6 @@ public class FlattenedBoard implements EntityContext, BoardView {
     }
 
     @Override
-    public void spawnMiniSquirrel(MiniSquirrel miniSquirrel, XY position) {
-
-    }
-
-    @Override
     public PlayerEntity nearestPlayerEntity(XY pos) {
 
         PlayerEntity nearestPlayerEntity = null;
@@ -266,5 +261,9 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
     public EntitySet getEntitySet() {
         return entitySet;
+    }
+
+    public void setEntities(Entity entity){
+        entities[entity.getPosition().X][entity.getPosition().Y] = entity;
     }
 }

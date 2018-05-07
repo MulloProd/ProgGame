@@ -40,7 +40,6 @@ public abstract class Entity {
 
     public int getID() {
         return ID;
-
     }
 
     public int updateEnergy(int value){
