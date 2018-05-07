@@ -125,6 +125,6 @@ public class Board {
     }
 
     public FlattenedBoard flatten(){
-        return new FlattenedBoard(entities, width, height, state);
+        return new FlattenedBoard(entities, entitySet, width, height, state);
     }
 }

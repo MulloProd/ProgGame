@@ -9,12 +9,14 @@ import java.util.Random;
 public class FlattenedBoard implements EntityContext, BoardView {
 
     private final Entity[][] entities;
+    private final EntitySet entitySet;
     private final int width;
     private final int height;
     private State state;
 
-    public FlattenedBoard(Entity[][] entities, int width, int height, State state){
+    public FlattenedBoard(Entity[][] entities, EntitySet entitySet, int width, int height, State state){
         this.entities = entities;
+        this.entitySet = entitySet;
         this.width = width;
         this.height = height;
         this.state = state;
@@ -260,5 +262,9 @@ public class FlattenedBoard implements EntityContext, BoardView {
         entities[xEntity][yEntity] = null;
         return;
 
+    }
+
+    public EntitySet getEntitySet() {
+        return entitySet;
     }
 }

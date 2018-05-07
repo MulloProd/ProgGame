@@ -28,7 +28,7 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
     }
 
 
-    public void setSpawnMiniSquirrel(boolean spawnMiniSquirrel) {
-        this.spawnMiniSquirrel = spawnMiniSquirrel;
+    public void setSpawnMiniSquirrel(int energy) {
+        ;
     }
 }

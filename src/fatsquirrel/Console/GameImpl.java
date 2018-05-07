@@ -14,14 +14,21 @@ import java.util.function.Consumer;
 public class GameImpl extends Game {
 
     ConsoleUI consoleUI = new ConsoleUI();
+    HandOperatedMasterSquirrel masterSquirrel;
 
     public GameImpl(State state) {
         super(state);
+
+        for(Entity entity : state.flattenedBoard().getEntitySet().set){
+            if(entity instanceof HandOperatedMasterSquirrel)
+                masterSquirrel = (HandOperatedMasterSquirrel)entity;
+        }
     }
 
     @Override
     public void processInput() throws IOException {
         getState().setLastInputVector(consoleUI.getCommand().getDirection());
+        masterSquirrel.setSpawnMiniSquirrel(consoleUI.getCommand().getMiniEnergy());
 
         //Befehl zum Erzeugen von MiniSquirrels
     }
