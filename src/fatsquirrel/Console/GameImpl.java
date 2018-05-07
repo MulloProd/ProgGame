@@ -27,8 +27,8 @@ public class GameImpl extends Game {
 
     @Override
     public void processInput() throws IOException {
-        getState().setLastInputVector(consoleUI.getCommand().getDirection());
-        masterSquirrel.setSpawnMiniSquirrel(consoleUI.getCommand().getMiniEnergy());
+        masterSquirrel.setNextPos(consoleUI.getCommand().getDirection());
+        //masterSquirrel.setSpawnMiniSquirrel(consoleUI.getCommand().getMiniEnergy());
 
         //Befehl zum Erzeugen von MiniSquirrels
     }
