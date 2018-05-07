@@ -10,7 +10,7 @@ public class CommandsProzessor {
     PrintStream outputStream = System.out;
     BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
 
-    public MoveCommand process() throws IOException, NotEnoughEnergyException {
+    public MoveCommand process() throws IOException {
         CommandScanner commandScanner = new CommandScanner(GameCommandType.values(), inputReader);
 
         while (true) { // the loop over all commands with one input line for every command
@@ -37,7 +37,13 @@ public class CommandsProzessor {
                     case MASTER_ENERGY:
                         break;
                     case SPAWN_MINI:
-                        return spawn_mini((int)command.getParams()[0]);
+                        try{
+                            return spawn_mini((int)command.getParams()[0]);
+                        }
+                        catch (NotEnoughEnergyException e){
+                            System.out.println("MasterSquirrel besitzt nicht genügend Energie.");
+                        }
+
                 }
             }
         }

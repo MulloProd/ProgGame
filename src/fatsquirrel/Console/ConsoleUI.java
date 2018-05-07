@@ -42,7 +42,7 @@ public class ConsoleUI implements UI {
     }
 
     @Override
-    public MoveCommand getCommand() throws IOException, NotEnoughEnergyException {
+    public MoveCommand getCommand() throws IOException {
         CommandsProzessor commandsProzessor = new CommandsProzessor();
         return commandsProzessor.process();
     }
