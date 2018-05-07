@@ -47,6 +47,7 @@ public class MyFavoriteCommandsProcessor {
     }
 
     private void addi(){
+
     }
 
     private static void writeClassHeader(Class c) {

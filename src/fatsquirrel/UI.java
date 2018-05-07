@@ -1,7 +1,7 @@
 package fatsquirrel;
 
 import fatsquirrel.Console.MoveCommand;
-import fatsquirrel.Console.NotEnoughEnergyException;
+import fatsquirrel.core.NotEnoughEnergyException;
 import fatsquirrel.core.BoardView;
 
 import java.io.IOException;

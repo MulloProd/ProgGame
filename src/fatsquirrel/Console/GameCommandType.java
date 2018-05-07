@@ -122,12 +122,12 @@ public enum GameCommandType implements CommandTypeInfo {
 
         @Override
         public String getHelpText() {
-            return "<mastersquirrel>, shows how much energy the Mastersquirrel has left";
+            return "Shows how much energy the Mastersquirrel has left";
         }
 
         @Override
         public Class[] getParamTypes() {
-            return new Class[]{String.class};
+            return new Class[0];
         }
     },
     SPAWN_MINI {
@@ -138,7 +138,7 @@ public enum GameCommandType implements CommandTypeInfo {
 
         @Override
         public String getHelpText() {
-            return "<int>, Startenergy of minisquirrel";
+            return "<int>, Startenergy of Minisquirrel";
         }
 
         @Override

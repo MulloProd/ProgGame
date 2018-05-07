@@ -1,23 +1,22 @@
 package fatsquirrel.Console;
 
 import fatsquirrel.State;
-import fatsquirrel.UI;
-import fatsquirrel.core.BoardView;
 import fatsquirrel.core.Entities.Entity;
 import fatsquirrel.core.Entities.HandOperatedMasterSquirrel;
-import fatsquirrel.core.Entities.Wall;
 import fatsquirrel.core.Game;
+import fatsquirrel.core.NotEnoughEnergyException;
 
 import java.io.IOException;
-import java.util.function.Consumer;
 
 public class GameImpl extends Game {
 
-    ConsoleUI consoleUI = new ConsoleUI();
-    HandOperatedMasterSquirrel masterSquirrel;
+    private ConsoleUI consoleUI = new ConsoleUI();
+    private HandOperatedMasterSquirrel masterSquirrel;
+    private State state;
 
     public GameImpl(State state) {
         super(state);
+        this.state = state;
 
         for(Entity entity : state.flattenedBoard().getEntitySet().set){
             if(entity instanceof HandOperatedMasterSquirrel)
@@ -27,10 +26,31 @@ public class GameImpl extends Game {
 
     @Override
     public void processInput() throws IOException {
-        masterSquirrel.setNextPos(consoleUI.getCommand().getDirection());
-        //masterSquirrel.setSpawnMiniSquirrel(consoleUI.getCommand().getMiniEnergy());
+        //Abfrage Eingabe
+        MoveCommand moveCommand = consoleUI.getCommand();
 
-        //Befehl zum Erzeugen von MiniSquirrels
+        //Position neu setzen, falls Eingabe war Bewegung
+        masterSquirrel.setNextPos(moveCommand.getDirection());
+
+        //Auflisten aller Entities mit Energie -> Problem Board und Entities werden neu erstellt (Bewegung fährt fort)
+        if (moveCommand.getListAll()){
+            System.out.println(state.flattenedBoard().getEntitySet().toString());
+        }
+
+        //Ausgabe der Mastersquirrel-Energy
+        if(moveCommand.getListMasterSquirrelEnergy()){
+            System.out.println(masterSquirrel.getEnergy());
+        }
+
+        //Minisquirrel spawnen lassen
+        if(moveCommand.getMiniSquirrelEnergy()>0){
+            try{
+                masterSquirrel.spawnMiniSquirrel(moveCommand.getMiniSquirrelEnergy());
+            }
+            catch (NotEnoughEnergyException e){
+
+            }
+        }
     }
 
     @Override

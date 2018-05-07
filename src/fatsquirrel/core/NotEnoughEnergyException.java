@@ -1,4 +1,4 @@
-package fatsquirrel.Console;
+package fatsquirrel.core;
 
 public class NotEnoughEnergyException extends Exception {
     public NotEnoughEnergyException() { super(); }

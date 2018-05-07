@@ -1,5 +1,6 @@
 package fatsquirrel.core.Entities;
 
+import fatsquirrel.core.NotEnoughEnergyException;
 import fatsquirrel.XY;
 
 
@@ -7,7 +8,6 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
 
     private XY position;
     private XY nextPos;
-    private boolean spawnMiniSquirrel = false;
 
     public HandOperatedMasterSquirrel(int id, int energy, XY position) {
         super(id, energy, position);
@@ -18,8 +18,6 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
         if(getCollisionCounter()==0){
             entityContext.tryMove(this, nextPos);
 
-            if(spawnMiniSquirrel){}
-            //MiniSquirrel setzen
         }
         else{
             setCollisionCounter(-1);
@@ -27,8 +25,13 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel {
     }
 
 
-    public void setSpawnMiniSquirrel(int energy) {
-        ;
+    public void spawnMiniSquirrel(int energy) throws NotEnoughEnergyException {
+        if(energy > this.getEnergy()){
+            throw new NotEnoughEnergyException("Mastersquirrel bestitzt nicht genug Energie.");
+        }
+        else{
+            //Spwanen
+        }
     }
 
     public void setNextPos(XY nextPos) {

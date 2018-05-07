@@ -1,6 +1,5 @@
 package fatsquirrel.core;
 
-import fatsquirrel.Console.NotEnoughEnergyException;
 import fatsquirrel.State;
 
 import java.io.IOException;
