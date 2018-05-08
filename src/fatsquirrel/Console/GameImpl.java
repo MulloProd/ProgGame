@@ -32,28 +32,29 @@ public class GameImpl extends Game {
     public void processInput() throws IOException {
         //Abfrage Eingabe
         moveCommand = consoleUI.getCommand();
+        if(moveCommand != null) {
+            //Position neu setzen, falls Eingabe war Bewegung
+            masterSquirrel.setNextPos(moveCommand.getDirection());
 
-        //Position neu setzen, falls Eingabe war Bewegung
-        masterSquirrel.setNextPos(moveCommand.getDirection());
+            //Auflisten aller Entities mit Energie -> Problem Board und Entities werden neu erstellt (Bewegung fährt fort)
+            if (moveCommand.getListAll()) {
+                System.out.println(state.flattenedBoard().getEntitySet().toString());
+                processInput();
+            }
 
-        //Auflisten aller Entities mit Energie -> Problem Board und Entities werden neu erstellt (Bewegung fährt fort)
-        if (moveCommand.getListAll()){
-            System.out.println(state.flattenedBoard().getEntitySet().toString());
-            processInput();
-        }
+            //Ausgabe der Mastersquirrel-Energy
+            if (moveCommand.getListMasterSquirrelEnergy()) {
+                System.out.println(masterSquirrel.getEnergy());
+                processInput();
+            }
 
-        //Ausgabe der Mastersquirrel-Energy
-        if(moveCommand.getListMasterSquirrelEnergy()){
-            System.out.println(masterSquirrel.getEnergy());
-            processInput();
-        }
-
-        //Minisquirrel spawnen lassen
-        if(moveCommand.getMiniSquirrelEnergy()>0){
-            try {
-                spawnMiniSquirrel();
-            } catch (NotEnoughEnergyException e) {
-                e.printStackTrace();
+            //Minisquirrel spawnen lassen
+            if (moveCommand.getMiniSquirrelEnergy() > 0) {
+                try {
+                    spawnMiniSquirrel();
+                } catch (NotEnoughEnergyException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

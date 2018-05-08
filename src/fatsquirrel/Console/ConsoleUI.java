@@ -7,6 +7,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class ConsoleUI implements UI {
 
@@ -58,33 +60,30 @@ public class ConsoleUI implements UI {
         while (true) { // the loop over all commands with one input line for every command
 
             Command command = commandScanner.next();
-
             if(command != null) {
-                switch ((GameCommandType)command.getCommandType()) {
-                    case EXIT:
-                        exit();
-                        break;
-                    case HELP:
-                        help();
-                        break;
-                    case ALL:
-                        return all();
-                    case LEFT:
-                        return move(-1,0);
-                    case UP:
-                        return move(0,-1);
-                    case DOWN:
-                        return move(0,1);
-                    case RIGHT:
-                        return move(1,0);
-                    case MASTER_ENERGY:
-                        return master_energy();
-                    case SPAWN_MINI:
-                        return spawn_mini((int)command.getParams()[0]);
+                Class[] params = new Class[command.getParams().length];
+                for (int i = 0; i < params.length; i++)
+                    params[i] = command.getParams()[i].getClass();
+
+                Method method = null;
+                try {
+                    method = this.getClass().getDeclaredMethod(command.getCommandType().getName(), params);
+                    if (method.getReturnType() == MoveCommand.class)                                                //Evtl noch abstrakter machen
+                        return (MoveCommand) (method.invoke(this, command.getParams()));
+                    else
+                        method.invoke(this, null);
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
                 }
             }
         }
     }
+
+    //in andre klasse, damit scanner unabhängig von UI ist
 
     private void exit(){
         System.exit(0);
@@ -100,6 +99,22 @@ public class ConsoleUI implements UI {
         return new MoveCommand (0,0,0, true, false);
     }
 
+    private MoveCommand left(){
+        return move(-1,0);
+    }
+
+    private MoveCommand right(){
+        return move(1,0);
+    }
+
+    private MoveCommand up(){
+        return move(0,-1);
+    }
+
+    private MoveCommand down(){
+        return move(0,1);
+    }
+
     private MoveCommand move(int x, int y){
         return new MoveCommand(x,y, 0, false, false);
     }
@@ -108,7 +123,7 @@ public class ConsoleUI implements UI {
         return new MoveCommand(0,0,0,false, true);
     }
 
-    private MoveCommand spawn_mini (int miniEnergy) {
+    private MoveCommand spawn_mini (Integer miniEnergy) {
         return new MoveCommand(0,0, miniEnergy, false, false);
     }
 
