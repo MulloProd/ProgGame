@@ -5,6 +5,7 @@ import fatsquirrel.XY;
 import fatsquirrel.core.Entities.Entity;
 import fatsquirrel.core.Entities.HandOperatedMasterSquirrel;
 import fatsquirrel.core.Entities.MiniSquirrel;
+import fatsquirrel.core.Entities.StandardMiniSquirrel;
 import fatsquirrel.core.Game;
 import fatsquirrel.core.NotEnoughEnergyException;
 
@@ -38,11 +39,13 @@ public class GameImpl extends Game {
         //Auflisten aller Entities mit Energie -> Problem Board und Entities werden neu erstellt (Bewegung fährt fort)
         if (moveCommand.getListAll()){
             System.out.println(state.flattenedBoard().getEntitySet().toString());
+            processInput();
         }
 
         //Ausgabe der Mastersquirrel-Energy
         if(moveCommand.getListMasterSquirrelEnergy()){
             System.out.println(masterSquirrel.getEnergy());
+            processInput();
         }
 
         //Minisquirrel spawnen lassen
@@ -67,9 +70,9 @@ public class GameImpl extends Game {
             int x = masterSquirrel.getPosition().X+1;
             int y = masterSquirrel.getPosition().Y+1;
 
-            MiniSquirrel miniSquirrel = new MiniSquirrel(id, moveCommand.getMiniSquirrelEnergy(), new XY(x, y), masterSquirrel);
-            state.flattenedBoard().getEntitySet().addEntity(miniSquirrel);
-            state.flattenedBoard().setEntities(miniSquirrel);
+            StandardMiniSquirrel standardMiniSquirrel = new StandardMiniSquirrel(id, moveCommand.getMiniSquirrelEnergy(), new XY(x, y), masterSquirrel);
+            state.flattenedBoard().getEntitySet().addEntity(standardMiniSquirrel);
+            state.flattenedBoard().setEntities(standardMiniSquirrel);
         }
         else {
             throw new NotEnoughEnergyException("Mastersquirrel besitzt nicht genügend Energie.");

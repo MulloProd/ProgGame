@@ -42,6 +42,9 @@ public class ConsoleUI implements UI {
                     case MiniSquirrel:
                         System.out.print("m");
                         break;
+                    case StandardMiniSquirrel:
+                        System.out.print("m");
+                        break;
                 }
             }
             System.out.println();
