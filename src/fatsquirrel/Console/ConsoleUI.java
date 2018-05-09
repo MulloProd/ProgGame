@@ -69,7 +69,7 @@ public class ConsoleUI implements UI {
                 try {
                     method = this.getClass().getDeclaredMethod(command.getCommandType().getName(), params);
                     if (method.getReturnType() == MoveCommand.class)                                                //Evtl noch abstrakter machen
-                        return (MoveCommand) (method.invoke(this, command.getParams()));
+                        return (MoveCommand)(method.invoke(this, command.getParams()));
                     else
                         method.invoke(this, null);
                 } catch (NoSuchMethodException e) {
