@@ -38,6 +38,9 @@ public class FlattenedBoard implements EntityContext, BoardView {
     @Override
     public void tryMove(MiniSquirrel miniSquirrel, XY moveDirection) {
 
+        if(moveDirection==null)
+            return;
+
         if(moveDirection.X == 0 && moveDirection.Y == 0)
             return;
 
@@ -135,6 +138,9 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
     @Override
     public void tryMove(MasterSquirrel masterSquirrel, XY moveDirection) {
+
+        if(moveDirection==null)
+            return;
 
         if(moveDirection.X == 0 && moveDirection.Y == 0)
             return;

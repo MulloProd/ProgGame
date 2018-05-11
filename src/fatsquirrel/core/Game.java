@@ -7,15 +7,17 @@ import java.io.IOException;
 public abstract class Game {
 
     private final State state;
+    private final int FPS = 2;
 
     public Game(State state){
         this.state = state;
     }
 
-    public void run() throws IOException {
+    public void run() throws IOException, InterruptedException {
         while(true){
+            Thread.sleep(2000);
             render();
-            processInput();
+            //processInput();
             update();
         }
     }
