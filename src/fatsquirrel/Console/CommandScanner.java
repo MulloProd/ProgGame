@@ -26,30 +26,30 @@ public class CommandScanner {
                 Object[] params = new Object[commandTypeInfos[i].getParamTypes().length];
 
                 //schauen ob parameter stimmen <-- wird noch bisschen überarbeitete wegen fehleranfälligkeit, aber wenn man alles richtig eingibt klappts
-                for (int e = 0; e < commandTypeInfos[i].getParamTypes().length;e++) {
-                    if(commandTypeInfos[i].getParamTypes()[e] == int.class && input.length>e+1){
-                        try {
-                            params[e] = Integer.parseInt(input[e+1]);
+                for (int e = 0; e < commandTypeInfos[i].getParamTypes().length; e++) {
+                    try {
+                        if (commandTypeInfos[i].getParamTypes()[e] == int.class && input.length > e + 1) {
+                            try {
+                                params[e] = Integer.parseInt(input[e + 1]);
+                            } catch (Exception ex) {
+                                throw new ScanException();
+                            }
+                        } else if (commandTypeInfos[i].getParamTypes()[e] == float.class && input.length > e + 1) {
+                            try {
+                                params[e] = Float.parseFloat(input[e + 1]);
+                            } catch (Exception ex) {
+                                throw new ScanException();
+                            }
+                        } else if (commandTypeInfos[i].getParamTypes()[e] == String.class && input.length > e + 1) {
+                            params[e] = input[e + 1];
+                        } else if (commandTypeInfos[i].getParamTypes()[e] == Object.class && input.length > e + 1) {
+                            params[e] = input[e + 1];
+                        } else {
+                            throw new ScanException();
                         }
-                        catch(Exception ex){
-                            return null;
-                        }
-                    }
-                    else if(commandTypeInfos[i].getParamTypes()[e] == float.class && input.length>e+1){
-                        try {
-                            params[e] = Float.parseFloat(input[e+1]);
-                        }
-                        catch(Exception ex){
-                            return null;}
-                    }
-                    else if(commandTypeInfos[i].getParamTypes()[e] == String.class && input.length>e+1){
-                        params[e] = input[e+1];
-                    }
-                    else if(commandTypeInfos[i].getParamTypes()[e] == Object.class && input.length>e+1){
-                        params[e] = input[e+1];
-                    }
-                    else
+                    } catch (ScanException exception) {
                         return null;
+                    }
                 }
                 return new Command(commandTypeInfos[i], params);
             }

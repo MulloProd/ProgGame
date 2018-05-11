@@ -2,10 +2,7 @@ package fatsquirrel.Console;
 
 import fatsquirrel.State;
 import fatsquirrel.XY;
-import fatsquirrel.core.Entities.Entity;
-import fatsquirrel.core.Entities.HandOperatedMasterSquirrel;
-import fatsquirrel.core.Entities.MiniSquirrel;
-import fatsquirrel.core.Entities.StandardMiniSquirrel;
+import fatsquirrel.core.Entities.*;
 import fatsquirrel.core.Game;
 import fatsquirrel.core.NotEnoughEnergyException;
 
@@ -22,9 +19,11 @@ public class GameImpl extends Game {
         super(state);
         this.state = state;
 
-        for(Entity entity : state.flattenedBoard().getEntitySet().set){
-            if(entity instanceof HandOperatedMasterSquirrel)
-                masterSquirrel = (HandOperatedMasterSquirrel)entity;
+        for(int x=0;x<state.flattenedBoard().getSize().X;x++){
+            for(int y=0;y<state.flattenedBoard().getSize().Y;y++){
+                if(state.flattenedBoard().getEntityType(x,y).getType() == EntityType.Types.HandOperatedMasterSquirrel)
+                    masterSquirrel = (HandOperatedMasterSquirrel)state.flattenedBoard().getEntity(x,y);
+            }
         }
     }
 
@@ -38,7 +37,7 @@ public class GameImpl extends Game {
 
             //Auflisten aller Entities mit Energie -> Problem Board und Entities werden neu erstellt (Bewegung fährt fort)
             if (moveCommand.getListAll()) {
-                System.out.println(state.flattenedBoard().getEntitySet().toString());
+                System.out.println(state.flattenedBoard().allEntitiesToString());
                 processInput();
             }
 
@@ -66,14 +65,11 @@ public class GameImpl extends Game {
 
     private void spawnMiniSquirrel() throws NotEnoughEnergyException {
         if(moveCommand.getMiniSquirrelEnergy()< masterSquirrel.getEnergy()) {
-            int id = state.flattenedBoard().getEntitySet().getNextFreeID();
             //Abfrage fehlt, ob Position frei
             int x = masterSquirrel.getPosition().X+1;
             int y = masterSquirrel.getPosition().Y+1;
 
-            StandardMiniSquirrel standardMiniSquirrel = new StandardMiniSquirrel(id, moveCommand.getMiniSquirrelEnergy(), new XY(x, y), masterSquirrel);
-            state.flattenedBoard().getEntitySet().addEntity(standardMiniSquirrel);
-            state.flattenedBoard().setEntities(standardMiniSquirrel);
+            state.flattenedBoard().spawn_Mini(new XY(x,y), moveCommand.getMiniSquirrelEnergy(), masterSquirrel);
         }
         else {
             throw new NotEnoughEnergyException("Mastersquirrel besitzt nicht genügend Energie.");

@@ -8,16 +8,11 @@ import java.util.*;
 public class EntitySet {
 
     public List<Entity> set = new ArrayList<Entity>();
+    private int nextID = 0;
 
     public int getNextFreeID(){
-        int runner = 0;
-        for(int i=0;i<set.size();i++){
-            if(set.get(i).getID()>runner)
-                return runner;
-            else
-                runner++;
-        }
-        return runner;
+        nextID++;
+        return nextID-1;
     }
 
     public void addEntity(Entity newEntity){
