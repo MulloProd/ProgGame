@@ -15,9 +15,9 @@ public abstract class Game {
 
     public void run() throws IOException, InterruptedException {
         while(true){
-            Thread.sleep(2000);
+            //Thread.sleep(2000);
             render();
-            //processInput();
+            processInput();
             update();
         }
     }

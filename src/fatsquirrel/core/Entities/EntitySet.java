@@ -17,7 +17,6 @@ public class EntitySet {
 
     public void addEntity(Entity newEntity){
         set.add(newEntity);
-        Collections.sort(set, (e1, e2) -> (e1.getID() > e2.getID()) ? 1 : -1);
     }
 
     public void deleteEntity(Entity oldEntity){
@@ -40,9 +39,12 @@ public class EntitySet {
 
     public void nextStep(EntityContext entityContext) throws IOException {
         //System.out.println(toString());
-        for(Entity e : set){
-            if(e!=null)
-                e.nextStep(entityContext);
+        int counter = set.size();
+        for(int i=0;i<set.size();i++){
+            if(counter > set.size())
+                i--;
+            if(set.get(i)!=null)
+                set.get(i).nextStep(entityContext);
         }
 
     }

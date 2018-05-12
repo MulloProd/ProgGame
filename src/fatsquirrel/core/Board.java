@@ -125,7 +125,7 @@ public class Board {
     }
 
     public void removeEntity(Entity entity){
-        entitySet.set.remove(entity);
+        entitySet.deleteEntity(entity);
         entities[entity.getPosition().X][entity.getPosition().Y]=null;
     }
 
