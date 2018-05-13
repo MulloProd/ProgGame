@@ -14,6 +14,7 @@ public class ConsoleUI implements UI {
 
     PrintStream outputStream = System.out;
     BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
+    MoveCommand moveCommandBuffer;
 
     @Override
     public void render(BoardView view) {
@@ -68,10 +69,15 @@ public class ConsoleUI implements UI {
                 Method method = null;
                 try {
                     method = this.getClass().getDeclaredMethod(command.getCommandType().getName(), params);
-                    if (method.getReturnType() == MoveCommand.class)                                                //Evtl noch abstrakter machen
-                        return (MoveCommand)(method.invoke(this, command.getParams()));
-                    else
+                    if (method.getReturnType() == MoveCommand.class)  {    //Evtl noch abstrakter machen
+                        moveCommandBuffer = (MoveCommand)(method.invoke(this, command.getParams()));
+                        return moveCommandBuffer;
+                    }
+                    else{
                         method.invoke(this, null);
+                        return moveCommandBuffer;
+                    }
+
                 } catch (NoSuchMethodException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {

@@ -17,7 +17,15 @@ public class Launcher {
         State state = new State(board);
         board.setState(state);
         Game game = new GameImpl(state);
+
+        //Durch if ersetzen und mit Programmparameter starten
         startGame(game);
+        /*
+        if(args[0].toLowerCase().equals("old"))
+            startOldGame(game);
+        else
+            startGame(game);
+            */
     }
 
     public static void startGame(Game game) {
@@ -26,8 +34,7 @@ public class Launcher {
             @Override
             public void run() {
                 try {
-                    game.run();
-                    game.processInput();
+                    game.run(true);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e){
@@ -35,6 +42,19 @@ public class Launcher {
                 }
             }
         }, 1000);
+
+        try {
+            while(true){
+                game.processInput();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    public static void startOldGame(Game game) throws IOException, InterruptedException {
+        game.run(false);
+    }
+
 }
 

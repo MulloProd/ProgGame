@@ -28,7 +28,6 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
         if(moveDirection==null)
             return;
-
         if(moveDirection.X == 0 && moveDirection.Y == 0)
             return;
 
@@ -78,6 +77,8 @@ public class FlattenedBoard implements EntityContext, BoardView {
     @Override
     public void tryMove(GoodBeast goodBeast, XY moveDirection) {
 
+        if(moveDirection==null)
+            return;
         if(moveDirection.X == 0 && moveDirection.Y == 0)
             return;
 
@@ -96,6 +97,9 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
     @Override
     public void tryMove(BadBeast badBeast, XY moveDirection) {
+
+        if(moveDirection==null)
+            return;
         if(moveDirection.X == 0 && moveDirection.Y == 0)
             return;
 
@@ -129,7 +133,6 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
         if(moveDirection==null)
             return;
-
         if(moveDirection.X == 0 && moveDirection.Y == 0)
             return;
 
@@ -174,10 +177,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
             board.moveEntity(masterSquirrel, masterSquirrel.getPosition().add(moveDirection));
         }
 
-        if(masterSquirrel.getEnergy() <=0){
-            System.out.println("Verloren!");
-            System.exit(0);
-        }
+
     }
 
     @Override
@@ -204,7 +204,13 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
     @Override
     public void kill(Entity entity) {
-        board.removeEntity(entity);
+        if(entity instanceof MasterSquirrel){
+            System.out.println("Mastersquirrel mit der ID " + entity.getID() + " hat verloren!");
+            System.exit(0);
+        }
+        else{
+            board.removeEntity(entity);
+        }
     }
 
     @Override
