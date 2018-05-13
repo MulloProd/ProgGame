@@ -1,5 +1,6 @@
 package fatsquirrel;
 
+import fatsquirrel.Console.BotGameImpl;
 import fatsquirrel.Console.GameImpl;
 import fatsquirrel.core.Board;
 import fatsquirrel.core.Entities.*;
@@ -16,7 +17,7 @@ public class Launcher {
         Board board = new Board();
         State state = new State(board);
         board.setState(state);
-        Game game = new GameImpl(state);
+        Game game = new BotGameImpl(state);
 
         //Durch if ersetzen und mit Programmparameter starten
         startGame(game);

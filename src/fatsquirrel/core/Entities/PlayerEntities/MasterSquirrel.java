@@ -1,6 +1,7 @@
-package fatsquirrel.core.Entities;
+package fatsquirrel.core.Entities.PlayerEntities;
 
 import fatsquirrel.*;
+import fatsquirrel.core.Entities.Entity;
 
 public abstract class MasterSquirrel extends PlayerEntity{
 
@@ -32,7 +33,6 @@ public abstract class MasterSquirrel extends PlayerEntity{
     private static void toString(String string){
         System.out.println(string);
     }
-
 }
 
 

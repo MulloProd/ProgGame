@@ -7,6 +7,7 @@ public enum EntityType {
     BadBeast{},
     GoodBeast{},
     HandOperatedMasterSquirrel{},
+    MasterSquirrelBot {},
     MasterSquirrel{},
     StandardMiniSquirrel{},
     MiniSquirrel{},

@@ -1,8 +1,10 @@
 package fatsquirrel.core;
 
-import fatsquirrel.State;
 import fatsquirrel.XY;
 import fatsquirrel.core.Entities.*;
+import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
+import fatsquirrel.core.Entities.PlayerEntities.MiniSquirrel;
+import fatsquirrel.core.Entities.PlayerEntities.PlayerEntity;
 
 import java.util.Random;
 
@@ -249,6 +251,9 @@ public class FlattenedBoard implements EntityContext, BoardView {
                 case "HandOperatedMasterSquirrel":
                     type = EntityType.HandOperatedMasterSquirrel;
                     break;
+                case "MasterSquirrelBot":
+                    type = EntityType.MasterSquirrelBot;
+                    break;
                 case "MasterSquirrel":
                     type = EntityType.MasterSquirrel;
                     break;
@@ -267,16 +272,19 @@ public class FlattenedBoard implements EntityContext, BoardView {
         return getEntityType(new XY(x,y));
     }
 
-
-    public void spawn_Mini(XY xy, int energy, MasterSquirrel masterSquirrel){
-        board.setNewMiniSquirrel(xy.X, xy.Y, energy, masterSquirrel);
+    @Override
+    public void spawn_Mini(XY direction, int energy, MasterSquirrel masterSquirrel){
+        int x = masterSquirrel.getPosition().X +direction.X;
+        int y=masterSquirrel.getPosition().Y +direction.Y;
+        board.setNewMiniSquirrel(x, y, energy, masterSquirrel);
     }
 
     public String allEntitiesToString(){
         return board.allEntitiesToString();
     }
 
-    public Entity getEntity(int x, int y){
+    @Override
+    public Entity getEntityAt(int x, int y){
         return board.getEntity(x,y);
     }
 }

@@ -1,7 +1,9 @@
 package fatsquirrel.core.Entities;
 
-import fatsquirrel.State;
 import fatsquirrel.XY;
+import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
+import fatsquirrel.core.Entities.PlayerEntities.MiniSquirrel;
+import fatsquirrel.core.Entities.PlayerEntities.PlayerEntity;
 
 public interface EntityContext {
 
@@ -15,4 +17,8 @@ public interface EntityContext {
     void kill(Entity entity);
     void killAndReplace(Entity entity);
     EntityType getEntityType(XY xy);
+
+    void spawn_Mini(XY xy, int energy, MasterSquirrel masterSquirrel);
+
+    Entity getEntityAt(int x, int y);
 }

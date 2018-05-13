@@ -1,6 +1,7 @@
-package fatsquirrel.core.Entities;
+package fatsquirrel.core.Entities.PlayerEntities;
 
 import fatsquirrel.XY;
+import fatsquirrel.core.Entities.EntityContext;
 
 public class MiniSquirrel extends PlayerEntity {
 

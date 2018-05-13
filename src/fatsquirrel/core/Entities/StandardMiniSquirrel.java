@@ -1,6 +1,8 @@
 package fatsquirrel.core.Entities;
 
 import fatsquirrel.XY;
+import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
+import fatsquirrel.core.Entities.PlayerEntities.MiniSquirrel;
 
 public class StandardMiniSquirrel extends MiniSquirrel {
     public StandardMiniSquirrel(int id, int energy, XY position, MasterSquirrel masterSquirrel) {

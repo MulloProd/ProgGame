@@ -1,6 +1,7 @@
 package fatsquirrel.core.Entities;
 
 import fatsquirrel.XY;
+import fatsquirrel.core.Entities.PlayerEntities.PlayerEntity;
 
 public class GoodBeast extends Entity {
 

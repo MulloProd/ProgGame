@@ -2,35 +2,33 @@ package fatsquirrel.Console;
 
 import fatsquirrel.State;
 import fatsquirrel.XY;
-import fatsquirrel.core.Entities.*;
-import fatsquirrel.core.Entities.PlayerEntities.HandOperatedMasterSquirrel;
+import fatsquirrel.core.Entities.EntityType;
 import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
 import fatsquirrel.core.Game;
 import fatsquirrel.core.NotEnoughEnergyException;
-import javafx.application.Application;
 
 import java.io.IOException;
 
-public class GameImpl extends Game {
+public class BotGameImpl extends Game {
 
     private ConsoleUI consoleUI = new ConsoleUI();
     private MasterSquirrel masterSquirrel;
     private State state;
     private MoveCommand moveCommand;
 
-    public GameImpl(State state) {
+    public BotGameImpl(State state) {
         super(state);
         this.state = state;
 
         for(int x=0;x<state.flattenedBoard().getSize().X;x++){
             for(int y=0;y<state.flattenedBoard().getSize().Y;y++){
-                if(state.flattenedBoard().getEntityType(x,y) == EntityType.HandOperatedMasterSquirrel)
+                if(state.flattenedBoard().getEntityType(x,y) == EntityType.MasterSquirrelBot)
                     masterSquirrel = (MasterSquirrel)state.flattenedBoard().getEntityAt(x,y);
             }
         }
         if(masterSquirrel == null)
         {
-            System.out.println("Wrong board config! No HandOperatedMasterSquirrel found!");
+            System.out.println("Wrong board config! No MasterSquirrelBot found!");
             System.exit(0);
         }
     }
@@ -38,10 +36,10 @@ public class GameImpl extends Game {
     @Override
     public void processInput() throws IOException {
         //Abfrage Eingabe
-        moveCommand = consoleUI.getCommand();
+        /*moveCommand = consoleUI.getCommand();
         if(moveCommand != null) {
             //Position neu setzen, falls Eingabe war Bewegung
-            ((HandOperatedMasterSquirrel)masterSquirrel).setNextMoveDirection(moveCommand.getDirection());
+            masterSquirrel.setNextMoveDirection(moveCommand.getDirection());
 
             //Auflisten aller Entities mit Energie -> Problem Board und Entities werden neu erstellt (Bewegung fährt fort)
             if (moveCommand.getListAll()) {
@@ -63,7 +61,7 @@ public class GameImpl extends Game {
                     e.printStackTrace();
                 }
             }
-        }
+        }*/
     }
 
     @Override

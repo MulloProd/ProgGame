@@ -1,6 +1,6 @@
 package fatsquirrel.core.Entities;
 
-import javafx.collections.transformation.SortedList;
+import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
 
 import java.io.IOException;
 import java.util.*;

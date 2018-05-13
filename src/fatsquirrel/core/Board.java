@@ -4,10 +4,12 @@ import fatsquirrel.State;
 import fatsquirrel.XY;
 import fatsquirrel.core.Entities.EntitySet;
 import fatsquirrel.core.Entities.*;
+import fatsquirrel.core.Entities.PlayerEntities.HandOperatedMasterSquirrel;
+import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
+import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrelBot;
+import fatsquirrel.core.Entities.PlayerEntities.MiniSquirrel;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 public class Board {
@@ -67,16 +69,14 @@ public class Board {
                 counter--;
         }
 
-        /*
-        //MiniSquirrels erstellen
-        counter = BoardConfig.getMiniSquirrelCount();
-        while (counter>0){
+        //MasterSquirrelBot erstellen
+        counter = BoardConfig.getbotMasterSquirrelCount();
+        while(counter>0){
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
-            if(setNewEntity(x,y,new MiniSquirrel(entitySet.getNextFreeID(), 200, new XY(x,y), entitySet.getRandomMasterSquirrel())))
+            if(setNewEntity(x,y,EntityType.MasterSquirrelBot))
                 counter--;
         }
-        */
 
         //Planzen erstellen
         counter = BoardConfig.getPlantCount();
@@ -169,6 +169,8 @@ public class Board {
                 return new GoodBeast(entitySet.getNextFreeID(), 200, xy);
             case HandOperatedMasterSquirrel:
                 return new HandOperatedMasterSquirrel(entitySet.getNextFreeID(), 1000, xy);
+            case MasterSquirrelBot:
+                return new MasterSquirrelBot(entitySet.getNextFreeID(), 1000, xy);
             default:
                 return null;
         }

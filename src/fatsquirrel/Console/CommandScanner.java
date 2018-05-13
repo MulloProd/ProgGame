@@ -48,6 +48,7 @@ public class CommandScanner {
                             throw new ScanException();
                         }
                     } catch (ScanException exception) {
+                        outputStream.println("Wrong Input!");
                         return null;
                     }
                 }
