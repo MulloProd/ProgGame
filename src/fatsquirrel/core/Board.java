@@ -37,16 +37,16 @@ public class Board {
         int counter = BoardConfig.getWallCount();
         //Surrounding Wall, horizontal
         for(int i=0;i<entities.length && counter>0;i++){
-            if(setNewEntity(i,0,EntityType.Types.Wall))
+            if(setNewEntity(i,0,EntityType.Wall))
                 counter--;
-            if(counter>0 && setNewEntity(i,entities[i].length-1,EntityType.Types.Wall))
+            if(counter>0 && setNewEntity(i,entities[i].length-1,EntityType.Wall))
                 counter--;
         }
         //Surrounding Wall, vertical
         for(int i=0;i<entities[0].length&&counter>0;i++){
-            if(setNewEntity(0,i,EntityType.Types.Wall))
+            if(setNewEntity(0,i,EntityType.Wall))
                 counter--;
-            if(counter>0 && setNewEntity(entities.length-1,i,EntityType.Types.Wall))
+            if(counter>0 && setNewEntity(entities.length-1,i,EntityType.Wall))
                 counter--;
         }
 
@@ -54,7 +54,7 @@ public class Board {
         while(counter>0){
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
-            if(setNewEntity(x,y,EntityType.Types.Wall))
+            if(setNewEntity(x,y,EntityType.Wall))
                 counter--;
         }
 
@@ -63,7 +63,7 @@ public class Board {
         while(counter>0){
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
-            if(setNewEntity(x,y,EntityType.Types.HandOperatedMasterSquirrel))
+            if(setNewEntity(x,y,EntityType.HandOperatedMasterSquirrel))
                 counter--;
         }
 
@@ -83,14 +83,14 @@ public class Board {
         while(counter>0){
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
-            if(setNewEntity(x,y,EntityType.Types.GoodPlant))
+            if(setNewEntity(x,y,EntityType.GoodPlant))
                 counter--;
         }
         counter = BoardConfig.getPlantCount();
         while(counter>0){
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
-            if(setNewEntity(x,y,EntityType.Types.BadPlant))
+            if(setNewEntity(x,y,EntityType.BadPlant))
                 counter--;
         }
 
@@ -99,14 +99,14 @@ public class Board {
         while(counter>0){
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
-            if(setNewEntity(x,y,EntityType.Types.BadBeast))
+            if(setNewEntity(x,y,EntityType.BadBeast))
                 counter--;
         }
         counter = BoardConfig.getBeastCount();
         while(counter>0){
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
-            if(setNewEntity(x,y,EntityType.Types.GoodBeast))
+            if(setNewEntity(x,y,EntityType.GoodBeast))
                 counter--;
         }
 
@@ -130,7 +130,7 @@ public class Board {
     }
 
     //gibt TRUE zurück wenn setzen erfolgreich war, kann alles mit standartwerten initialisieren (für mini muss was andres verwendet werden
-    public boolean setNewEntity(int x, int y, EntityType.Types entityType) {
+    public boolean setNewEntity(int x, int y, EntityType entityType) {
         if(x<0||y<0||x>width||y>height)
             return false;
         else if(entities[x][y] != null)
@@ -155,7 +155,7 @@ public class Board {
         }
     }
 
-    private Entity getNewEntityWithType(EntityType.Types entityType, XY xy){
+    private Entity getNewEntityWithType(EntityType entityType, XY xy){
         switch (entityType){
             case Wall:
                 return new Wall(entitySet.getNextFreeID(), -10, xy);
@@ -185,7 +185,7 @@ public class Board {
         return new FlattenedBoard(width, height, this);
     }
 
-    public String AllEntitiesToString(){
+    public String allEntitiesToString(){
         return entitySet.toString();
     }
 }

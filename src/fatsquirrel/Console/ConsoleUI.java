@@ -19,7 +19,7 @@ public class ConsoleUI implements UI {
     public void render(BoardView view) {
         for(int y=0;y<view.getSize().Y;y++){
             for(int x=0;x<view.getSize().X;x++){
-                switch (view.getEntityType(x,y).getType()){
+                switch (view.getEntityType(x,y)){
                     case None:
                         System.out.print(" ");
                         break;

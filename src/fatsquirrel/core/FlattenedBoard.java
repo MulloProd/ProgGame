@@ -19,14 +19,6 @@ public class FlattenedBoard implements EntityContext, BoardView {
     }
 
     @Override
-    public EntityType getEntityType(int x, int y) {
-        if(board.getEntity(x,y) != null)
-            return new EntityType(board.getEntity(x,y).getClass());
-        else
-            return new EntityType(null);
-    }
-
-    @Override
     public XY getSize() {
         return new XY(width, height);
     }
@@ -221,7 +213,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
         while(!success) {
             int x = new Random().nextInt(width - 1);
             int y = new Random().nextInt(height - 1);
-            if(board.setNewEntity(x,y, getEntityType(entity.getPosition()).getType()))
+            if(board.setNewEntity(x,y, getEntityType(entity.getPosition())))
                 success = true;
 
             kill(entity);
@@ -230,18 +222,52 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
     @Override
     public EntityType getEntityType(XY xy) {
-        if(board.getEntity(xy) != null)
-            return new EntityType(board.getEntity(xy).getClass());
-        else
-            return new EntityType(null);
+        EntityType type = EntityType.None;
+        if(board.getEntity(xy.X, xy.Y)!=null) {
+            switch (board.getEntity(xy.X, xy.Y).getClass().getSimpleName()) {
+                case "Wall":
+                    type = EntityType.Wall;
+                    break;
+                case "BadPlant":
+                    type = EntityType.BadPlant;
+                    break;
+                case "GoodPlant":
+                    type = EntityType.GoodPlant;
+                    break;
+                case "BadBeast":
+                    type = EntityType.BadBeast;
+                    break;
+                case "GoodBeast":
+                    type = EntityType.GoodBeast;
+                    break;
+                case "HandOperatedMasterSquirrel":
+                    type = EntityType.HandOperatedMasterSquirrel;
+                    break;
+                case "MasterSquirrel":
+                    type = EntityType.MasterSquirrel;
+                    break;
+                case "MiniSquirrel":
+                    type = EntityType.MiniSquirrel;
+                    break;
+                case "StandardMiniSquirrel":
+                    type = EntityType.StandardMiniSquirrel;
+                    break;
+            }
+        }
+        return type;
     }
+    @Override
+    public EntityType getEntityType(int x, int y) {
+        return getEntityType(new XY(x,y));
+    }
+
 
     public void spawn_Mini(XY xy, int energy, MasterSquirrel masterSquirrel){
         board.setNewMiniSquirrel(xy.X, xy.Y, energy, masterSquirrel);
     }
 
     public String allEntitiesToString(){
-        return allEntitiesToString();
+        return board.allEntitiesToString();
     }
 
     public Entity getEntity(int x, int y){

@@ -21,7 +21,7 @@ public class GameImpl extends Game {
 
         for(int x=0;x<state.flattenedBoard().getSize().X;x++){
             for(int y=0;y<state.flattenedBoard().getSize().Y;y++){
-                if(state.flattenedBoard().getEntityType(x,y).getType() == EntityType.Types.HandOperatedMasterSquirrel)
+                if(state.flattenedBoard().getEntityType(x,y) == EntityType.HandOperatedMasterSquirrel)
                     masterSquirrel = (HandOperatedMasterSquirrel)state.flattenedBoard().getEntity(x,y);
             }
         }
