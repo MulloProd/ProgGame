@@ -1,6 +1,8 @@
 package fatsquirrel.Console;
 
+import fatsquirrel.FxUI;
 import fatsquirrel.State;
+import fatsquirrel.UI;
 import fatsquirrel.XY;
 import fatsquirrel.core.Entities.*;
 import fatsquirrel.core.Entities.PlayerEntities.HandOperatedMasterSquirrel;
@@ -13,7 +15,7 @@ import java.io.IOException;
 
 public class GameImpl extends Game {
 
-    private ConsoleUI consoleUI = new ConsoleUI();
+    private UI ui;
     private MasterSquirrel masterSquirrel;
     private State state;
     private MoveCommand moveCommand;
@@ -35,10 +37,15 @@ public class GameImpl extends Game {
         }
     }
 
+    public GameImpl (State state, UI ui){
+        super(state, ui);
+        this.ui = ui;
+    }
+
     @Override
     public void processInput() throws IOException {
         //Abfrage Eingabe
-        moveCommand = consoleUI.getCommand();
+        moveCommand = ui.getCommand();
         if(moveCommand != null) {
             //Position neu setzen, falls Eingabe war Bewegung
             ((HandOperatedMasterSquirrel)masterSquirrel).setNextMoveDirection(moveCommand.getDirection());
@@ -68,7 +75,7 @@ public class GameImpl extends Game {
 
     @Override
     public void render() {
-        consoleUI.render(getState().flattenedBoard());
+        ui.render(getState().flattenedBoard());
     }
 
     private void spawnMiniSquirrel() throws NotEnoughEnergyException {

@@ -92,6 +92,11 @@ public class ConsoleUI implements UI {
         }
     }
 
+    @Override
+    public void message(String msg) {
+
+    }
+
     //in andre klasse, damit scanner unabhängig von UI ist
 
     private void exit(){

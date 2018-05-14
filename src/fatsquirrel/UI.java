@@ -10,4 +10,5 @@ public interface UI {
 
     void render(BoardView view);
     MoveCommand getCommand() throws IOException;
+    void message(String msg);
 }
