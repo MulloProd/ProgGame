@@ -1,6 +1,9 @@
-package fatsquirrel.Console;
+package fatsquirrel.UIs;
 
-import fatsquirrel.UI;
+import fatsquirrel.Console.Command;
+import fatsquirrel.Console.CommandScanner;
+import fatsquirrel.Console.GameCommandType;
+import fatsquirrel.Console.MoveCommand;
 import fatsquirrel.core.BoardView;
 
 import java.io.BufferedReader;
@@ -97,7 +100,7 @@ public class ConsoleUI implements UI {
 
     }
 
-    //in andre klasse, damit scanner unabhängig von UI ist
+    //in andre klasse, damit scanner unabhängig von UIs ist
 
     private void exit(){
         System.exit(0);

@@ -1,15 +1,13 @@
-package fatsquirrel.Console;
+package fatsquirrel.Game;
 
-import fatsquirrel.FxUI;
+import fatsquirrel.Console.MoveCommand;
 import fatsquirrel.State;
-import fatsquirrel.UI;
+import fatsquirrel.UIs.UI;
 import fatsquirrel.XY;
 import fatsquirrel.core.Entities.*;
 import fatsquirrel.core.Entities.PlayerEntities.HandOperatedMasterSquirrel;
 import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
-import fatsquirrel.core.Game;
 import fatsquirrel.core.NotEnoughEnergyException;
-import javafx.application.Application;
 
 import java.io.IOException;
 
@@ -23,6 +21,18 @@ public class GameImpl extends Game {
     public GameImpl (State state, UI ui){
         super(state, ui);
         this.ui = ui;
+
+        for(int x=0;x<state.flattenedBoard().getSize().X;x++){
+            for(int y=0;y<state.flattenedBoard().getSize().Y;y++){
+                if(state.flattenedBoard().getEntityType(x,y) == EntityType.HandOperatedMasterSquirrel)
+                    masterSquirrel = (MasterSquirrel)state.flattenedBoard().getEntityAt(x,y);
+            }
+        }
+        if(masterSquirrel == null)
+        {
+            System.out.println("Wrong board config! No HandOperatedMasterSquirrel found!");
+            System.exit(0);
+        }
     }
 
     @Override

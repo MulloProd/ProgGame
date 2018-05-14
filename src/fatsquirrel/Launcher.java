@@ -1,19 +1,19 @@
 package fatsquirrel;
 
-import fatsquirrel.Console.BotGameImpl;
-import fatsquirrel.Console.ConsoleUI;
-import fatsquirrel.Console.GameImpl;
+import fatsquirrel.Game.BotGameImpl;
+import fatsquirrel.Game.GameMode;
+import fatsquirrel.UIs.ConsoleUI;
+import fatsquirrel.Game.GameImpl;
+import fatsquirrel.UIs.FxUI;
 import fatsquirrel.core.Board;
 import fatsquirrel.core.BoardConfig;
-import fatsquirrel.core.Entities.*;
-import fatsquirrel.core.Game;
+import fatsquirrel.Game.Game;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -67,7 +67,7 @@ public class Launcher extends Application{
 
         FxUI fxUI = FxUI.createInstance(BoardConfig.getSize());
 
-        game = new GameImpl(new State(board), fxUI);
+        game = new BotGameImpl(new State(board), fxUI);
 
         primaryStage.setScene(fxUI);
         primaryStage.setTitle("Lästiges Squirrel");

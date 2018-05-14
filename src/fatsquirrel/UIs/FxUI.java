@@ -1,7 +1,8 @@
-package fatsquirrel;
+package fatsquirrel.UIs;
 
 import fatsquirrel.Console.GameCommandType;
 import fatsquirrel.Console.MoveCommand;
+import fatsquirrel.XY;
 import fatsquirrel.core.BoardView;
 import fatsquirrel.core.Entities.EntityType;
 import javafx.application.Platform;
@@ -10,6 +11,7 @@ import javafx.scene.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -20,7 +22,7 @@ public class FxUI extends Scene implements UI {
 
     private Canvas boardCanvas;
     private Label msgLabel;
-    private static final int CELL_SIZE = 20;
+    private static final int CELL_SIZE = 40;
     private static MoveCommand moveCommand;
     private static Label statusLabel;
 
@@ -87,10 +89,12 @@ public class FxUI extends Scene implements UI {
         for(int y=0; y<viewSize.Y; y++){
             for(int x=0; x<viewSize.X; x++){
                 if(view.getEntityType(x,y).equals(EntityType.Wall)){
-                    gc.setFill(Color.CHOCOLATE);
-                    gc.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                    gc.drawImage(new Image(getClass().getResourceAsStream("..\\Images\\wall.jpg")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                    //gc.setFill(Color.CHOCOLATE);
+                    //gc.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                 }
                 if(view.getEntityType(x,y).equals(EntityType.BadBeast)){
+                    //gc.drawImage(new Image(getClass().getResourceAsStream("Images\\badbeast.gif")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                     gc.setFill(Color.ORANGERED);
                     gc.fillOval(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                 }
@@ -99,10 +103,12 @@ public class FxUI extends Scene implements UI {
                     gc.fillOval(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                 }
                 if(view.getEntityType(x,y).equals(EntityType.GoodPlant)){
+                    //gc.drawImage(new Image(getClass().getResourceAsStream("Images\\goodplant.png")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                     gc.setFill(Color.GREENYELLOW);
                     gc.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                 }
                 if(view.getEntityType(x,y).equals(EntityType.BadPlant)){
+                    //gc.drawImage(new Image(getClass().getResourceAsStream("Images\\badplant.jpg")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                     gc.setFill(Color.DARKSEAGREEN);
                     gc.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                 }
@@ -111,6 +117,7 @@ public class FxUI extends Scene implements UI {
                     gc.fillOval(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                 }
                 if(view.getEntityType(x,y).equals(EntityType.MasterSquirrelBot)){
+                    //gc.drawImage(new Image(getClass().getResourceAsStream("Images\\squirrel.png")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                     gc.setFill(Color.DARKRED);
                     gc.fillOval(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                 }

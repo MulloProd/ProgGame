@@ -1,4 +1,4 @@
-package fatsquirrel;
+package fatsquirrel.UIs;
 
 import fatsquirrel.Console.MoveCommand;
 import fatsquirrel.core.NotEnoughEnergyException;

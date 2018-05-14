@@ -1,7 +1,7 @@
-package fatsquirrel.core;
+package fatsquirrel.Game;
 
 import fatsquirrel.State;
-import fatsquirrel.UI;
+import fatsquirrel.UIs.UI;
 
 import java.io.IOException;
 import java.util.Timer;
@@ -49,7 +49,7 @@ public abstract class Game {
                     while(true){
                         try {
                             processInput();
-                            Thread.sleep(5000/FPS);
+                            Thread.sleep(1000/FPS);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         } catch (IOException e){
