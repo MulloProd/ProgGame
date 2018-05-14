@@ -30,9 +30,9 @@ public abstract class Game {
                 public void run() {
                     while(true){
                         try {
-                            Thread.sleep(1000/FPS);
                             render();
                             update();
+                            Thread.sleep(1000/FPS);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         } catch (IOException e){
@@ -40,7 +40,7 @@ public abstract class Game {
                         }
                     }
                 }
-            }, 0);
+            }, 1000);
 
             //2. Thread für den Input
             processTimer.schedule(new TimerTask() {
@@ -48,8 +48,8 @@ public abstract class Game {
                 public void run() {
                     while(true){
                         try {
-                            Thread.sleep(1000/FPS);
                             processInput();
+                            Thread.sleep(5000/FPS);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         } catch (IOException e){
@@ -57,7 +57,7 @@ public abstract class Game {
                         }
                     }
                 }
-            }, 0);
+            }, 1000);
 
         }else{
             while (true){

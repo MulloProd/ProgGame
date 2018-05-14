@@ -28,7 +28,6 @@ public class Launcher extends Application{
         board = new Board();
         state = new State(board);
         board.setState(state);
-        //Game game = new BotGameImpl(state);
 
 
         if(gameMode.equals(gameMode.JFX))
@@ -37,8 +36,10 @@ public class Launcher extends Application{
             game = new GameImpl(new State(board), new ConsoleUI());
             startGame(game);
         }
-        else if (gameMode.equals(gameMode.OLD))
+        else if (gameMode.equals(gameMode.OLD)) {
+            game = new GameImpl(new State(board), new ConsoleUI());
             startOldGame(game);
+        }
     }
 
     public static void startGame(Game game) {
@@ -66,7 +67,7 @@ public class Launcher extends Application{
 
         FxUI fxUI = FxUI.createInstance(BoardConfig.getSize());
 
-        game = new BotGameImpl(new State(board), fxUI);
+        game = new GameImpl(new State(board), fxUI);
 
         primaryStage.setScene(fxUI);
         primaryStage.setTitle("Lästiges Squirrel");

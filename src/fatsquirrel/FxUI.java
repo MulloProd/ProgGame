@@ -1,9 +1,9 @@
 package fatsquirrel;
 
+import fatsquirrel.Console.GameCommandType;
 import fatsquirrel.Console.MoveCommand;
 import fatsquirrel.core.BoardView;
 import fatsquirrel.core.Entities.EntityType;
-import fatsquirrel.core.Entities.Wall;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.*;
@@ -41,8 +41,20 @@ public class FxUI extends Scene implements UI {
         fxUI.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                System.out.println("Es wurde folgende Taste gedrückt: " + keyEvent.getCode() + " bitte behandeln!");
-                // TODO handle event
+                System.out.println("Es wurde folgende Taste gedrückt: " + keyEvent.getCode() + ".");
+
+                if(keyEvent.getCode().name().toUpperCase().equals(GameCommandType.LEFT.toString())){
+                    moveCommand = new MoveCommand(-1,0,0,false,false);
+                }
+                else if(keyEvent.getCode().name().toUpperCase().equals(GameCommandType.RIGHT.toString())){
+                    moveCommand = new MoveCommand(1,0,0,false,false);
+                }
+                else if(keyEvent.getCode().name().toUpperCase().equals(GameCommandType.UP.toString())){
+                    moveCommand = new MoveCommand(0,-1,0,false,false);
+                }
+                else if(keyEvent.getCode().name().toUpperCase().equals(GameCommandType.DOWN.toString())){
+                    moveCommand = new MoveCommand(0,1,0,false,false);
+                }
             }
         });
         return fxUI;
@@ -62,7 +74,7 @@ public class FxUI extends Scene implements UI {
 
     @Override
     public MoveCommand getCommand() throws IOException {
-        return null;
+        return moveCommand;
     }
 
     private void repaintBoardCanvas(BoardView view) {
@@ -79,7 +91,7 @@ public class FxUI extends Scene implements UI {
                     gc.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                 }
                 if(view.getEntityType(x,y).equals(EntityType.BadBeast)){
-                    gc.setFill(Color.RED);
+                    gc.setFill(Color.ORANGERED);
                     gc.fillOval(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                 }
                 if(view.getEntityType(x,y).equals(EntityType.GoodBeast)){
@@ -91,19 +103,19 @@ public class FxUI extends Scene implements UI {
                     gc.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                 }
                 if(view.getEntityType(x,y).equals(EntityType.BadPlant)){
-                    gc.setFill(Color.DARKOLIVEGREEN);
+                    gc.setFill(Color.DARKSEAGREEN);
                     gc.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                 }
                 if(view.getEntityType(x,y).equals(EntityType.HandOperatedMasterSquirrel)){
-                    gc.setFill(Color.DARKGOLDENROD);
+                    gc.setFill(Color.BLACK);
                     gc.fillOval(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                 }
                 if(view.getEntityType(x,y).equals(EntityType.MasterSquirrelBot)){
-                    gc.setFill(Color.YELLOW);
+                    gc.setFill(Color.DARKRED);
                     gc.fillOval(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                 }
                 if(view.getEntityType(x,y).equals(EntityType.MiniSquirrel)){
-                    gc.setFill(Color.DARKSLATEGRAY);
+                    gc.setFill(Color.INDIANRED);
                     gc.fillOval(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                 }
 
