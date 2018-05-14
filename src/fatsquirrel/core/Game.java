@@ -13,10 +13,6 @@ public abstract class Game {
     private UI ui;
     private final int FPS = 1;
 
-    public Game(State state){
-        this.state = state;
-    }
-
     public Game(State state, UI ui){
         this.state = state;
         this.ui = ui;

@@ -66,7 +66,7 @@ public class Launcher extends Application{
 
         FxUI fxUI = FxUI.createInstance(BoardConfig.getSize());
 
-        game = new GameImpl(new State(board), fxUI);
+        game = new BotGameImpl(new State(board), fxUI);
 
         primaryStage.setScene(fxUI);
         primaryStage.setTitle("Lästiges Squirrel");

@@ -1,6 +1,7 @@
 package fatsquirrel.Console;
 
 import fatsquirrel.State;
+import fatsquirrel.UI;
 import fatsquirrel.XY;
 import fatsquirrel.core.Entities.EntityType;
 import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
@@ -11,14 +12,14 @@ import java.io.IOException;
 
 public class BotGameImpl extends Game {
 
-    private ConsoleUI consoleUI = new ConsoleUI();
     private MasterSquirrel masterSquirrel;
     private State state;
     private MoveCommand moveCommand;
+    private UI ui;
 
-    public BotGameImpl(State state) {
-        super(state);
-        this.state = state;
+    public BotGameImpl(State state, UI ui) {
+        super(state,ui);
+        this.ui = ui;
 
         for(int x=0;x<state.flattenedBoard().getSize().X;x++){
             for(int y=0;y<state.flattenedBoard().getSize().Y;y++){
@@ -66,7 +67,7 @@ public class BotGameImpl extends Game {
 
     @Override
     public void render() {
-        consoleUI.render(getState().flattenedBoard());
+        ui.render(getState().flattenedBoard());
     }
 
     private void spawnMiniSquirrel() throws NotEnoughEnergyException {

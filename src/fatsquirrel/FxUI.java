@@ -22,6 +22,7 @@ public class FxUI extends Scene implements UI {
     private Label msgLabel;
     private static final int CELL_SIZE = 20;
     private static MoveCommand moveCommand;
+    private static Label statusLabel;
 
     public FxUI(Parent parent, Canvas boardCanvas, Label msgLabel) {
         super(parent);
@@ -31,7 +32,7 @@ public class FxUI extends Scene implements UI {
 
     public static FxUI createInstance(XY boardSize) {
         Canvas boardCanvas = new Canvas(boardSize.X * CELL_SIZE, boardSize.Y * CELL_SIZE);
-        Label statusLabel = new Label();
+        statusLabel = new Label();
         VBox top = new VBox();
         top.getChildren().add(boardCanvas);
         top.getChildren().add(statusLabel);
@@ -70,17 +71,44 @@ public class FxUI extends Scene implements UI {
         gc.setFill(Color.BLACK);
         XY viewSize = view.getSize();
 
+
         for(int y=0; y<viewSize.Y; y++){
             for(int x=0; x<viewSize.X; x++){
                 if(view.getEntityType(x,y).equals(EntityType.Wall)){
+                    gc.setFill(Color.CHOCOLATE);
                     gc.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                }
+                if(view.getEntityType(x,y).equals(EntityType.BadBeast)){
+                    gc.setFill(Color.RED);
+                    gc.fillOval(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                }
+                if(view.getEntityType(x,y).equals(EntityType.GoodBeast)){
+                    gc.setFill(Color.CORNFLOWERBLUE);
+                    gc.fillOval(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                }
+                if(view.getEntityType(x,y).equals(EntityType.GoodPlant)){
+                    gc.setFill(Color.GREENYELLOW);
+                    gc.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                }
+                if(view.getEntityType(x,y).equals(EntityType.BadPlant)){
+                    gc.setFill(Color.DARKOLIVEGREEN);
+                    gc.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                }
+                if(view.getEntityType(x,y).equals(EntityType.HandOperatedMasterSquirrel)){
+                    gc.setFill(Color.DARKGOLDENROD);
+                    gc.fillOval(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                }
+                if(view.getEntityType(x,y).equals(EntityType.MasterSquirrelBot)){
+                    gc.setFill(Color.YELLOW);
+                    gc.fillOval(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                }
+                if(view.getEntityType(x,y).equals(EntityType.MiniSquirrel)){
+                    gc.setFill(Color.DARKSLATEGRAY);
+                    gc.fillOval(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                 }
 
             }
         }
-        // dummy for rendering a board snapshot, TODO: change it!
-        gc.fillText("Where are the beasts?", 100, 100);
-        gc.fillOval(150, 150, 50, 50);
     }
 
 

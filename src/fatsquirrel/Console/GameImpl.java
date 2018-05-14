@@ -20,23 +20,6 @@ public class GameImpl extends Game {
     private State state;
     private MoveCommand moveCommand;
 
-    public GameImpl(State state) {
-        super(state);
-        this.state = state;
-
-        for(int x=0;x<state.flattenedBoard().getSize().X;x++){
-            for(int y=0;y<state.flattenedBoard().getSize().Y;y++){
-                if(state.flattenedBoard().getEntityType(x,y) == EntityType.HandOperatedMasterSquirrel)
-                    masterSquirrel = (MasterSquirrel)state.flattenedBoard().getEntityAt(x,y);
-            }
-        }
-        if(masterSquirrel == null)
-        {
-            System.out.println("Wrong board config! No HandOperatedMasterSquirrel found!");
-            System.exit(0);
-        }
-    }
-
     public GameImpl (State state, UI ui){
         super(state, ui);
         this.ui = ui;
