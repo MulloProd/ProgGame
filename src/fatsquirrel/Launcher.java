@@ -22,15 +22,14 @@ public class Launcher extends Application{
     private static Board board;
     private static Game game;
     private static State state;
-    private static final GameMode gameMode = GameMode.JFX;
+    private static final GameMode gameMode = GameMode.SOLO;
 
     public static void main(String[] args) throws Exception {
         board = new Board();
         state = new State(board);
         board.setState(state);
 
-
-        if(gameMode.equals(gameMode.JFX))
+        if(gameMode.equals(gameMode.BOT) || gameMode.equals(gameMode.SOLO))
             Application.launch(args);
         else if (gameMode.equals(gameMode.CONSOLE)) {
             game = new GameImpl(new State(board), new ConsoleUI());
@@ -56,7 +55,7 @@ public class Launcher extends Application{
                     e.printStackTrace();
                 }
             }
-        }, 1000);
+        }, 0);
     }
 
     public static void startOldGame(Game game) throws IOException, InterruptedException {
@@ -67,7 +66,10 @@ public class Launcher extends Application{
 
         FxUI fxUI = FxUI.createInstance(BoardConfig.getSize());
 
-        game = new BotGameImpl(new State(board), fxUI);
+        if(gameMode == GameMode.BOT)
+            game = new BotGameImpl(new State(board), fxUI);
+        else
+            game = new GameImpl(new State(board), fxUI);
 
         primaryStage.setScene(fxUI);
         primaryStage.setTitle("Lästiges Squirrel");

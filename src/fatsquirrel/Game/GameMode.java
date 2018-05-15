@@ -1,5 +1,5 @@
 package fatsquirrel.Game;
 
 public enum GameMode {
-    OLD,CONSOLE,JFX
+    OLD,CONSOLE,SOLO,BOT
 }
