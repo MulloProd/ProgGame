@@ -111,7 +111,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
         if(board.getEntity(x,y) == null){
             board.moveEntity(badBeast, badBeast.getPosition().add(moveDirection));
         }
-        else if(board.getEntity(x,y) instanceof PlayerEntity){
+        else if(board.getEntity(x,y) instanceof MasterSquirrel){
             if(badBeast.getBiteCounter()>1){
                 board.getEntity(x,y).updateEnergy(badBeast.getEnergy());
                 if(board.getEntity(x,y).getEnergy()<=0){
@@ -207,8 +207,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
     @Override
     public void kill(Entity entity) {
         if(entity instanceof MasterSquirrel){
-            System.out.println("Mastersquirrel mit der ID " + entity.getID() + " hat verloren!");
-            System.exit(0);
+
         }
         else{
             board.removeEntity(entity);

@@ -15,7 +15,6 @@ public class GameImpl extends Game {
 
     private UI ui;
     private MasterSquirrel masterSquirrel;
-    private State state;
     private MoveCommand moveCommand;
 
     public GameImpl (State state, UI ui){
@@ -45,7 +44,7 @@ public class GameImpl extends Game {
 
             //Auflisten aller Entities mit Energie -> Problem Board und Entities werden neu erstellt (Bewegung fährt fort)
             if (moveCommand.getListAll()) {
-                System.out.println(state.flattenedBoard().allEntitiesToString());
+                System.out.println(getState().flattenedBoard().allEntitiesToString());
                 processInput();
             }
 
@@ -77,7 +76,7 @@ public class GameImpl extends Game {
             int x = masterSquirrel.getPosition().X+1;
             int y = masterSquirrel.getPosition().Y+1;
 
-            state.flattenedBoard().spawn_Mini(new XY(x,y), moveCommand.getMiniSquirrelEnergy(), masterSquirrel);
+            getState().flattenedBoard().spawn_Mini(new XY(1,1), moveCommand.getMiniSquirrelEnergy(), masterSquirrel);
         }
         else {
             throw new NotEnoughEnergyException("Mastersquirrel besitzt nicht genügend Energie.");

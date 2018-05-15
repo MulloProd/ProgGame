@@ -12,7 +12,6 @@ import java.io.IOException;
 
 public class BotGameImpl extends Game {
 
-    private State state;
     private MoveCommand moveCommand;
     private UI ui;
 

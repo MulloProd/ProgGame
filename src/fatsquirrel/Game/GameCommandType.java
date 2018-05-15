@@ -1,4 +1,6 @@
-package fatsquirrel.Console;
+package fatsquirrel.Game;
+
+import fatsquirrel.Console.CommandTypeInfo;
 
 public enum GameCommandType implements CommandTypeInfo {
 

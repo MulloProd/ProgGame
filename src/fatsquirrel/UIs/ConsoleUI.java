@@ -2,7 +2,7 @@ package fatsquirrel.UIs;
 
 import fatsquirrel.Console.Command;
 import fatsquirrel.Console.CommandScanner;
-import fatsquirrel.Console.GameCommandType;
+import fatsquirrel.Game.GameCommandType;
 import fatsquirrel.Console.MoveCommand;
 import fatsquirrel.core.BoardView;
 

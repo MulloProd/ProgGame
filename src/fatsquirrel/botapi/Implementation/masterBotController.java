@@ -12,6 +12,6 @@ public class masterBotController implements BotController{
         view.move(XY.randomVector());
 
         if(new Random().nextInt(10) < 2)
-            view.spawnMiniBot(XY.randomVector(), 50);
+            view.spawnMiniBot(XY.randomVector(), 100);
     }
 }

@@ -22,7 +22,7 @@ public class Launcher extends Application{
     private static Board board;
     private static Game game;
     private static State state;
-    private static final GameMode gameMode = GameMode.SOLO;
+    private static final GameMode gameMode = GameMode.BOT;
 
     public static void main(String[] args) throws Exception {
         board = new Board();
