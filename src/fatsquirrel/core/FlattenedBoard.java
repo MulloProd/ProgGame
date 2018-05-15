@@ -60,7 +60,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
                     miniSquirrel.updateEnergy(0);
                     board.getEntity(x,y).updateEnergy(0);
                     kill(miniSquirrel);
-                    kill(board.getEntity(x,y));
+                    kill(miniSquirrelTemp);
                 }
             }
             else if(board.getEntity(x,y) instanceof GoodPlant
@@ -117,14 +117,14 @@ public class FlattenedBoard implements EntityContext, BoardView {
                 if(board.getEntity(x,y).getEnergy()<=0){
                     kill(board.getEntity(x,y));
                 }
-                badBeast.setBiteCounter(-1);
+                badBeast.decreaseBiteCounter();
             }
             else if(badBeast.getBiteCounter()==1){
                 board.getEntity(x,y).updateEnergy(badBeast.getEnergy());
                 if(board.getEntity(x,y).getEnergy()<=0){
                     kill(board.getEntity(x,y));
                 }
-                badBeast.setBiteCounter(7); //Reset BiteCounter
+                badBeast.decreaseBiteCounter(); //Reset BiteCounter
                 killAndReplace(badBeast);
             }
         }

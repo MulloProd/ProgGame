@@ -64,7 +64,7 @@ public class BadBeast extends Entity {
         return biteCounter;
     }
 
-    public void setBiteCounter(int biteCounter) {
-        this.biteCounter = this.biteCounter+biteCounter;
+    public void decreaseBiteCounter() {
+        this.biteCounter --;
     }
 }

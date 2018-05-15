@@ -44,7 +44,6 @@ public abstract class Entity {
 
     public int updateEnergy(int value){
         if(value==0){
-            energy=0;
             return 0;
         }
         else if(energy + value <= startEnergy) {
