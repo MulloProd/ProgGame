@@ -3,7 +3,7 @@ package fatsquirrel.core;
 import fatsquirrel.XY;
 
 public class BoardConfig {
-    private static final XY size = new XY(20, 20);
+    private static final XY size = new XY(15, 15);
     private static final int wallCount = size.X*2 + (size.Y-2)*2;
     private static final int beastCount = 1;
     private static final int plantCount = 3;

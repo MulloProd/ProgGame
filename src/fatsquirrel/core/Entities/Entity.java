@@ -46,6 +46,10 @@ public abstract class Entity {
         if(value==0){
             return 0;
         }
+        else if(energy+value <= 0){
+            energy=0;
+            return 0;
+        }
         else if(energy + value <= startEnergy) {
             energy += value;
             return 0;

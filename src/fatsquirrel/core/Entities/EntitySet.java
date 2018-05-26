@@ -41,8 +41,8 @@ public class EntitySet {
         //System.out.println(toString());
         int counter = set.size();
         for(int i=0;i<set.size();i++){
-            if(counter > set.size())
-                i--;
+            //if(counter > set.size())
+              //  i--;
             if(set.get(i)!=null)
                 set.get(i).nextStep(entityContext);
         }
