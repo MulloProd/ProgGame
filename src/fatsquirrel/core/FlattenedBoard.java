@@ -273,6 +273,9 @@ public class FlattenedBoard implements EntityContext, BoardView {
                 case "MiniSquirrel":
                     type = EntityType.MiniSquirrel;
                     break;
+                case "MiniSquirrelBot":
+                    type = EntityType.MiniSquirrelBot;
+                    break;
                 case "StandardMiniSquirrel":
                     type = EntityType.StandardMiniSquirrel;
                     break;

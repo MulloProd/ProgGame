@@ -10,6 +10,7 @@ public enum EntityType {
     MasterSquirrelBot {},
     MasterSquirrel{},
     StandardMiniSquirrel{},
+    MiniSquirrelBot{},
     MiniSquirrel{},
     None{};
 }

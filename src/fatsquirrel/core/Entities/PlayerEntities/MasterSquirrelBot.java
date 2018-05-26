@@ -4,6 +4,7 @@ import fatsquirrel.XY;
 import fatsquirrel.botapi.BotController;
 import fatsquirrel.botapi.BotControllerFactory;
 import fatsquirrel.botapi.ControllerContext;
+import fatsquirrel.botapi.Direction;
 import fatsquirrel.botapi.Implementation.botControllerFactory;
 import fatsquirrel.core.Entities.EntityContext;
 import fatsquirrel.core.Entities.EntityType;
@@ -13,9 +14,13 @@ import java.io.IOException;
 public class MasterSquirrelBot extends MasterSquirrel {
     private final BotControllerFactory botControllerFactory;
     private final BotController botController;
+    private XY position;
+    private int energy;
 
     public MasterSquirrelBot(int id, int energy, XY position) {
         super(id, energy, position);
+        this.position = position;
+        this.energy = energy;
 
         botControllerFactory = new botControllerFactory();
         botController = botControllerFactory.createMasterBotController();
@@ -36,12 +41,12 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
         @Override
         public XY getViewLowerLeft() {
-            return null;
+            return new XY(position.X-15, position.Y+15);
         }
 
         @Override
         public XY getViewUpperRight() {
-            return null;
+            return new XY (position.X+15, position.Y-15);
         }
 
         @Override
@@ -61,7 +66,17 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
         @Override
         public int getEnergy() {
-            return getEnergy();
+            return energy;
+        }
+
+        @Override
+        public void doImplosion(int impactRadius) {
+
+        }
+
+        @Override
+        public Direction getMasterDirection() {
+            return null;
         }
     }
 }

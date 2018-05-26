@@ -42,20 +42,13 @@ public class Launcher extends Application{
     }
 
     public static void startGame(Game game) {
-
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    game.run(true);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e){
-                    e.printStackTrace();
-                }
-            }
-        }, 0);
+        try {
+            game.run(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
     }
 
     public static void startOldGame(Game game) throws IOException, InterruptedException {

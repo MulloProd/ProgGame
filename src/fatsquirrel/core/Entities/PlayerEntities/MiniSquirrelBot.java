@@ -4,6 +4,7 @@ import fatsquirrel.XY;
 import fatsquirrel.botapi.BotController;
 import fatsquirrel.botapi.BotControllerFactory;
 import fatsquirrel.botapi.ControllerContext;
+import fatsquirrel.botapi.Direction;
 import fatsquirrel.botapi.Implementation.botControllerFactory;
 import fatsquirrel.core.Entities.Entity;
 import fatsquirrel.core.Entities.EntityContext;
@@ -12,9 +13,13 @@ import fatsquirrel.core.Entities.EntityType;
 public class MiniSquirrelBot extends MiniSquirrel{
     private final BotController botController;
     private final BotControllerFactory botControllerFactory;
+    private XY position;
+    private int energy;
 
     public MiniSquirrelBot(int id, int energy, XY position, MasterSquirrel masterSquirrel) {
         super(id, energy, position, masterSquirrel);
+        this.position = position;
+        this.energy = energy;
 
         botControllerFactory = new botControllerFactory();
         botController = botControllerFactory.createMiniBotController();
@@ -35,12 +40,12 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
         @Override
         public XY getViewLowerLeft() {
-            return null;
+            return new XY(position.X-10, position.Y+10);
         }
 
         @Override
         public XY getViewUpperRight() {
-            return null;
+            return new XY(position.X+10, position.Y-10);
         }
 
         @Override
@@ -60,7 +65,48 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
         @Override
         public int getEnergy() {
-            return getEnergy();
+            return entityContext.getEntityAt(position.X,position.Y).getEnergy();
+        }
+
+        @Override
+        public void doImplosion(int impactRadius) {
+            //entityContext.kill(MiniSquirrelBot.this);
+            System.out.println("done");
+        }
+
+        @Override
+        public Direction getMasterDirection() {
+            XY xyMaster = getMasterSquirrel().getPosition();
+            int x = position.X - xyMaster.X;
+            int y = position.Y - xyMaster.Y;
+
+            //Himmelsrichtung ermitteln
+            if(x>=0 && y>=0){
+                if(x>=y)
+                    return Direction.LEFT;
+                else
+                    return Direction.UP;
+            }
+            else if(x>=0 && y<=0){
+                if(x>=Math.abs(y))
+                    return Direction.LEFT;
+                else
+                    return Direction.DOWN;
+            }
+            else if(x<=0 && y>=0){
+                if(Math.abs(x)>=y)
+                    return Direction.RIGHT;
+                else
+                    return Direction.UP;
+            }
+            else if(x<=0 && y<=0){
+                if(Math.abs(x)>=Math.abs(y))
+                    return Direction.RIGHT;
+                else
+                    return Direction.DOWN;
+            }
+
+            return null;
         }
     }
 }

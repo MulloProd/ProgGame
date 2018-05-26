@@ -135,8 +135,12 @@ public class FxUI extends Scene implements UI {
                         gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         statusLabel.setText("Energie: " + view.getEntityAt(x, y).getEnergy());
                         break;
-                    case MiniSquirrel:
+                    case MiniSquirrelBot:
                         gc.setFill(Color.INDIANRED);
+                        gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                        break;
+                    case MiniSquirrel:
+                        gc.setFill(Color.ORANGERED);
                         gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
                 }

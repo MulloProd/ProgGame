@@ -4,10 +4,7 @@ import fatsquirrel.State;
 import fatsquirrel.XY;
 import fatsquirrel.core.Entities.EntitySet;
 import fatsquirrel.core.Entities.*;
-import fatsquirrel.core.Entities.PlayerEntities.HandOperatedMasterSquirrel;
-import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
-import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrelBot;
-import fatsquirrel.core.Entities.PlayerEntities.MiniSquirrel;
+import fatsquirrel.core.Entities.PlayerEntities.*;
 
 import java.io.IOException;
 import java.util.Random;
@@ -142,13 +139,14 @@ public class Board {
             return true;
         }
     }
+
     public boolean setNewMiniSquirrel(int x, int y, int energy, MasterSquirrel masterSquirrel){
         if(x<0||y<0||x>width||y>height)
             return false;
         else if(entities[x][y] != null)
             return false;
         else{
-            Entity entity = new MiniSquirrel(entitySet.getNextFreeID(), energy, new XY(x,y), masterSquirrel);
+            Entity entity = new MiniSquirrelBot(entitySet.getNextFreeID(), energy, new XY(x,y), masterSquirrel);
             entities[x][y] = entity;
             entitySet.addEntity(entity);
             return true;
@@ -179,6 +177,7 @@ public class Board {
     public Entity getEntity(XY xy){
         return getEntity(xy.X,xy.Y);
     }
+
     public Entity getEntity(int x, int y){
         return entities[x][y];
     }
