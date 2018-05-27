@@ -1,6 +1,6 @@
 package fatsquirrel.core;
 
-import fatsquirrel.State;
+import fatsquirrel.Logging;
 import fatsquirrel.XY;
 import fatsquirrel.core.Entities.EntitySet;
 import fatsquirrel.core.Entities.*;

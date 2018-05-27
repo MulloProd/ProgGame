@@ -1,4 +1,4 @@
-package fatsquirrel.core;
+package fatsquirrel;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class Logging {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        handler.setFormatter(new SimpleFormatter());
+        handler.setFormatter(new LoggingFormatter());
         logger.addHandler(handler);
         logger.setLevel(Level.FINE);
 

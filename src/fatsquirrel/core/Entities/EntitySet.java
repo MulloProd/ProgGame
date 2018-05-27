@@ -1,7 +1,7 @@
 package fatsquirrel.core.Entities;
 
 import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
-import fatsquirrel.core.Logging;
+import fatsquirrel.Logging;
 
 import java.io.IOException;
 import java.util.*;

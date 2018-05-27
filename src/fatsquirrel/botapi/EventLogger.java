@@ -1,9 +1,7 @@
 package fatsquirrel.botapi;
 
 import fatsquirrel.XY;
-import fatsquirrel.core.Entities.EntityContext;
-import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrelBot;
-import fatsquirrel.core.Logging;
+import fatsquirrel.Logging;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;

@@ -5,7 +5,7 @@ import fatsquirrel.botapi.*;
 import fatsquirrel.botapi.Implementation.botControllerFactory;
 import fatsquirrel.core.Entities.EntityContext;
 import fatsquirrel.core.Entities.EntityType;
-import fatsquirrel.core.Logging;
+import fatsquirrel.Logging;
 
 import java.io.IOException;
 import java.lang.reflect.Proxy;

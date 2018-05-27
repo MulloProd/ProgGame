@@ -3,10 +3,9 @@ package fatsquirrel.core.Entities.PlayerEntities;
 import fatsquirrel.XY;
 import fatsquirrel.botapi.*;
 import fatsquirrel.botapi.Implementation.botControllerFactory;
-import fatsquirrel.core.Entities.Entity;
 import fatsquirrel.core.Entities.EntityContext;
 import fatsquirrel.core.Entities.EntityType;
-import fatsquirrel.core.Logging;
+import fatsquirrel.Logging;
 
 import java.lang.reflect.Proxy;
 
