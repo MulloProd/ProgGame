@@ -43,21 +43,31 @@ public abstract class Entity {
     }
 
     public int updateEnergy(int value){
-        if(value==0){
+        if (value == 0)
             return 0;
-        }
-        else if(energy+value <= 0){
-            energy=0;
-            return 0;
-        }
-        else if(energy + value <= startEnergy) {
-            energy += value;
-            return 0;
+        if (energy >= 0) {
+            if (energy + value <= 0) {
+                energy = 0;
+                return 0;
+            } else if (energy + value <= startEnergy) {
+                energy += value;
+                return 0;
+            } else {
+                int difference = energy + value - startEnergy;
+                energy = startEnergy;
+                return difference;
+            }
         }
         else{
-            int difference = energy + value - startEnergy;
-            energy = startEnergy;
-            return difference;
+            if (energy + value < 0) {
+                energy += value;
+                return 0;
+            } else if (energy + value >=0) {
+                int difference = Math.abs(energy + value);
+                energy = 0;
+                return difference;
+            }
+            return 0;
         }
     }
 
