@@ -28,5 +28,6 @@ public class BotGameImpl extends Game {
     @Override
     public void render() {
         ui.render(getState().flattenedBoard());
+        logging.getLogger().info("GUI updated");
     }
 }
