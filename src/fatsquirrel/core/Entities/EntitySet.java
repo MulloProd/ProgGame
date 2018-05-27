@@ -18,8 +18,12 @@ public class EntitySet {
     }
 
     public void addEntity(Entity newEntity){
-        logging.getLogger().info(newEntity.getClass().getSimpleName() + " (ID: " + newEntity.getID() + ") added");
-        set.add(newEntity);
+        if(newEntity !=null) {
+            logging.getLogger().info(newEntity.getClass().getSimpleName() + " (ID: " + newEntity.getID() + ") added");
+            set.add(newEntity);
+        }
+        else
+            logging.getLogger().warning("newEntity is null!");
     }
 
     public void deleteEntity(Entity oldEntity){
@@ -42,15 +46,11 @@ public class EntitySet {
     }
 
     public void nextStep(EntityContext entityContext) throws IOException {
-        //System.out.println(toString());
-        int counter = set.size();
-        for(int i=0;i<set.size();i++){
-            //if(counter > set.size())
-              //  i--;
-            if(set.get(i)!=null)
-                set.get(i).nextStep(entityContext);
+        List<Entity> tempList = new ArrayList<>(set);
+        for(Entity entity : tempList){
+            if(entity!=null && set.contains(entity))
+                entity.nextStep(entityContext);
         }
-
     }
 
     public String toString(){
