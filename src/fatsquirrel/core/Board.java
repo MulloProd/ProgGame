@@ -14,7 +14,7 @@ public class Board {
     private final int height;
     private final int width;
     private Entity[][] entities;
-    private State state;
+    private Logging logging = new Logging(this.getClass().getName());
 
     public Board() throws Exception {
         height = BoardConfig.getSize().Y;
@@ -22,11 +22,6 @@ public class Board {
         entities = new Entity[width][height];
         createRandomBoard();
     }
-
-    public void setState(State state){
-        this.state = state;
-    }
-
     public void updateEntitySet() throws IOException {
         entitySet.nextStep(flatten());
     }
@@ -107,7 +102,7 @@ public class Board {
                 counter--;
         }
 
-
+        logging.getLogger().info("Random board created");
     }
 
     public boolean moveEntity(Entity entity, XY newPos){

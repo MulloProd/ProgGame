@@ -1,21 +1,21 @@
 package fatsquirrel.core.Entities.PlayerEntities;
 
 import fatsquirrel.XY;
-import fatsquirrel.botapi.BotController;
-import fatsquirrel.botapi.BotControllerFactory;
-import fatsquirrel.botapi.ControllerContext;
-import fatsquirrel.botapi.Direction;
+import fatsquirrel.botapi.*;
 import fatsquirrel.botapi.Implementation.botControllerFactory;
 import fatsquirrel.core.Entities.EntityContext;
 import fatsquirrel.core.Entities.EntityType;
+import fatsquirrel.core.Logging;
 
 import java.io.IOException;
+import java.lang.reflect.Proxy;
 
 public class MasterSquirrelBot extends MasterSquirrel {
     private final BotControllerFactory botControllerFactory;
     private final BotController botController;
     private XY position;
     private int energy;
+    private final Logging logging;
 
     public MasterSquirrelBot(int id, int energy, XY position) {
         super(id, energy, position);
@@ -24,11 +24,19 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
         botControllerFactory = new botControllerFactory();
         botController = botControllerFactory.createMasterBotController();
+
+        logging = new Logging("MasterBot#" + id, "MasterBots");
     }
 
     @Override
     public void nextStep(EntityContext entityContext) throws IOException {
-        botController.nextStep(new ControllerContextImpl(entityContext));
+        EventLogger handler = new EventLogger(new ControllerContextImpl(entityContext), logging);
+        ControllerContext proxy = (ControllerContext) Proxy.newProxyInstance(
+                ControllerContext.class.getClassLoader(),
+                new Class[] { ControllerContext.class },
+                handler);
+
+        botController.nextStep(proxy);
     }
 
     private class ControllerContextImpl implements ControllerContext{

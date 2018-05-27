@@ -27,7 +27,6 @@ public class Launcher extends Application{
     public static void main(String[] args) throws Exception {
         board = new Board();
         state = new State(board);
-        board.setState(state);
 
         if(gameMode.equals(gameMode.BOT) || gameMode.equals(gameMode.SOLO))
             Application.launch(args);

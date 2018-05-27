@@ -1,6 +1,7 @@
 package fatsquirrel.core.Entities;
 
 import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
+import fatsquirrel.core.Logging;
 
 import java.io.IOException;
 import java.util.*;
@@ -9,6 +10,7 @@ public class EntitySet {
 
     public List<Entity> set = new ArrayList<Entity>();
     private int nextID = 0;
+    private Logging logging = new Logging(this.getClass().getName());
 
     public int getNextFreeID(){
         nextID++;
@@ -16,10 +18,12 @@ public class EntitySet {
     }
 
     public void addEntity(Entity newEntity){
+        logging.getLogger().info(newEntity.getClass().getSimpleName() + " (ID: " + newEntity.getID() + ") added");
         set.add(newEntity);
     }
 
     public void deleteEntity(Entity oldEntity){
+        logging.getLogger().info(oldEntity.getClass().getSimpleName() + " (ID: " + oldEntity.getID() + ") killed");
         set.remove(oldEntity);
     }
 
