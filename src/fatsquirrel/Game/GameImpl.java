@@ -63,11 +63,14 @@ public class GameImpl extends Game {
                 }
             }
         }
+
+        logging.getLogger().info("Input processed");
     }
 
     @Override
     public void render() {
         ui.render(getState().flattenedBoard());
+        logging.getLogger().info("GUI updated");
     }
 
     private void spawnMiniSquirrel() throws NotEnoughEnergyException {
@@ -79,6 +82,7 @@ public class GameImpl extends Game {
             getState().flattenedBoard().spawn_Mini(new XY(1,1), moveCommand.getMiniSquirrelEnergy(), masterSquirrel);
         }
         else {
+            logging.getLogger().warning("MasterSquirrel#" + masterSquirrel.getID() + " don´t have enough energy!");
             throw new NotEnoughEnergyException("Mastersquirrel besitzt nicht genügend Energie.");
         }
     }

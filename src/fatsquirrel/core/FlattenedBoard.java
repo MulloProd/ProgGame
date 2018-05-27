@@ -234,10 +234,9 @@ public class FlattenedBoard implements EntityContext, BoardView {
         while(!success) {
             int x = new Random().nextInt(width - 1);
             int y = new Random().nextInt(height - 1);
+            kill(entity);
             if(board.setNewEntity(x,y, getEntityType(entity.getPosition())))
                 success = true;
-
-            kill(entity);
         }
     }
 

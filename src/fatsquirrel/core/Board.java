@@ -8,13 +8,14 @@ import fatsquirrel.core.Entities.PlayerEntities.*;
 
 import java.io.IOException;
 import java.util.Random;
+import java.util.logging.Level;
 
 public class Board {
     private EntitySet entitySet = new EntitySet();
     private final int height;
     private final int width;
     private Entity[][] entities;
-    private Logging logging = new Logging(this.getClass().getName());
+    private Logging logging = new Logging(this.getClass().getName(), Level.FINER);
 
     public Board() throws Exception {
         height = BoardConfig.getSize().Y;
@@ -110,6 +111,7 @@ public class Board {
             entities[newPos.X][newPos.Y] = entity;
             entities[entity.getPosition().X][entity.getPosition().Y] = null;
             entity.setPosition(newPos);
+            logging.getLogger().finer(entity.getClass().getSimpleName() + "#" + entity.getID() + ": Entity moved to ("+newPos.X+"/"+newPos.Y+")");
             return true;
         }
         else
@@ -119,6 +121,7 @@ public class Board {
     public void removeEntity(Entity entity){
         entitySet.deleteEntity(entity);
         entities[entity.getPosition().X][entity.getPosition().Y]=null;
+        logging.getLogger().finer(entity.getClass().getSimpleName()+ "#"+entity.getID()+" removed!");
     }
 
     //gibt TRUE zurück wenn setzen erfolgreich war, kann alles mit standartwerten initialisieren (für mini muss was andres verwendet werden
@@ -131,6 +134,7 @@ public class Board {
             Entity entity = getNewEntityWithType(entityType, new XY(x,y));
             entities[x][y] = entity;
             entitySet.addEntity(entity);
+            logging.getLogger().finer("new "+entity.getClass().getSimpleName()+" added! "+"#"+entity.getID());
             return true;
         }
     }
@@ -144,6 +148,7 @@ public class Board {
             Entity entity = new MiniSquirrelBot(entitySet.getNextFreeID(), energy, new XY(x,y), masterSquirrel);
             entities[x][y] = entity;
             entitySet.addEntity(entity);
+            logging.getLogger().finer("new "+entity.getClass().getSimpleName()+" added! "+"#"+entity.getID());
             return true;
         }
     }

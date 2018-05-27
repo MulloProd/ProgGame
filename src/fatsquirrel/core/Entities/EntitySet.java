@@ -27,7 +27,7 @@ public class EntitySet {
     }
 
     public void deleteEntity(Entity oldEntity){
-        logging.getLogger().info(oldEntity.getClass().getSimpleName() + " (ID: " + oldEntity.getID() + ") killed");
+        logging.getLogger().info(oldEntity.getClass().getSimpleName() + " (ID: " + oldEntity.getID() + ") removed");
         set.remove(oldEntity);
     }
 

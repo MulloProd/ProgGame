@@ -1,5 +1,6 @@
 package fatsquirrel.Game;
 
+import fatsquirrel.Logging;
 import fatsquirrel.State;
 import fatsquirrel.UIs.UI;
 
@@ -12,6 +13,7 @@ public abstract class Game {
     private final State state;
     private UI ui;
     private final int FPS = 1;
+    protected Logging logging = new Logging(this.getClass().getName());
 
     public Game(State state, UI ui){
         this.state = state;
@@ -70,6 +72,7 @@ public abstract class Game {
 
     private void update() throws IOException {
         state.update();
+        logging.getLogger().info("Game updated");
     }
 
     public abstract void processInput() throws IOException;

@@ -23,6 +23,7 @@ public class Launcher extends Application{
     private static Game game;
     private static State state;
     private static final GameMode gameMode = GameMode.BOT;
+    private static Logging logging = new Logging(Launcher.class.getName());
 
     public static void main(String[] args) throws Exception {
         board = new Board();
@@ -33,10 +34,12 @@ public class Launcher extends Application{
         else if (gameMode.equals(gameMode.CONSOLE)) {
             game = new GameImpl(new State(board), new ConsoleUI());
             startGame(game);
+            logging.getLogger().info("Console game started!");
         }
         else if (gameMode.equals(gameMode.OLD)) {
             game = new GameImpl(new State(board), new ConsoleUI());
             startOldGame(game);
+            logging.getLogger().info("Old console game started!");
         }
     }
 
@@ -58,13 +61,17 @@ public class Launcher extends Application{
 
         FxUI fxUI = FxUI.createInstance(BoardConfig.getSize());
 
-        if(gameMode == GameMode.BOT)
+        if(gameMode == GameMode.BOT) {
             game = new BotGameImpl(new State(board), fxUI);
-        else
+            logging.getLogger().info("Bot JavaFX game started!");
+        }
+        else {
             game = new GameImpl(new State(board), fxUI);
+            logging.getLogger().info("Hand operated JavaFX game started!");
+        }
 
         primaryStage.setScene(fxUI);
-        primaryStage.setTitle("Lästiges Squirrel");
+        primaryStage.setTitle("Lässiges Squirrel");
         fxUI.getWindow().setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent evt) {
