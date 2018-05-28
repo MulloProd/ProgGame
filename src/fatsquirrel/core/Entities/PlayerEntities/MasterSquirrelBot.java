@@ -64,8 +64,8 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
         @Override
         public EntityType getEntityAt(XY xy) throws OutOfViewException {
-            if(xy.X < getViewLowerLeft().X || xy.X > getViewUpperRight().X ||
-                    xy.Y < getViewUpperRight().Y || xy.Y > getViewLowerLeft().Y)
+            if(xy.x < getViewLowerLeft().x || xy.x > getViewUpperRight().x ||
+                    xy.y< getViewUpperRight().y || xy.y > getViewLowerLeft().y)
                 throw new OutOfViewException();
             else
                 return entityContext.getEntityType(xy);
@@ -79,8 +79,8 @@ public class MasterSquirrelBot extends MasterSquirrel {
                 e.printStackTrace();
             }
 
-            if(xy.equals(EntityType.MiniSquirrelBot)){
-                if(this.equals(((MiniSquirrelBot)entityContext.getEntityAt(xy.X,xy.Y)).getMasterSquirrel()))
+            if(xy.equals(EntityType.MINI_SQUIRREL)){
+                if(this.equals(((MiniSquirrelBot)entityContext.getEntityAt(xy.x,xy.y)).getMasterSquirrel()))
                     return true;
                 else
                     return false;
@@ -101,7 +101,7 @@ public class MasterSquirrelBot extends MasterSquirrel {
                 throw new SpawnException();
 
             try {
-                if((getEntityAt(new XY(getPosition().X+direction.X, getPosition().Y+direction.Y))) !=EntityType.None)
+                if((getEntityAt(new XY(getPosition().x+direction.x, getPosition().y+direction.y))) !=EntityType.NONE)
                     throw new SpawnException();
             } catch (OutOfViewException e) {
                 e.printStackTrace();
