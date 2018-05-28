@@ -25,7 +25,7 @@ public class EventLogger implements InvocationHandler{
             case "spawnMiniBot":
                 logging.getLogger().info("MiniBot spawned!");
                 break;
-            case "doImplosion":
+            case "implode":
                 logging.getLogger().info("MiniBot imploded!");
                 break;
         }

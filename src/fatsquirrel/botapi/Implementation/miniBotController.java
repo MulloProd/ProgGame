@@ -14,7 +14,7 @@ public class miniBotController implements BotController {
     public void nextStep(ControllerContext view) {
 
         if(new Random().nextInt(10) < 2)
-            view.doImplosion(impactRadius);
+            view.implode(impactRadius);
         else
             view.move(XY.randomVector());
     }

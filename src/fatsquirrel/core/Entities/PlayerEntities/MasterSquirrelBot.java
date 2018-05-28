@@ -19,7 +19,7 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
     public MasterSquirrelBot(int id, int energy, XY position) {
         super(id, energy, position);
-        this.position = position;
+        this.position = position; //über Getter regeln?
         this.energy = energy;
 
         botControllerFactory = new botControllerFactory();
@@ -58,8 +58,35 @@ public class MasterSquirrelBot extends MasterSquirrel {
         }
 
         @Override
-        public EntityType getEntityAt(XY xy) {
-            return entityContext.getEntityType(xy);
+        public XY locate() {
+            return position;
+        }
+
+        @Override
+        public EntityType getEntityAt(XY xy) throws OutOfViewException {
+            if(xy.X < getViewLowerLeft().X || xy.X > getViewUpperRight().X ||
+                    xy.Y < getViewUpperRight().Y || xy.Y > getViewLowerLeft().Y)
+                throw new OutOfViewException();
+            else
+                return entityContext.getEntityType(xy);
+        }
+
+        @Override
+        public boolean isMine(XY xy) {
+            try {
+                getEntityAt(xy);
+            } catch (OutOfViewException e) {
+                e.printStackTrace();
+            }
+
+            if(xy.equals(EntityType.MiniSquirrelBot)){
+                if(this.equals(((MiniSquirrelBot)entityContext.getEntityAt(xy.X,xy.Y)).getMasterSquirrel()))
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
         }
 
         @Override
@@ -68,8 +95,24 @@ public class MasterSquirrelBot extends MasterSquirrel {
         }
 
         @Override
-        public void spawnMiniBot(XY direction, int energy) {
+        public void spawnMiniBot(XY direction, int energy) throws SpawnException {
+
+            if(energy<100 || energy>=getEnergy())
+                throw new SpawnException();
+
+            try {
+                if((getEntityAt(new XY(getPosition().X+direction.X, getPosition().Y+direction.Y))) !=EntityType.None)
+                    throw new SpawnException();
+            } catch (OutOfViewException e) {
+                e.printStackTrace();
+            }
+
             entityContext.spawn_Mini(direction, energy, MasterSquirrelBot.this);
+        }
+
+        @Override
+        public void implode(int impactRadius) {
+
         }
 
         @Override
@@ -78,13 +121,13 @@ public class MasterSquirrelBot extends MasterSquirrel {
         }
 
         @Override
-        public void doImplosion(int impactRadius) {
-
+        public XY directionOfMaster() {
+            return null;
         }
 
         @Override
-        public Direction getMasterDirection() {
-            return null;
+        public long getRemainingSteps() {
+            return 0;
         }
     }
 }

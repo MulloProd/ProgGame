@@ -9,7 +9,7 @@ import java.util.logging.*;
 public class Logging {
     private Logger logger;
     private String standardPath = "./logs/";
-    private Level standardLevel = Level.FINE;
+    private Level standardLevel = Level.SEVERE;
 
     public Logging(String name, String folderName, Level level) {
         Init(name, standardPath + folderName + "/", level);

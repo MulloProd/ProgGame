@@ -46,17 +46,44 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
         @Override
         public XY getViewLowerLeft() {
-            return new XY(MiniSquirrelBot.this.getPosition().X-10, MiniSquirrelBot.this.getPosition().Y+10);
+            return new XY(getPosition().X-10, getPosition().Y+10);
         }
 
         @Override
         public XY getViewUpperRight() {
-            return new XY(MiniSquirrelBot.this.getPosition().X+10, MiniSquirrelBot.this.getPosition().Y-10);
+            return new XY(getPosition().X+10, getPosition().Y-10);
         }
 
         @Override
-        public EntityType getEntityAt(XY xy) {
-            return entityContext.getEntityType(xy);
+        public XY locate() {
+            return getPosition();
+        }
+
+        @Override
+        public EntityType getEntityAt(XY xy) throws OutOfViewException {
+            if(xy.X < getViewLowerLeft().X || xy.X > getViewUpperRight().X ||
+                    xy.Y < getViewUpperRight().Y || xy.Y > getViewLowerLeft().Y)
+                throw new OutOfViewException();
+            else
+                return entityContext.getEntityType(xy);
+        }
+
+        @Override
+        public boolean isMine(XY xy) {
+            try {
+                getEntityAt(xy);
+            } catch (OutOfViewException e) {
+                e.printStackTrace();
+            }
+
+            if(entityContext.getEntityAt(xy.X,xy.Y).equals(EntityType.MasterSquirrelBot)){
+                if(MiniSquirrelBot.this.getMasterSquirrel().equals((entityContext.getEntityAt(xy.X,xy.Y))))
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
         }
 
         @Override
@@ -70,12 +97,7 @@ public class MiniSquirrelBot extends MiniSquirrel{
         }
 
         @Override
-        public int getEnergy() {
-            return MiniSquirrelBot.this.getEnergy();
-        }
-
-        @Override
-        public void doImplosion(int impactRadius) {
+        public void implode(int impactRadius) {
             int xLeft = MiniSquirrelBot.this.getPosition().X-impactRadius;
             int yLeft = MiniSquirrelBot.this.getPosition().Y-impactRadius;
             int xRight = MiniSquirrelBot.this.getPosition().X+impactRadius;
@@ -97,7 +119,7 @@ public class MiniSquirrelBot extends MiniSquirrel{
                     Entity entity = entityContext.getEntityAt(x,y);
                     if(entity != null && !(entity.equals(MiniSquirrelBot.this)) && !(entity instanceof Wall)) {
                         int distance = Math.abs(MiniSquirrelBot.this.getPosition().X - entity.getPosition().X) +
-                            Math.abs(MiniSquirrelBot.this.getPosition().Y - entity.getPosition().Y);
+                                Math.abs(MiniSquirrelBot.this.getPosition().Y - entity.getPosition().Y);
                         int energyLoss = 200 * (MiniSquirrelBot.this.getEnergy()/(int)impactArea) * (1 - distance/impactRadius);
 
                         if(entity.getEnergy()<energyLoss)
@@ -132,15 +154,22 @@ public class MiniSquirrelBot extends MiniSquirrel{
             }
 
             entityContext.kill(MiniSquirrelBot.this);
-            System.out.println("imploded");
         }
 
         @Override
-        public Direction getMasterDirection() {
+        public int getEnergy() {
+            return MiniSquirrelBot.this.getEnergy();
+        }
+
+        @Override
+        public XY directionOfMaster() {
             XY xyMaster = getMasterSquirrel().getPosition();
             int x = MiniSquirrelBot.this.getPosition().X - xyMaster.X;
             int y = MiniSquirrelBot.this.getPosition().Y - xyMaster.Y;
 
+            return new XY(x,y);
+
+            /*
             //Himmelsrichtung ermitteln
             if(x>=0 && y>=0){
                 if(x>=y)
@@ -166,8 +195,14 @@ public class MiniSquirrelBot extends MiniSquirrel{
                 else
                     return Direction.DOWN;
             }
-
             return null;
+            */
         }
+
+        @Override
+        public long getRemainingSteps() {
+            return 0;
+        }
+
     }
 }
