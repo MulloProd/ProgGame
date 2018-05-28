@@ -88,7 +88,8 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
         @Override
         public void move(XY direction) {
-            entityContext.tryMove(MiniSquirrelBot.this, direction);
+            if(!(direction.equals(XY.ZERO_ZERO)))
+                entityContext.tryMove(MiniSquirrelBot.this, direction);
         }
 
         @Override
@@ -98,10 +99,10 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
         @Override
         public void implode(int impactRadius) {
-            int xLeft = MiniSquirrelBot.this.getPosition().x -impactRadius;
-            int yLeft = MiniSquirrelBot.this.getPosition().y -impactRadius;
-            int xRight = MiniSquirrelBot.this.getPosition().x +impactRadius;
-            int yRight = MiniSquirrelBot.this.getPosition().y +impactRadius;
+            int xLeft = getPosition().x -impactRadius;
+            int yLeft = getPosition().y -impactRadius;
+            int xRight = getPosition().x +impactRadius;
+            int yRight = getPosition().y +impactRadius;
 
             if(xLeft <=0)
                 xLeft=1;
@@ -118,9 +119,8 @@ public class MiniSquirrelBot extends MiniSquirrel{
                 for(int x=xLeft; x<=xRight; x++){
                     Entity entity = entityContext.getEntityAt(x,y);
                     if(entity != null && !(entity.equals(MiniSquirrelBot.this)) && !(entity instanceof Wall)) {
-                        int distance = Math.abs(MiniSquirrelBot.this.getPosition().x - entity.getPosition().x) +
-                            Math.abs(MiniSquirrelBot.this.getPosition().y - entity.getPosition().y);
-                        int energyLoss = 200 * (MiniSquirrelBot.this.getEnergy()/(int)impactArea) * (1 - distance/impactRadius);
+                        double distance = getPosition().distanceFrom(entity.getPosition());
+                        int energyLoss = (int) (200 * (getEnergy()/impactArea) * (1 - distance/impactRadius));
 
                         if(entity.getEnergy()<energyLoss)
                             energyLoss=Math.abs(entity.getEnergy());
@@ -128,18 +128,18 @@ public class MiniSquirrelBot extends MiniSquirrel{
                         //Abfrage der einzelnen Entities
                         if (entity instanceof GoodPlant || entity instanceof GoodBeast) {
                             entity.updateEnergy(-energyLoss);
-                            MiniSquirrelBot.this.getMasterSquirrel().updateEnergy(energyLoss);
+                            getMasterSquirrel().updateEnergy(energyLoss);
                         } else if (entity instanceof BadPlant || entity instanceof BadBeast) {
                             entity.updateEnergy(energyLoss);
                         } else if (entity instanceof MiniSquirrel){
-                            if(!(((MiniSquirrel) entity).getMasterSquirrel().equals(MiniSquirrelBot.this.getMasterSquirrel()))) {
+                            if(!(((MiniSquirrel) entity).getMasterSquirrel().equals(getMasterSquirrel()))) {
                                 entity.updateEnergy(-energyLoss);
-                                MiniSquirrelBot.this.getMasterSquirrel().updateEnergy(energyLoss);
+                                getMasterSquirrel().updateEnergy(energyLoss);
                             }
                         } else if(entity instanceof MasterSquirrel){
-                            if(!(entity.equals(MiniSquirrelBot.this.getMasterSquirrel()))){
+                            if(!(entity.equals(getMasterSquirrel()))){
                                 entity.updateEnergy(-energyLoss);
-                                MiniSquirrelBot.this.getMasterSquirrel().updateEnergy(energyLoss);
+                                getMasterSquirrel().updateEnergy(energyLoss);
                             }
                         }
 
@@ -164,8 +164,8 @@ public class MiniSquirrelBot extends MiniSquirrel{
         @Override
         public XY directionOfMaster() {
             XY xyMaster = getMasterSquirrel().getPosition();
-            int x = MiniSquirrelBot.this.getPosition().x - xyMaster.x;
-            int y = MiniSquirrelBot.this.getPosition().y - xyMaster.y;
+            int x = getPosition().x - xyMaster.x;
+            int y = getPosition().y - xyMaster.y;
 
             return new XY(x,y);
 
