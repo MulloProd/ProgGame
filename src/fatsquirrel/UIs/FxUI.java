@@ -4,7 +4,6 @@ import fatsquirrel.Game.GameCommandType;
 import fatsquirrel.Console.MoveCommand;
 import fatsquirrel.XY;
 import fatsquirrel.core.BoardView;
-import fatsquirrel.core.Entities.EntityType;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.*;
@@ -100,30 +99,30 @@ public class FxUI extends Scene implements UI {
         for(int y=0; y<viewSize.Y; y++){
             for(int x=0; x<viewSize.X; x++) {
                 switch(view.getEntityType(x,y)){
-                    case Wall:
+                    case WALL:
                         gc.drawImage(new Image(getClass().getResourceAsStream("..\\Images\\wall.jpg")), x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         //gc.setFill(Color.CHOCOLATE);
                         //gc.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         break;
-                    case BadBeast:
+                    case BAD_BEAST:
                         //gc.drawImage(new Image(getClass().getResourceAsStream("..\\Images\\badbeast.gif")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         gc.setFill(Color.DARKRED);
                         gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
-                    case GoodBeast:
+                    case GOOD_BEAST:
                         gc.setFill(Color.FORESTGREEN);
                         gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
-                    case BadPlant:
+                    case BAD_PLANT:
                         //gc.drawImage(new Image(getClass().getResourceAsStream("Images\\badplant.jpg")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         gc.setFill(Color.INDIANRED);
                         gc.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
-                    case GoodPlant:
+                    case GOOD_PLANT:
                         //gc.drawImage(new Image(getClass().getResourceAsStream("Images\\goodplant.png")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         gc.setFill(Color.LIGHTGREEN);
                         gc.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-                        break;
+                        break;/*
                     case HandOperatedMasterSquirrel:
                         gc.setFill(Color.BLACK);
                         gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
@@ -138,8 +137,14 @@ public class FxUI extends Scene implements UI {
                     case MiniSquirrelBot:
                         gc.setFill(Color.CORNFLOWERBLUE);
                         gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                        break;*/
+                    case MASTER_SQUIRREL:
+                        //gc.drawImage(new Image(getClass().getResourceAsStream("Images\\squirrel.png")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                        gc.setFill(Color.DARKSLATEBLUE);
+                        gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                        statusLabel.setText("Energie: " + view.getEntityAt(x, y).getEnergy());
                         break;
-                    case MiniSquirrel:
+                    case MINI_SQUIRREL:
                         gc.setFill(Color.SKYBLUE);
                         gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;

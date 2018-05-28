@@ -24,4 +24,5 @@ public final class XY {
     public String toString(){
         return "("+X+"/"+Y+")";
     }
+
 }

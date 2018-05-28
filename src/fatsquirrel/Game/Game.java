@@ -12,7 +12,7 @@ public abstract class Game {
 
     private final State state;
     private UI ui;
-    private final int FPS = 1;
+    private final int FPS = 3;
     protected Logging logging = new Logging(this.getClass().getName());
 
     public Game(State state, UI ui){

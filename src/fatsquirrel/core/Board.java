@@ -7,6 +7,7 @@ import fatsquirrel.core.Entities.*;
 import fatsquirrel.core.Entities.PlayerEntities.*;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 import java.util.logging.Level;
 
@@ -32,16 +33,16 @@ public class Board {
         int counter = BoardConfig.getWallCount();
         //Surrounding Wall, horizontal
         for(int i=0;i<entities.length && counter>0;i++){
-            if(setNewEntity(i,0,EntityType.Wall))
+            if(setNewEntity(i,0,EntityType.WALL))
                 counter--;
-            if(counter>0 && setNewEntity(i,entities[i].length-1,EntityType.Wall))
+            if(counter>0 && setNewEntity(i,entities[i].length-1,EntityType.WALL))
                 counter--;
         }
         //Surrounding Wall, vertical
         for(int i=0;i<entities[0].length&&counter>0;i++){
-            if(setNewEntity(0,i,EntityType.Wall))
+            if(setNewEntity(0,i,EntityType.WALL))
                 counter--;
-            if(counter>0 && setNewEntity(entities.length-1,i,EntityType.Wall))
+            if(counter>0 && setNewEntity(entities.length-1,i,EntityType.WALL))
                 counter--;
         }
 
@@ -49,7 +50,7 @@ public class Board {
         while(counter>0){
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
-            if(setNewEntity(x,y,EntityType.Wall))
+            if(setNewEntity(x,y,EntityType.WALL))
                 counter--;
         }
 
@@ -58,7 +59,7 @@ public class Board {
         while(counter>0){
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
-            if(setNewEntity(x,y,EntityType.HandOperatedMasterSquirrel))
+            if(setNewMasterSquirrel(x,y,HandOperatedMasterSquirrel.class))
                 counter--;
         }
 
@@ -67,7 +68,7 @@ public class Board {
         while(counter>0){
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
-            if(setNewEntity(x,y,EntityType.MasterSquirrelBot))
+            if(setNewMasterSquirrel(x,y,MasterSquirrelBot.class))
                 counter--;
         }
 
@@ -76,14 +77,14 @@ public class Board {
         while(counter>0){
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
-            if(setNewEntity(x,y,EntityType.GoodPlant))
+            if(setNewEntity(x,y,EntityType.GOOD_PLANT))
                 counter--;
         }
         counter = BoardConfig.getPlantCount();
         while(counter>0){
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
-            if(setNewEntity(x,y,EntityType.BadPlant))
+            if(setNewEntity(x,y,EntityType.BAD_PLANT))
                 counter--;
         }
 
@@ -92,14 +93,14 @@ public class Board {
         while(counter>0){
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
-            if(setNewEntity(x,y,EntityType.BadBeast))
+            if(setNewEntity(x,y,EntityType.BAD_BEAST))
                 counter--;
         }
         counter = BoardConfig.getBeastCount();
         while(counter>0){
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
-            if(setNewEntity(x,y,EntityType.GoodBeast))
+            if(setNewEntity(x,y,EntityType.GOOD_BEAST))
                 counter--;
         }
 
@@ -138,8 +139,44 @@ public class Board {
                 logging.getLogger().finer("new " + entity.getClass().getSimpleName() + " added! " + "#" + entity.getID());
                 return true;
             }
-            else
+            else {
+                logging.getLogger().severe("New Entity is null! " + entityType.toString());
                 return false;
+            }
+        }
+    }
+
+    public boolean setNewMasterSquirrel(int x, int y, Class masterSquirrel) {
+        if (x < 0 || y < 0 || x > width || y > height)
+            return false;
+        else if (entities[x][y] != null)
+            return false;
+        else {
+            Class[] cArg = new Class[3];
+            cArg[0] = int.class;
+            cArg[1] = int.class;
+            cArg[2] = XY.class;
+
+            int id = entitySet.getNextFreeID();
+            int energy = 1000;
+            XY pos = new XY(x,y);
+
+            Entity entity = null;
+            try {
+                entity = (Entity)masterSquirrel.getDeclaredConstructor(cArg).newInstance(id, energy, pos);
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+            entities[x][y] = entity;
+            entitySet.addEntity(entity);
+            logging.getLogger().finer("new " + entity.getClass().getSimpleName() + " added! " + "#" + entity.getID());
+            return true;
         }
     }
 
@@ -159,20 +196,20 @@ public class Board {
 
     private Entity getNewEntityWithType(EntityType entityType, XY xy){
         switch (entityType){
-            case Wall:
+            case WALL:
                 return new Wall(entitySet.getNextFreeID(), -10, xy);
-            case BadPlant:
+            case BAD_PLANT:
                 return new BadPlant(entitySet.getNextFreeID(), -100, xy);
-            case GoodPlant:
+            case GOOD_PLANT:
                 return new GoodPlant(entitySet.getNextFreeID(), 100, xy);
-            case BadBeast:
+            case BAD_BEAST:
                 return new BadBeast(entitySet.getNextFreeID(), -150, xy);
-            case GoodBeast:
-                return new GoodBeast(entitySet.getNextFreeID(), 200, xy);
+            case GOOD_BEAST:
+                return new GoodBeast(entitySet.getNextFreeID(), 200, xy);/*
             case HandOperatedMasterSquirrel:
                 return new HandOperatedMasterSquirrel(entitySet.getNextFreeID(), 1000, xy);
             case MasterSquirrelBot:
-                return new MasterSquirrelBot(entitySet.getNextFreeID(), 1000, xy);
+                return new MasterSquirrelBot(entitySet.getNextFreeID(), 1000, xy);*/
             default:
                 return null;
         }

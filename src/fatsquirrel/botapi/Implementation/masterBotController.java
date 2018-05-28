@@ -9,7 +9,7 @@ import java.util.Random;
 public class masterBotController implements BotController{
     @Override
     public void nextStep(ControllerContext view) {
-        XY lowerLeft = view.getViewLowerLeft();
+    XY lowerLeft = view.getViewLowerLeft();
         XY upperRight = view.getViewUpperRight();
 
         view.move(XY.randomVector());

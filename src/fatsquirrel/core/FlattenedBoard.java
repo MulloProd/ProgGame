@@ -1,5 +1,6 @@
 package fatsquirrel.core;
 
+import fatsquirrel.Logging;
 import fatsquirrel.XY;
 import fatsquirrel.core.Entities.*;
 import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
@@ -13,6 +14,8 @@ public class FlattenedBoard implements EntityContext, BoardView {
     private final Board board;
     private final int width;
     private final int height;
+
+    private static Logging logging = new Logging(FlattenedBoard.class.getSimpleName());
 
     public FlattenedBoard(int width, int height, Board board){
         this.width = width;
@@ -43,7 +46,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
                 miniSquirrel.updateEnergy(-1);
             }
             else if(board.getEntity(x,y) instanceof MasterSquirrel){
-                //Kollision mit eigenem MasterSquirrel
+                //Kollision mit eigenem MASTER_SQUIRREL
                 if(board.getEntity(x,y) == miniSquirrel.getMasterSquirrel()){
                     miniSquirrel.updateEnergy(-1);
                     board.getEntity(x,y).updateEnergy(miniSquirrel.getEnergy());
@@ -128,16 +131,16 @@ public class FlattenedBoard implements EntityContext, BoardView {
         else if(board.getEntity(x,y) instanceof PlayerEntity){
             if(badBeast.getBiteCounter()>1){
                 board.getEntity(x,y).updateEnergy(badBeast.getEnergy());
-                if(board.getEntity(x,y).getEnergy()<=0){
-                    kill(board.getEntity(x,y));
-                }
+                //if(board.getEntity(x,y).getEnergy()<=0){
+                //    kill(board.getEntity(x,y));
+                //}
                 badBeast.decreaseBiteCounter();
             }
             else if(badBeast.getBiteCounter()==1){
                 board.getEntity(x,y).updateEnergy(badBeast.getEnergy());
-                if(board.getEntity(x,y).getEnergy()<=0){
-                    kill(board.getEntity(x,y));
-                }
+                //if(board.getEntity(x,y).getEnergy()<=0){
+                //    kill(board.getEntity(x,y));
+                //}
                 badBeast.decreaseBiteCounter(); //Reset BiteCounter
                 killAndReplace(badBeast);
             }
@@ -236,32 +239,35 @@ public class FlattenedBoard implements EntityContext, BoardView {
             int x = new Random().nextInt(width - 1);
             int y = new Random().nextInt(height - 1);
             EntityType entityType = getEntityType(entity.getPosition());
-            kill(entity);
+            logging.getLogger().finer("killAndReplace; Type: "+entityType+"; Class: "+entity.getClass().getSimpleName());
+            if(entityType==EntityType.NONE)
+                logging.getLogger().severe("Can´t get Type!");
             if(board.setNewEntity(x,y, entityType))
                 success = true;
         }
+        kill(entity);
     }
 
     @Override
     public EntityType getEntityType(XY xy) {
-        EntityType type = EntityType.None;
+        EntityType type = EntityType.NONE;
         if(board.getEntity(xy.X, xy.Y)!=null) {
             switch (board.getEntity(xy.X, xy.Y).getClass().getSimpleName()) {
                 case "Wall":
-                    type = EntityType.Wall;
+                    type = EntityType.WALL;
                     break;
                 case "BadPlant":
-                    type = EntityType.BadPlant;
+                    type = EntityType.BAD_PLANT;
                     break;
                 case "GoodPlant":
-                    type = EntityType.GoodPlant;
+                    type = EntityType.GOOD_PLANT;
                     break;
                 case "BadBeast":
-                    type = EntityType.BadBeast;
+                    type = EntityType.BAD_BEAST;
                     break;
                 case "GoodBeast":
-                    type = EntityType.GoodBeast;
-                    break;
+                    type = EntityType.GOOD_BEAST;
+                    break;/*
                 case "HandOperatedMasterSquirrel":
                     type = EntityType.HandOperatedMasterSquirrel;
                     break;
@@ -269,18 +275,23 @@ public class FlattenedBoard implements EntityContext, BoardView {
                     type = EntityType.MasterSquirrelBot;
                     break;
                 case "MasterSquirrel":
-                    type = EntityType.MasterSquirrel;
+                    type = EntityType.MASTER_SQUIRREL;
                     break;
                 case "MiniSquirrel":
-                    type = EntityType.MiniSquirrel;
+                    type = EntityType.MINI_SQUIRREL;
                     break;
                 case "MiniSquirrelBot":
                     type = EntityType.MiniSquirrelBot;
                     break;
                 case "StandardMiniSquirrel":
                     type = EntityType.StandardMiniSquirrel;
-                    break;
+                    break;*/
             }
+            if (board.getEntity(xy.X, xy.Y) instanceof MasterSquirrel)
+                type = EntityType.MASTER_SQUIRREL;
+            else if (board.getEntity(xy.X, xy.Y) instanceof MiniSquirrel)
+                type = EntityType.MINI_SQUIRREL;
+
         }
         return type;
     }
