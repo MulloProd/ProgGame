@@ -46,17 +46,17 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
         @Override
         public XY getViewLowerLeft() {
-            return new XY(getPosition().x-10, getPosition().y+10);
+            return new XY(MiniSquirrelBot.this.getPosition().x-10, MiniSquirrelBot.this.getPosition().y+10);
         }
 
         @Override
         public XY getViewUpperRight() {
-            return new XY(getPosition().x+10, getPosition().y-10);
+            return new XY(MiniSquirrelBot.this.getPosition().x+10, MiniSquirrelBot.this.getPosition().y-10);
         }
 
         @Override
         public XY locate() {
-            return getPosition();
+            return MiniSquirrelBot.this.getPosition();
         }
 
         @Override
@@ -99,10 +99,10 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
         @Override
         public void implode(int impactRadius) {
-            int xLeft = getPosition().x -impactRadius;
-            int yLeft = getPosition().y -impactRadius;
-            int xRight = getPosition().x +impactRadius;
-            int yRight = getPosition().y +impactRadius;
+            int xLeft = MiniSquirrelBot.this.getPosition().x -impactRadius;
+            int yLeft = MiniSquirrelBot.this.getPosition().y -impactRadius;
+            int xRight = MiniSquirrelBot.this.getPosition().x +impactRadius;
+            int yRight = MiniSquirrelBot.this.getPosition().y +impactRadius;
 
             if(xLeft <=0)
                 xLeft=1;
@@ -119,8 +119,8 @@ public class MiniSquirrelBot extends MiniSquirrel{
                 for(int x=xLeft; x<=xRight; x++){
                     Entity entity = entityContext.getEntityAt(x,y);
                     if(entity != null && !(entity.equals(MiniSquirrelBot.this)) && !(entity instanceof Wall)) {
-                        double distance = getPosition().distanceFrom(entity.getPosition());
-                        int energyLoss = (int) (200 * (getEnergy()/impactArea) * (1 - distance/impactRadius));
+                        double distance = MiniSquirrelBot.this.getPosition().distanceFrom(entity.getPosition());
+                        int energyLoss = (int) (200 * (MiniSquirrelBot.this.getEnergy()/impactArea) * (1 - distance/impactRadius));
 
                         if(entity.getEnergy()<energyLoss)
                             energyLoss=Math.abs(entity.getEnergy());
@@ -128,18 +128,18 @@ public class MiniSquirrelBot extends MiniSquirrel{
                         //Abfrage der einzelnen Entities
                         if (entity instanceof GoodPlant || entity instanceof GoodBeast) {
                             entity.updateEnergy(-energyLoss);
-                            getMasterSquirrel().updateEnergy(energyLoss);
+                            MiniSquirrelBot.this.getMasterSquirrel().updateEnergy(energyLoss);
                         } else if (entity instanceof BadPlant || entity instanceof BadBeast) {
                             entity.updateEnergy(energyLoss);
                         } else if (entity instanceof MiniSquirrel){
-                            if(!(((MiniSquirrel) entity).getMasterSquirrel().equals(getMasterSquirrel()))) {
+                            if(!(((MiniSquirrel) entity).getMasterSquirrel().equals(MiniSquirrelBot.this.getMasterSquirrel()))) {
                                 entity.updateEnergy(-energyLoss);
-                                getMasterSquirrel().updateEnergy(energyLoss);
+                                MiniSquirrelBot.this.getMasterSquirrel().updateEnergy(energyLoss);
                             }
                         } else if(entity instanceof MasterSquirrel){
-                            if(!(entity.equals(getMasterSquirrel()))){
+                            if(!(entity.equals(MiniSquirrelBot.this.getMasterSquirrel()))){
                                 entity.updateEnergy(-energyLoss);
-                                getMasterSquirrel().updateEnergy(energyLoss);
+                                MiniSquirrelBot.this.getMasterSquirrel().updateEnergy(energyLoss);
                             }
                         }
 

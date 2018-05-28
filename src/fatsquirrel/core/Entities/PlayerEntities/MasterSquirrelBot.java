@@ -13,14 +13,10 @@ import java.lang.reflect.Proxy;
 public class MasterSquirrelBot extends MasterSquirrel {
     private final BotControllerFactory botControllerFactory;
     private final BotController botController;
-    private XY position;
-    private int energy;
     private final Logging logging;
 
     public MasterSquirrelBot(int id, int energy, XY position) {
         super(id, energy, position);
-        this.position = position; //über Getter regeln?
-        this.energy = energy;
 
         botControllerFactory = new botControllerFactory();
         botController = botControllerFactory.createMasterBotController();
@@ -49,17 +45,17 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
         @Override
         public XY getViewLowerLeft() {
-            return new XY(position.x -15, position.y +15);
+            return new XY(MasterSquirrelBot.this.getPosition().x-15, MasterSquirrelBot.this.getPosition().y +15);
         }
 
         @Override
         public XY getViewUpperRight() {
-            return new XY (position.x +15, position.y -15);
+            return new XY (MasterSquirrelBot.this.getPosition().x +15, MasterSquirrelBot.this.getPosition().y -15);
         }
 
         @Override
         public XY locate() {
-            return position;
+            return MasterSquirrelBot.this.getPosition();
         }
 
         @Override
@@ -97,11 +93,11 @@ public class MasterSquirrelBot extends MasterSquirrel {
         @Override
         public void spawnMiniBot(XY direction, int energy) throws SpawnException {
 
-            if(energy<100 || energy>=getEnergy())
+            if(MasterSquirrelBot.this.getEnergy()<100 || energy>=MasterSquirrelBot.this.getEnergy())
                 throw new SpawnException();
 
             try {
-                if((getEntityAt(new XY(getPosition().x+direction.x, getPosition().y+direction.y))) !=EntityType.NONE)
+                if((getEntityAt(new XY(MasterSquirrelBot.this.getPosition().x+direction.x, MasterSquirrelBot.this.getPosition().y+direction.y))) !=EntityType.NONE)
                     throw new SpawnException();
             } catch (OutOfViewException e) {
                 e.printStackTrace();
@@ -117,7 +113,7 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
         @Override
         public int getEnergy() {
-            return energy;
+            return MasterSquirrelBot.this.getEnergy();
         }
 
         @Override
