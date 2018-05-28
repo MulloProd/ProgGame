@@ -13,8 +13,6 @@ import java.lang.reflect.Proxy;
 public class MiniSquirrelBot extends MiniSquirrel{
     private final BotController botController;
     private final BotControllerFactory botControllerFactory;
-    private XY position;
-    private int energy;
     private final Logging logging;
 
     public MiniSquirrelBot(int id, int energy, XY position, MasterSquirrel masterSquirrel) {

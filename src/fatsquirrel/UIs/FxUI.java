@@ -107,21 +107,21 @@ public class FxUI extends Scene implements UI {
                         break;
                     case BadBeast:
                         //gc.drawImage(new Image(getClass().getResourceAsStream("..\\Images\\badbeast.gif")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
-                        gc.setFill(Color.DARKGREEN);
+                        gc.setFill(Color.DARKRED);
                         gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
                     case GoodBeast:
-                        gc.setFill(Color.CORNFLOWERBLUE);
+                        gc.setFill(Color.FORESTGREEN);
                         gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
                     case BadPlant:
                         //gc.drawImage(new Image(getClass().getResourceAsStream("Images\\badplant.jpg")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
-                        gc.setFill(Color.FORESTGREEN);
+                        gc.setFill(Color.INDIANRED);
                         gc.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
                     case GoodPlant:
                         //gc.drawImage(new Image(getClass().getResourceAsStream("Images\\goodplant.png")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
-                        gc.setFill(Color.SKYBLUE);
+                        gc.setFill(Color.LIGHTGREEN);
                         gc.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
                     case HandOperatedMasterSquirrel:
@@ -131,16 +131,16 @@ public class FxUI extends Scene implements UI {
                         break;
                     case MasterSquirrelBot:
                         //gc.drawImage(new Image(getClass().getResourceAsStream("Images\\squirrel.png")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
-                        gc.setFill(Color.DARKRED);
+                        gc.setFill(Color.DARKSLATEBLUE);
                         gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         statusLabel.setText("Energie: " + view.getEntityAt(x, y).getEnergy());
                         break;
                     case MiniSquirrelBot:
-                        gc.setFill(Color.INDIANRED);
+                        gc.setFill(Color.CORNFLOWERBLUE);
                         gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
                     case MiniSquirrel:
-                        gc.setFill(Color.ORANGERED);
+                        gc.setFill(Color.SKYBLUE);
                         gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
                 }

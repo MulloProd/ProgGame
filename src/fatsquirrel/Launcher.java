@@ -10,6 +10,7 @@ import fatsquirrel.core.BoardConfig;
 import fatsquirrel.Game.Game;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -72,6 +73,7 @@ public class Launcher extends Application{
 
         primaryStage.setScene(fxUI);
         primaryStage.setTitle("Lässiges Squirrel");
+        primaryStage.getIcons().add(new Image(Launcher.class.getResourceAsStream("Images\\squirrel.jpg")));
         fxUI.getWindow().setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent evt) {
