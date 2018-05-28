@@ -21,9 +21,9 @@ public class GameImpl extends Game {
         super(state, ui);
         this.ui = ui;
 
-        for(int x=0;x<state.flattenedBoard().getSize().X;x++){
-            for(int y=0;y<state.flattenedBoard().getSize().Y;y++){
-                if(state.flattenedBoard().getEntityType(x,y) == EntityType.HandOperatedMasterSquirrel)
+        for(int x = 0; x<state.flattenedBoard().getSize().x; x++){
+            for(int y = 0; y<state.flattenedBoard().getSize().y; y++){
+                if(state.flattenedBoard().getEntityType(x,y) == EntityType.MASTER_SQUIRREL)
                     masterSquirrel = (MasterSquirrel)state.flattenedBoard().getEntityAt(x,y);
             }
         }
@@ -76,8 +76,8 @@ public class GameImpl extends Game {
     private void spawnMiniSquirrel() throws NotEnoughEnergyException {
         if(moveCommand.getMiniSquirrelEnergy()< masterSquirrel.getEnergy()) {
             //Abfrage fehlt, ob Position frei
-            int x = masterSquirrel.getPosition().X+1;
-            int y = masterSquirrel.getPosition().Y+1;
+            int x = masterSquirrel.getPosition().x +1;
+            int y = masterSquirrel.getPosition().y +1;
 
             getState().flattenedBoard().spawn_Mini(new XY(1,1), moveCommand.getMiniSquirrelEnergy(), masterSquirrel);
         }

@@ -20,7 +20,7 @@ public class EventLogger implements InvocationHandler{
         switch(method.getName()){
             case "move":
                 XY dir = (XY)args[0];
-                logging.getLogger().info("Bot moved in direction (" + dir.X + "/" + dir.Y + ")");
+                logging.getLogger().info("Bot moved in direction (" + dir.x + "/" + dir.y + ")");
                 break;
             case "spawnMiniBot":
                 logging.getLogger().info("MiniBot spawned!");

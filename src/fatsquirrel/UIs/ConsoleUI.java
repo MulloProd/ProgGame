@@ -5,6 +5,8 @@ import fatsquirrel.Console.CommandScanner;
 import fatsquirrel.Game.GameCommandType;
 import fatsquirrel.Console.MoveCommand;
 import fatsquirrel.core.BoardView;
+import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
+import fatsquirrel.core.Entities.PlayerEntities.MiniSquirrel;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,40 +23,44 @@ public class ConsoleUI implements UI {
 
     @Override
     public void render(BoardView view) {
-        for(int y=0;y<view.getSize().Y;y++){
-            for(int x=0;x<view.getSize().X;x++){
+        for(int y = 0; y<view.getSize().y; y++){
+            for(int x = 0; x<view.getSize().x; x++){
                 switch (view.getEntityType(x,y)){
-                    case None:
+                    case NONE:
                         System.out.print(" ");
                         break;
-                    case Wall:
+                    case WALL:
                         System.out.print("#");
                         break;
-                    case BadBeast:
+                    case BAD_BEAST:
                         System.out.print("B");
                         break;
-                    case GoodBeast:
+                    case GOOD_BEAST:
                         System.out.print("b");
                         break;
-                    case BadPlant:
+                    case BAD_PLANT:
                         System.out.print("X");
                         break;
-                    case GoodPlant:
+                    case GOOD_PLANT:
                         System.out.print("O");
-                        break;
+                        break;/*
                     case HandOperatedMasterSquirrel:
                         System.out.print("M");
                         break;
                     case MasterSquirrelBot:
                         System.out.print("M");
                         break;
-                    case MiniSquirrel:
+                    case MINI_SQUIRREL:
                         System.out.print("m");
                         break;
                     case StandardMiniSquirrel:
                         System.out.print("m");
-                        break;
+                        break;*/
                 }
+                if(view.getEntityAt(x,y) instanceof MasterSquirrel)
+                    System.out.print("M");
+                else if(view.getEntityAt(x,y) instanceof MiniSquirrel)
+                    System.out.print("m");
             }
             System.out.println();
         }

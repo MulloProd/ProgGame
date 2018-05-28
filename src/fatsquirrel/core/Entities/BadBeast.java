@@ -1,6 +1,7 @@
 package fatsquirrel.core.Entities;
 
 import fatsquirrel.XY;
+import fatsquirrel.XYsupport;
 import fatsquirrel.core.Entities.PlayerEntities.PlayerEntity;
 
 public class BadBeast extends Entity {
@@ -23,8 +24,8 @@ public class BadBeast extends Entity {
             XY playerEntityXY = playerEntity.getPosition();
 
             //Höhen- und Breitenunterschied
-            int xDiff = playerEntityXY.X - this.getPosition().X;
-            int yDiff = playerEntityXY.Y - this.getPosition().Y;
+            int xDiff = playerEntityXY.x - this.getPosition().x;
+            int yDiff = playerEntityXY.y - this.getPosition().y;
 
             //Vektor bestimmen
             int xVector=0;
@@ -48,7 +49,7 @@ public class BadBeast extends Entity {
                 entityContext.tryMove(this, new XY(xVector, yVector));
             }
             else{
-                entityContext.tryMove(this, XY.randomVector());
+                entityContext.tryMove(this, XYsupport.randomVector());
             }
             setNextStepCounter(-1);
         }
