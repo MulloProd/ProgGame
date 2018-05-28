@@ -132,10 +132,14 @@ public class Board {
             return false;
         else{
             Entity entity = getNewEntityWithType(entityType, new XY(x,y));
-            entities[x][y] = entity;
-            entitySet.addEntity(entity);
-            logging.getLogger().finer("new "+entity.getClass().getSimpleName()+" added! "+"#"+entity.getID());
-            return true;
+            if(entity != null) {
+                entities[x][y] = entity;
+                entitySet.addEntity(entity);
+                logging.getLogger().finer("new " + entity.getClass().getSimpleName() + " added! " + "#" + entity.getID());
+                return true;
+            }
+            else
+                return false;
         }
     }
 

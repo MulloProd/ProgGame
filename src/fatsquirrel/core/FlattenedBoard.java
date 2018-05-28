@@ -224,6 +224,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
         }
         else{
+            entity.getLogging().getLogger().info("Entity killed!");
             board.removeEntity(entity);
         }
     }
@@ -234,8 +235,9 @@ public class FlattenedBoard implements EntityContext, BoardView {
         while(!success) {
             int x = new Random().nextInt(width - 1);
             int y = new Random().nextInt(height - 1);
+            EntityType entityType = getEntityType(entity.getPosition());
             kill(entity);
-            if(board.setNewEntity(x,y, getEntityType(entity.getPosition())))
+            if(board.setNewEntity(x,y, entityType))
                 success = true;
         }
     }

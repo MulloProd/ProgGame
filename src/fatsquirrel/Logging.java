@@ -2,6 +2,7 @@ package fatsquirrel;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.logging.*;
 
@@ -34,16 +35,14 @@ public class Logging {
         Handler handler = null;
         try {
             //Alte  Logs löschen
-            File[] allContents = new File("./logs").listFiles();
-            if (allContents != null) {
-                for (File file : allContents) {
-                    file.delete();
-                }
-            }
-
-            File dir = new File("./logs/MiniBots");
+            deleteDir(new File("./logs"));
+            File dir = new File("./logs");
+            dir.mkdir();
+            dir = new File("./logs/MiniBots");
             dir.mkdir();
             dir = new File("./logs/MasterBots");
+            dir.mkdir();
+            dir = new File("./logs/Entities");
             dir.mkdir();
 
             //Handler erstellen
@@ -55,6 +54,23 @@ public class Logging {
 
         logger.addHandler(handler);
         logger.setLevel(level);
+    }
+
+    public void closeLogger(){
+        for(Handler handler: getLogger().getHandlers())
+            handler.close();
+    }
+
+    void deleteDir(File file) {
+        File[] contents = file.listFiles();
+        if (contents != null) {
+            for (File f : contents) {
+                if (! Files.isSymbolicLink(f.toPath())) {
+                    deleteDir(f);
+                }
+            }
+        }
+        file.delete();
     }
 
     public Logger getLogger() {

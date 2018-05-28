@@ -19,4 +19,9 @@ public final class XY {
         XY temp = new XY(new Random().nextInt(3)-1, new Random().nextInt(3)-1);
         return temp;
     }
+
+    @Override
+    public String toString(){
+        return "("+X+"/"+Y+")";
+    }
 }
