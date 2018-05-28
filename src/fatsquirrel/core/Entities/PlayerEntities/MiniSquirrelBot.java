@@ -46,12 +46,12 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
         @Override
         public XY getViewLowerLeft() {
-            return new XY(MiniSquirrelBot.this.getPosition().X-10, MiniSquirrelBot.this.getPosition().Y+10);
+            return new XY(MiniSquirrelBot.this.getPosition().x -10, MiniSquirrelBot.this.getPosition().y +10);
         }
 
         @Override
         public XY getViewUpperRight() {
-            return new XY(MiniSquirrelBot.this.getPosition().X+10, MiniSquirrelBot.this.getPosition().Y-10);
+            return new XY(MiniSquirrelBot.this.getPosition().x +10, MiniSquirrelBot.this.getPosition().y -10);
         }
 
         @Override
@@ -76,19 +76,19 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
         @Override
         public void doImplosion(int impactRadius) {
-            int xLeft = MiniSquirrelBot.this.getPosition().X-impactRadius;
-            int yLeft = MiniSquirrelBot.this.getPosition().Y-impactRadius;
-            int xRight = MiniSquirrelBot.this.getPosition().X+impactRadius;
-            int yRight = MiniSquirrelBot.this.getPosition().Y+impactRadius;
+            int xLeft = MiniSquirrelBot.this.getPosition().x -impactRadius;
+            int yLeft = MiniSquirrelBot.this.getPosition().y -impactRadius;
+            int xRight = MiniSquirrelBot.this.getPosition().x +impactRadius;
+            int yRight = MiniSquirrelBot.this.getPosition().y +impactRadius;
 
             if(xLeft <=0)
                 xLeft=1;
             if(yLeft<=0)
                 yLeft=1;
-            if(xRight>=entityContext.getSize().X)
-                xRight=entityContext.getSize().X-1;
-            if(yRight>=entityContext.getSize().Y)
-                yRight=entityContext.getSize().Y-1;
+            if(xRight>=entityContext.getSize().x)
+                xRight=entityContext.getSize().x -1;
+            if(yRight>=entityContext.getSize().y)
+                yRight=entityContext.getSize().y -1;
 
             double impactArea = impactRadius*impactRadius*Math.PI;
 
@@ -96,8 +96,8 @@ public class MiniSquirrelBot extends MiniSquirrel{
                 for(int x=xLeft; x<=xRight; x++){
                     Entity entity = entityContext.getEntityAt(x,y);
                     if(entity != null && !(entity.equals(MiniSquirrelBot.this)) && !(entity instanceof Wall)) {
-                        int distance = Math.abs(MiniSquirrelBot.this.getPosition().X - entity.getPosition().X) +
-                            Math.abs(MiniSquirrelBot.this.getPosition().Y - entity.getPosition().Y);
+                        int distance = Math.abs(MiniSquirrelBot.this.getPosition().x - entity.getPosition().x) +
+                            Math.abs(MiniSquirrelBot.this.getPosition().y - entity.getPosition().y);
                         int energyLoss = 200 * (MiniSquirrelBot.this.getEnergy()/(int)impactArea) * (1 - distance/impactRadius);
 
                         if(entity.getEnergy()<energyLoss)
@@ -138,8 +138,8 @@ public class MiniSquirrelBot extends MiniSquirrel{
         @Override
         public Direction getMasterDirection() {
             XY xyMaster = getMasterSquirrel().getPosition();
-            int x = MiniSquirrelBot.this.getPosition().X - xyMaster.X;
-            int y = MiniSquirrelBot.this.getPosition().Y - xyMaster.Y;
+            int x = MiniSquirrelBot.this.getPosition().x - xyMaster.x;
+            int y = MiniSquirrelBot.this.getPosition().y - xyMaster.y;
 
             //Himmelsrichtung ermitteln
             if(x>=0 && y>=0){

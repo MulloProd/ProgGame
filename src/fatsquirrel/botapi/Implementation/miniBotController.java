@@ -1,6 +1,7 @@
 package fatsquirrel.botapi.Implementation;
 
 import fatsquirrel.XY;
+import fatsquirrel.XYsupport;
 import fatsquirrel.botapi.BotController;
 import fatsquirrel.botapi.ControllerContext;
 
@@ -16,6 +17,6 @@ public class miniBotController implements BotController {
         if(new Random().nextInt(10) < 2)
             view.doImplosion(impactRadius);
         else
-            view.move(XY.randomVector());
+            view.move(XYsupport.randomVector());
     }
 }

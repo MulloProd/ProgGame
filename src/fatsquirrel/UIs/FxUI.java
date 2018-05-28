@@ -32,7 +32,7 @@ public class FxUI extends Scene implements UI {
     }
 
     public static FxUI createInstance(XY boardSize) {
-        Canvas boardCanvas = new Canvas(boardSize.X * CELL_SIZE, boardSize.Y * CELL_SIZE);
+        Canvas boardCanvas = new Canvas(boardSize.x * CELL_SIZE, boardSize.y * CELL_SIZE);
         statusLabel = new Label();
         VBox top = new VBox();
         top.getChildren().add(boardCanvas);
@@ -96,8 +96,8 @@ public class FxUI extends Scene implements UI {
         gc.setFill(Color.BLACK);
         XY viewSize = view.getSize();
 
-        for(int y=0; y<viewSize.Y; y++){
-            for(int x=0; x<viewSize.X; x++) {
+        for(int y = 0; y<viewSize.y; y++){
+            for(int x = 0; x<viewSize.x; x++) {
                 switch(view.getEntityType(x,y)){
                     case WALL:
                         gc.drawImage(new Image(getClass().getResourceAsStream("..\\Images\\wall.jpg")), x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);

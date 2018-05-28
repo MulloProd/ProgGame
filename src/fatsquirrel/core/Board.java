@@ -19,8 +19,8 @@ public class Board {
     private Logging logging = new Logging(this.getClass().getName(), Level.FINER);
 
     public Board() throws Exception {
-        height = BoardConfig.getSize().Y;
-        width = BoardConfig.getSize().X;
+        height = BoardConfig.getSize().y;
+        width = BoardConfig.getSize().x;
         entities = new Entity[width][height];
         createRandomBoard();
     }
@@ -108,11 +108,11 @@ public class Board {
     }
 
     public boolean moveEntity(Entity entity, XY newPos){
-        if(entities[newPos.X][newPos.Y] == null){
-            entities[newPos.X][newPos.Y] = entity;
-            entities[entity.getPosition().X][entity.getPosition().Y] = null;
+        if(entities[newPos.x][newPos.y] == null){
+            entities[newPos.x][newPos.y] = entity;
+            entities[entity.getPosition().x][entity.getPosition().y] = null;
             entity.setPosition(newPos);
-            logging.getLogger().finer(entity.getClass().getSimpleName() + "#" + entity.getID() + ": Entity moved to ("+newPos.X+"/"+newPos.Y+")");
+            logging.getLogger().finer(entity.getClass().getSimpleName() + "#" + entity.getID() + ": Entity moved to ("+newPos.x +"/"+newPos.y +")");
             return true;
         }
         else
@@ -121,7 +121,7 @@ public class Board {
 
     public void removeEntity(Entity entity){
         entitySet.deleteEntity(entity);
-        entities[entity.getPosition().X][entity.getPosition().Y]=null;
+        entities[entity.getPosition().x][entity.getPosition().y]=null;
         logging.getLogger().finer(entity.getClass().getSimpleName()+ "#"+entity.getID()+" removed!");
     }
 
@@ -216,7 +216,7 @@ public class Board {
     }
 
     public Entity getEntity(XY xy){
-        return getEntity(xy.X,xy.Y);
+        return getEntity(xy.x,xy.y);
     }
 
     public Entity getEntity(int x, int y){

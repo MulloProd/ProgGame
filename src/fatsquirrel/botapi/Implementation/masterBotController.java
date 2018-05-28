@@ -1,6 +1,7 @@
 package fatsquirrel.botapi.Implementation;
 
 import fatsquirrel.XY;
+import fatsquirrel.XYsupport;
 import fatsquirrel.botapi.BotController;
 import fatsquirrel.botapi.ControllerContext;
 
@@ -12,9 +13,9 @@ public class masterBotController implements BotController{
     XY lowerLeft = view.getViewLowerLeft();
         XY upperRight = view.getViewUpperRight();
 
-        view.move(XY.randomVector());
+        view.move(XYsupport.randomVector());
 
         if(new Random().nextInt(10) < 2)
-            view.spawnMiniBot(XY.randomVector(), 100);
+            view.spawnMiniBot(XYsupport.randomVector(), 100);
     }
 }

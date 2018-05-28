@@ -33,16 +33,16 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
         if(moveDirection==null)
             return;
-        if(moveDirection.X == 0 && moveDirection.Y == 0)
+        if(moveDirection.x == 0 && moveDirection.y == 0)
             return;
 
-        int x = miniSquirrel.getPosition().X+moveDirection.X;
-        int y = miniSquirrel.getPosition().Y+moveDirection.Y;
+        int x = miniSquirrel.getPosition().x +moveDirection.x;
+        int y = miniSquirrel.getPosition().y +moveDirection.y;
 
         //Noch Energy vorhanden
         if (miniSquirrel.getEnergy() >= 1) {
             if(board.getEntity(x,y) == null) {
-                board.moveEntity(miniSquirrel, miniSquirrel.getPosition().add(moveDirection));
+                board.moveEntity(miniSquirrel, miniSquirrel.getPosition().plus(moveDirection));
                 miniSquirrel.updateEnergy(-1);
             }
             else if(board.getEntity(x,y) instanceof MasterSquirrel){
@@ -75,7 +75,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
                 miniSquirrel.updateEnergy(board.getEntity(x,y).getEnergy());
                 killAndReplace(board.getEntity(x,y));
 
-                board.moveEntity(miniSquirrel, miniSquirrel.getPosition().add(moveDirection));
+                board.moveEntity(miniSquirrel, miniSquirrel.getPosition().plus(moveDirection));
             }
             else if(board.getEntity(x,y) instanceof GoodBeast
                     || board.getEntity(x,y) instanceof BadBeast){
@@ -85,7 +85,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
                 if(miniSquirrel.getEnergy()<=0)
                     kill(miniSquirrel);
                 else
-                    board.moveEntity(miniSquirrel, miniSquirrel.getPosition().add(moveDirection));
+                    board.moveEntity(miniSquirrel, miniSquirrel.getPosition().plus(moveDirection));
             }
         }
         else if (miniSquirrel.getEnergy() <= 0) {
@@ -98,14 +98,14 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
         if(moveDirection==null)
             return;
-        if(moveDirection.X == 0 && moveDirection.Y == 0)
+        if(moveDirection.x == 0 && moveDirection.y == 0)
             return;
 
-        int x = goodBeast.getPosition().X+moveDirection.X;
-        int y = goodBeast.getPosition().Y+moveDirection.Y;
+        int x = goodBeast.getPosition().x +moveDirection.x;
+        int y = goodBeast.getPosition().y +moveDirection.y;
 
         if(board.getEntity(x,y) == null){
-            board.moveEntity(goodBeast, goodBeast.getPosition().add(moveDirection));
+            board.moveEntity(goodBeast, goodBeast.getPosition().plus(moveDirection));
         }
         else if(board.getEntity(x,y) instanceof PlayerEntity){
             board.getEntity(x,y).updateEnergy(goodBeast.getEnergy());
@@ -119,14 +119,14 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
         if(moveDirection==null)
             return;
-        if(moveDirection.X == 0 && moveDirection.Y == 0)
+        if(moveDirection.x == 0 && moveDirection.y == 0)
             return;
 
-        int x = badBeast.getPosition().X+moveDirection.X;
-        int y = badBeast.getPosition().Y+moveDirection.Y;
+        int x = badBeast.getPosition().x +moveDirection.x;
+        int y = badBeast.getPosition().y +moveDirection.y;
 
         if(board.getEntity(x,y) == null){
-            board.moveEntity(badBeast, badBeast.getPosition().add(moveDirection));
+            board.moveEntity(badBeast, badBeast.getPosition().plus(moveDirection));
         }
         else if(board.getEntity(x,y) instanceof PlayerEntity){
             if(badBeast.getBiteCounter()>1){
@@ -152,16 +152,16 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
         if(moveDirection==null)
             return;
-        if(moveDirection.X == 0 && moveDirection.Y == 0)
+        if(moveDirection.x == 0 && moveDirection.y == 0)
             return;
 
         //aktuelle Position holen
-        int x = masterSquirrel.getPosition().X+moveDirection.X;
-        int y = masterSquirrel.getPosition().Y+moveDirection.Y;
+        int x = masterSquirrel.getPosition().x +moveDirection.x;
+        int y = masterSquirrel.getPosition().y +moveDirection.y;
 
         //Kollisionsabfrage
         if(board.getEntity(x,y) == null){
-            board.moveEntity(masterSquirrel, masterSquirrel.getPosition().add(moveDirection));
+            board.moveEntity(masterSquirrel, masterSquirrel.getPosition().plus(moveDirection));
         }
         else if(board.getEntity(x,y) instanceof Wall){
             masterSquirrel.setCollisionCounter(3);
@@ -173,14 +173,14 @@ public class FlattenedBoard implements EntityContext, BoardView {
             masterSquirrel.updateEnergy(board.getEntity(x,y).getEnergy());
             killAndReplace(board.getEntity(x,y));
 
-            board.moveEntity(masterSquirrel, masterSquirrel.getPosition().add(moveDirection));
+            board.moveEntity(masterSquirrel, masterSquirrel.getPosition().plus(moveDirection));
         }
         else if(board.getEntity(x,y) instanceof GoodBeast
                 || board.getEntity(x,y) instanceof BadBeast){
             masterSquirrel.updateEnergy(board.getEntity(x,y).getEnergy());
             killAndReplace(board.getEntity(x,y));
 
-            board.moveEntity(masterSquirrel, masterSquirrel.getPosition().add(moveDirection));
+            board.moveEntity(masterSquirrel, masterSquirrel.getPosition().plus(moveDirection));
         }
         else if(board.getEntity(x,y) instanceof MiniSquirrel){
             MasterSquirrel masterSquirrelTemp = ((MiniSquirrel)board.getEntity(x,y)).getMasterSquirrel();
@@ -193,7 +193,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
                 kill(board.getEntity(x,y));
             }
 
-            board.moveEntity(masterSquirrel, masterSquirrel.getPosition().add(moveDirection));
+            board.moveEntity(masterSquirrel, masterSquirrel.getPosition().plus(moveDirection));
         }
 
 
@@ -209,9 +209,9 @@ public class FlattenedBoard implements EntityContext, BoardView {
         for(int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 if(board.getEntity(i,j) instanceof PlayerEntity){
-                    if(Math.abs(pos.X-i)+Math.abs(pos.Y-j)<xDiff+yDiff){
-                        xDiff = Math.abs(pos.X-i);
-                        yDiff = Math.abs(pos.Y-j);
+                    if(Math.abs(pos.x -i)+Math.abs(pos.y -j)<xDiff+yDiff){
+                        xDiff = Math.abs(pos.x -i);
+                        yDiff = Math.abs(pos.y -j);
                         nearestPlayerEntity = (PlayerEntity)board.getEntity(i,j);
                     }
                 }
@@ -251,8 +251,8 @@ public class FlattenedBoard implements EntityContext, BoardView {
     @Override
     public EntityType getEntityType(XY xy) {
         EntityType type = EntityType.NONE;
-        if(board.getEntity(xy.X, xy.Y)!=null) {
-            switch (board.getEntity(xy.X, xy.Y).getClass().getSimpleName()) {
+        if(board.getEntity(xy.x, xy.y)!=null) {
+            switch (board.getEntity(xy.x, xy.y).getClass().getSimpleName()) {
                 case "Wall":
                     type = EntityType.WALL;
                     break;
@@ -287,9 +287,9 @@ public class FlattenedBoard implements EntityContext, BoardView {
                     type = EntityType.StandardMiniSquirrel;
                     break;*/
             }
-            if (board.getEntity(xy.X, xy.Y) instanceof MasterSquirrel)
+            if (board.getEntity(xy.x, xy.y) instanceof MasterSquirrel)
                 type = EntityType.MASTER_SQUIRREL;
-            else if (board.getEntity(xy.X, xy.Y) instanceof MiniSquirrel)
+            else if (board.getEntity(xy.x, xy.y) instanceof MiniSquirrel)
                 type = EntityType.MINI_SQUIRREL;
 
         }
@@ -302,8 +302,8 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
     @Override
     public void spawn_Mini(XY direction, int energy, MasterSquirrel masterSquirrel){
-        int x = masterSquirrel.getPosition().X +direction.X;
-        int y=masterSquirrel.getPosition().Y +direction.Y;
+        int x = masterSquirrel.getPosition().x +direction.x;
+        int y=masterSquirrel.getPosition().y +direction.y;
         board.setNewMiniSquirrel(x, y, energy, masterSquirrel);
     }
 

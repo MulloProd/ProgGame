@@ -23,8 +23,8 @@ public class ConsoleUI implements UI {
 
     @Override
     public void render(BoardView view) {
-        for(int y=0;y<view.getSize().Y;y++){
-            for(int x=0;x<view.getSize().X;x++){
+        for(int y = 0; y<view.getSize().y; y++){
+            for(int x = 0; x<view.getSize().x; x++){
                 switch (view.getEntityType(x,y)){
                     case NONE:
                         System.out.print(" ");

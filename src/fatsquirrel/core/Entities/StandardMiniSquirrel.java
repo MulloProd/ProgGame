@@ -1,6 +1,7 @@
 package fatsquirrel.core.Entities;
 
 import fatsquirrel.XY;
+import fatsquirrel.XYsupport;
 import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
 import fatsquirrel.core.Entities.PlayerEntities.MiniSquirrel;
 
@@ -11,6 +12,6 @@ public class StandardMiniSquirrel extends MiniSquirrel {
 
     @Override
     public void nextStep(EntityContext entityContext) {
-        entityContext.tryMove(this, XY.randomVector());
+        entityContext.tryMove(this, XYsupport.randomVector());
     }
 }
