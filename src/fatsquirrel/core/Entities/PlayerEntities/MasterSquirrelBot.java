@@ -122,7 +122,7 @@ public class MasterSquirrelBot extends MasterSquirrel {
                 if(entityType !=EntityType.NONE)
                     throw new SpawnException();
             } catch (OutOfViewException e) {
-                e.printStackTrace();
+                throw new SpawnException();
             }
 
             entityContext.spawn_Mini(direction, energy, MasterSquirrelBot.this);

@@ -32,8 +32,8 @@ public abstract class Game {
                 public void run() {
                     while(true){
                         try {
-                            render();
                             update();
+                            render();
                             Thread.sleep(1000/FPS);
                         } catch (InterruptedException e) {
                             e.printStackTrace();

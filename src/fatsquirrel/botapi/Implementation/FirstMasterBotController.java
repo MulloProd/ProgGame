@@ -5,11 +5,13 @@ import fatsquirrel.XYsupport;
 import fatsquirrel.botapi.BotController;
 import fatsquirrel.botapi.ControllerContext;
 import fatsquirrel.botapi.OutOfViewException;
+import fatsquirrel.botapi.SpawnException;
 import fatsquirrel.core.Entities.EntityType;
 import fatsquirrel.core.Entities.GoodPlant;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class FirstMasterBotController implements BotController {
     ControllerContext view;
@@ -37,6 +39,18 @@ public class FirstMasterBotController implements BotController {
         }
         else
             moveRandom();
+
+
+
+        int energyNewMini = 100;
+
+        if(new Random().nextInt(10) < 2){
+            try {
+                view.spawnMiniBot(XYsupport.randomVector(), energyNewMini);
+            } catch (SpawnException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private List<XY> findEntityType(EntityType entityType) {
