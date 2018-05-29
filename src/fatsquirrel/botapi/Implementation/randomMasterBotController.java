@@ -9,7 +9,7 @@ import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrelBot;
 
 import java.util.Random;
 
-public class masterBotController implements BotController{
+public class randomMasterBotController implements BotController{
     @Override
     public void nextStep(ControllerContext view) {
         XY lowerLeft = view.getViewLowerLeft();
@@ -21,7 +21,7 @@ public class masterBotController implements BotController{
 
         if(new Random().nextInt(10) < 2){
             try {
-                view.spawnMiniBot(XY.randomVector(), energyNewMini);
+                view.spawnMiniBot(XYsupport.randomVector(), energyNewMini);
             } catch (SpawnException e) {
                 e.printStackTrace();
             }

@@ -7,7 +7,7 @@ import fatsquirrel.botapi.ControllerContext;
 
 import java.util.Random;
 
-public class miniBotController implements BotController {
+public class randomMiniBotController implements BotController {
 
     private final int impactRadius = 3;         //zwischen >=2 und <=10
 

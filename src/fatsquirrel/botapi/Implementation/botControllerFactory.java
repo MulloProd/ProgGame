@@ -6,11 +6,11 @@ import fatsquirrel.botapi.BotControllerFactory;
 public class botControllerFactory implements BotControllerFactory {
     @Override
     public BotController createMasterBotController() {
-        return new masterBotController();
+        return new FirstMasterBotController();
     }
 
     @Override
     public BotController createMiniBotController() {
-        return new miniBotController();
+        return new randomMiniBotController();
     }
 }

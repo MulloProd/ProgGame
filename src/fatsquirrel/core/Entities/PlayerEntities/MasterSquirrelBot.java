@@ -54,12 +54,24 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
         @Override
         public XY getViewLowerLeft() {
-            return new XY(MasterSquirrelBot.this.getPosition().x-15, MasterSquirrelBot.this.getPosition().y +15);
+            int x = MasterSquirrelBot.this.getPosition().x-15;
+            int y = MasterSquirrelBot.this.getPosition().y +15;
+            if(x<0)
+                x=0;
+            if(y>entityContext.getSize().y)
+                y=entityContext.getSize().y-1;
+            return new XY(x, y);
         }
 
         @Override
         public XY getViewUpperRight() {
-            return new XY (MasterSquirrelBot.this.getPosition().x +15, MasterSquirrelBot.this.getPosition().y -15);
+            int x = MasterSquirrelBot.this.getPosition().x+15;
+            int y = MasterSquirrelBot.this.getPosition().y -15;
+            if(x>entityContext.getSize().x)
+                x=entityContext.getSize().x-1;
+            if(y<0)
+                y=0;
+            return new XY(x, y);
         }
 
         @Override
