@@ -19,7 +19,7 @@ public class EntitySet {
 
     public void addEntity(Entity newEntity){
         if(newEntity !=null) {
-            logging.getLogger().info(newEntity.getClass().getSimpleName() + " (ID: " + newEntity.getID() + ") added");
+            logging.getLogger().fine(newEntity.getClass().getSimpleName() + " (ID: " + newEntity.getID() + ") added");
             set.add(newEntity);
         }
         else
@@ -27,7 +27,7 @@ public class EntitySet {
     }
 
     public void deleteEntity(Entity oldEntity){
-        logging.getLogger().info(oldEntity.getClass().getSimpleName() + " (ID: " + oldEntity.getID() + ") removed");
+        logging.getLogger().fine(oldEntity.getClass().getSimpleName() + " (ID: " + oldEntity.getID() + ") removed");
         set.remove(oldEntity);
     }
 

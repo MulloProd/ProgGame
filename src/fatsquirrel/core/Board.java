@@ -16,7 +16,7 @@ public class Board {
     private final int height;
     private final int width;
     private Entity[][] entities;
-    private Logging logging = new Logging(this.getClass().getName(), Level.FINER);
+    private Logging logging = new Logging(this.getClass().getName());
 
     public Board() throws Exception {
         height = BoardConfig.getSize().y;

@@ -9,7 +9,7 @@ import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrelBot;
 
 import java.util.Random;
 
-public class masterBotController implements BotController{
+public class randomMasterBotController implements BotController{
     @Override
     public void nextStep(ControllerContext view) {
         XY lowerLeft = view.getViewLowerLeft();

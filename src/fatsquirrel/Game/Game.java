@@ -72,7 +72,7 @@ public abstract class Game {
 
     private void update() throws IOException {
         state.update();
-        logging.getLogger().info("Game updated");
+        logging.getLogger().fine("Game updated");
     }
 
     public abstract void processInput() throws IOException;
