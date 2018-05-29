@@ -14,6 +14,7 @@ public class miniBotController implements BotController {
     @Override
     public void nextStep(ControllerContext view) {
 
+        //boolean b = view.isMine(new XY(5,4));
         if(new Random().nextInt(10) < 2)
             view.implode(impactRadius);
         else
