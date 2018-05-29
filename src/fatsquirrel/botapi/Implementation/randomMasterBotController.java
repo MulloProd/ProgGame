@@ -26,14 +26,5 @@ public class randomMasterBotController implements BotController{
                 e.printStackTrace();
             }
         }
-
-        if(new Random().nextInt(10) < 2) {
-            try {
-                view.spawnMiniBot(XYsupport.randomVector(), energyNewMini);
-            } catch (SpawnException e) {
-                e.printStackTrace();
-            }
-        }
-
     }
 }

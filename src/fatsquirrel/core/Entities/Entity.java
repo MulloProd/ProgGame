@@ -71,17 +71,17 @@ public abstract class Entity {
             energy=0;
             return 0;
         }
-        else if(energy + value <= startEnergy) {
+        else {//if(energy + value <= startEnergy) {
             logging.getLogger().fine("Changed energy from " + energy + " to " + (energy+value));
             energy += value;
             return 0;
         }
-        else{
+        /*else{
             logging.getLogger().fine("Changed energy from " + energy + " to " + startEnergy);
             int difference = energy + value - startEnergy;
             energy = startEnergy;
             return difference;
-        }
+        }*/
     }
 
     public String toString(){

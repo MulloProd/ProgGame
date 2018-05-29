@@ -27,13 +27,16 @@ public class FirstMasterBotController implements BotController {
                     targetPos = xy;
             }
             if(targetPos != null){
-                int x = (targetPos.x<view.locate().x)?-1:1;
-                int y = (targetPos.y<view.locate().y)?-1:1;
+                int x = (targetPos.x<view.locate().x)?-1:(targetPos.x==view.locate().x)?0:1;
+                int y = (targetPos.y<view.locate().y)?-1:(targetPos.y==view.locate().y)?0:1;
                 XY moveDir = new XY(x,y);
                 move(moveDir);
             }
+            else
+                moveRandom();
         }
-        moveRandom();
+        else
+            moveRandom();
     }
 
     private List<XY> findEntityType(EntityType entityType) {
@@ -42,7 +45,7 @@ public class FirstMasterBotController implements BotController {
             for (int y = 0; y < Math.abs(view.getViewUpperRight().y - view.getViewLowerLeft().y); y++) {
                 try {
                     if (view.getEntityAt(view.getViewLowerLeft().plus(new XY(x, -y))) == entityType) {
-                        list.add(new XY(x, -y));
+                        list.add(view.getViewLowerLeft().plus(new XY(x, -y)));
                     }
                 } catch (OutOfViewException e) {
                     e.printStackTrace();
@@ -58,12 +61,22 @@ public class FirstMasterBotController implements BotController {
         else{
             int x = dir.x;
             int y = dir.y;
-            if(x!=1)
-                x++;
-            else if(y!=1)
+            if(x==-1&&y==0)
                 y++;
-            else
+            else if(x==-1&&y==1)
+                x++;
+            else if(x==0&&y==1)
+                x++;
+            else if(x==1&&y==1)
+                y--;
+            else if(x==1&&y==0)
+                y--;
+            else if(x==1&&y==-1)
                 x--;
+            else if(x==0&&y==-1)
+                x--;
+            else if(x==-1&&y==-1)
+                y++;
             move(new XY(x,y));
         }
     }
