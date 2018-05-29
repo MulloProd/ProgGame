@@ -46,10 +46,6 @@ public class XY {
             return false;
     }
 
-    public static XY randomVector(){
-        XY temp = new XY(new Random().nextInt(3)-1, new Random().nextInt(3)-1);
-        return temp;
-    }
 
     public String toString() { return ("("+ x +"/"+ y +")"); }
 

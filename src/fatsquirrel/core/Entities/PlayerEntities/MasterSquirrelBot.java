@@ -3,6 +3,7 @@ package fatsquirrel.core.Entities.PlayerEntities;
 import fatsquirrel.XY;
 import fatsquirrel.botapi.*;
 import fatsquirrel.botapi.Implementation.botControllerFactory;
+import fatsquirrel.core.Entities.Entity;
 import fatsquirrel.core.Entities.EntityContext;
 import fatsquirrel.core.Entities.EntityType;
 import fatsquirrel.Logging;
@@ -26,13 +27,21 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
     @Override
     public void nextStep(EntityContext entityContext) throws IOException {
-        EventLogger handler = new EventLogger(new ControllerContextImpl(entityContext), logging);
-        ControllerContext proxy = (ControllerContext) Proxy.newProxyInstance(
-                ControllerContext.class.getClassLoader(),
-                new Class[] { ControllerContext.class },
-                handler);
 
-        botController.nextStep(proxy);
+        if(getCollisionCounter()==0){
+            EventLogger handler = new EventLogger(new ControllerContextImpl(entityContext), logging);
+            ControllerContext proxy = (ControllerContext) Proxy.newProxyInstance(
+                    ControllerContext.class.getClassLoader(),
+                    new Class[] { ControllerContext.class },
+                    handler);
+
+            botController.nextStep(proxy);
+        }
+        else{
+            setCollisionCounter(-1);
+        }
+
+
     }
 
     private class ControllerContextImpl implements ControllerContext{
@@ -97,7 +106,8 @@ public class MasterSquirrelBot extends MasterSquirrel {
                 throw new SpawnException();
 
             try {
-                if((getEntityAt(new XY(MasterSquirrelBot.this.getPosition().x+direction.x, MasterSquirrelBot.this.getPosition().y+direction.y))) !=EntityType.NONE)
+                EntityType entityType = (getEntityAt(new XY(MasterSquirrelBot.this.getPosition().x+direction.x, MasterSquirrelBot.this.getPosition().y+direction.y)));
+                if(entityType !=EntityType.NONE)
                     throw new SpawnException();
             } catch (OutOfViewException e) {
                 e.printStackTrace();
