@@ -50,8 +50,26 @@ public class Board {
         while(counter>0){
             int x = new Random().nextInt(width-1);
             int y = new Random().nextInt(height-1);
-            if(setNewEntity(x,y,EntityType.WALL))
-                counter--;
+
+            int fixedWalls = new Random().nextInt(5);
+            int randVertHorz = new Random().nextInt(2);
+
+            if(randVertHorz==0) {
+                if (x + fixedWalls <= width - 1) {
+                    for (int i = x + fixedWalls; i > x; i--) {
+                        if (setNewEntity(i, y, EntityType.WALL))
+                            counter--;
+                    }
+                }
+            }
+            else{
+                if (y + fixedWalls <= height - 1) {
+                    for (int i = y + fixedWalls; i > y; i--) {
+                        if (setNewEntity(x, i, EntityType.WALL))
+                            counter--;
+                    }
+                }
+            }
         }
 
         //HandOperatedMasterSquirrels erstellen

@@ -21,7 +21,7 @@ public class masterBotController implements BotController{
 
         if(new Random().nextInt(10) < 2){
             try {
-                view.spawnMiniBot(XY.randomVector(), energyNewMini);
+                view.spawnMiniBot(XYsupport.randomVector(), energyNewMini);
             } catch (SpawnException e) {
                 e.printStackTrace();
             }
