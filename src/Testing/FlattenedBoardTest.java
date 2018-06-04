@@ -2,14 +2,18 @@ package Testing;
 
 import fatsquirrel.XY;
 import fatsquirrel.core.Board;
+import fatsquirrel.core.Entities.Entity;
 import fatsquirrel.core.Entities.EntityContext;
+import fatsquirrel.core.Entities.GoodBeast;
 import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
 import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrelBot;
+import fatsquirrel.core.Entities.PlayerEntities.PlayerEntity;
 import fatsquirrel.core.FlattenedBoard;
 import org.jmock.Mockery;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -30,6 +34,21 @@ public class FlattenedBoardTest {
     @Test
     public void BadMeetsBeast(){
         
+    }
+
+    @Test
+    public void GoodBeastMeetsEntity(){
+
+        Entity goodBeast = new GoodBeast(0,100,new XY(new Random().nextInt(board.width), new Random().nextInt(board.height)));
+        XY moveDirection = new XY(new Random().nextInt(board.width),new Random().nextInt(board.height));
+
+
+        assertFalse(moveDirection==null);
+        assertFalse(moveDirection.x == 0 && moveDirection.y == 0 && moveDirection.x <=1 && moveDirection.y<=1);
+
+        int x = goodBeast.getPosition().x +moveDirection.x;
+        int y = goodBeast.getPosition().y +moveDirection.y;
+
     }
 
     @Test
