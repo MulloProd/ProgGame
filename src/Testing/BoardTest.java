@@ -20,14 +20,6 @@ public class BoardTest {
 
     Mockery context = new Mockery();
 
-    private final int width = 15;
-    private final int height = 15;
-    private final MasterSquirrel masterSquirrel = new MasterSquirrelBot(0,1000,new XY(1,1));
-
-    private final EntitySet entitySet = new EntitySet();
-    private Entity[][] entities;
-
-
     @Test
     public void moveEntity() throws Exception {
         Board board = new Board();
@@ -60,22 +52,6 @@ public class BoardTest {
 
     @Test
     public void setNewMiniSquirrel() throws Exception {
-
-        Board board = new Board();
-
-        int x = 2;
-        int y = 1;
-        int energy = 100;
-
-        assertFalse("Out of bounds", x<0||y<0||x>width||y>height);
-        assertFalse("Other entity on this place",entities[x][y] != null);
-
-        Entity entity = new MiniSquirrelBot(entitySet.getNextFreeID(), energy, new XY(x,y), masterSquirrel);
-        entities[x][y] = entity;
-        entitySet.addEntity(entity);
-
-        assertTrue(board.setNewMiniSquirrel(x,y,energy,masterSquirrel));
-
     }
 
     @Test
