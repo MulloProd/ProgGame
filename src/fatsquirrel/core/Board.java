@@ -18,7 +18,7 @@ public class Board {
     private Entity[][] entities;
     private Logging logging = new Logging(this.getClass().getName());
 
-    public Board() throws Exception {
+    public Board() {
         height = BoardConfig.getSize().y;
         width = BoardConfig.getSize().x;
         entities = new Entity[width][height];
@@ -28,7 +28,7 @@ public class Board {
         entitySet.nextStep(flatten());
     }
 
-    private void createRandomBoard() throws Exception {
+    private void createRandomBoard() {
         //Wände erstellen
         int counter = BoardConfig.getWallCount();
         //Surrounding Wall, horizontal
@@ -189,7 +189,8 @@ public class Board {
             } catch (InvocationTargetException e) {
                 e.printStackTrace();
             } catch (NoSuchMethodException e) {
-                e.printStackTrace();
+                return false;
+
             }
             entities[x][y] = entity;
             entitySet.addEntity(entity);
@@ -201,7 +202,7 @@ public class Board {
     public boolean setNewMiniSquirrel(int x, int y, int energy, MasterSquirrel masterSquirrel){
         if(x<0||y<0||x>width||y>height)
             return false;
-        else if(entities[x][y] != null)
+        else if(entities[x][y] != null ||masterSquirrel == null)
             return false;
         else{
             Entity entity = new MiniSquirrelBot(entitySet.getNextFreeID(), energy, new XY(x,y), masterSquirrel);
