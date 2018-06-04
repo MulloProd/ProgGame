@@ -20,14 +20,6 @@ public class BoardTest {
 
     Mockery context = new Mockery();
 
-    private final int width = 15;
-    private final int height = 15;
-    private final MasterSquirrel masterSquirrel = new MasterSquirrelBot(0,1000,new XY(1,1));
-
-    private final EntitySet entitySet = new EntitySet();
-    private Entity[][] entities;
-
-
     @Test
     public void moveEntity() throws Exception {
         Board board = new Board();
@@ -50,6 +42,29 @@ public class BoardTest {
         assertEquals(entity.getPosition(), targetPoint);
     }
 
+    @Test
+    public void removeEntity() {
+    }
+
+    @Test
+    public void setNewMasterSquirrel() {
+    }
+
+    @Test
+    public void setNewMiniSquirrel() throws Exception {
+    }
+
+    @Test
+    public void getEntity() {
+    }
+
+    @Test
+    public void getEntity1() {
+    }
+
+    @Test
+    public void flatten() {
+    }
     @Test
     public void setNewEntity() throws Exception {
         Board board = new Board();
