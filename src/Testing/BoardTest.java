@@ -1,12 +1,16 @@
 package Testing;
 
 import fatsquirrel.XY;
+import fatsquirrel.XYsupport;
+import fatsquirrel.core.Board;
 import fatsquirrel.core.Entities.Entity;
 import fatsquirrel.core.Entities.EntitySet;
 import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
 import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrelBot;
 import fatsquirrel.core.Entities.PlayerEntities.MiniSquirrelBot;
 import org.junit.Test;
+
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -24,7 +28,24 @@ public class BoardTest {
     }
 
     @Test
-    public void moveEntity() {
+    public void moveEntity() throws Exception {
+        Board board =new Board();
+        XY targetPoint = new XY(new Random().nextInt(board.width),new Random().nextInt(board.height));
+        Entity entity = null;
+        for(int x=0;x<board.width;x++)
+        {
+            for(int y=0;y<board.height;y++){
+                if(board.getEntity(x,y)!=null)
+                    entity = board.getEntity(x,y);
+            }
+        }
+
+        while(board.getEntity(targetPoint.x,targetPoint.y) != null)
+            targetPoint = new XY(new Random().nextInt(board.width),new Random().nextInt(board.height));
+
+        board.moveEntity(entity, targetPoint);
+
+        assertEquals(entity.getPosition(), targetPoint);
     }
 
     @Test

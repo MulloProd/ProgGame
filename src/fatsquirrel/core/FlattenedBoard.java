@@ -33,7 +33,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
         if(moveDirection==null)
             return;
-        if(moveDirection.x == 0 && moveDirection.y == 0)
+        if(moveDirection.x == 0 && moveDirection.y == 0 && moveDirection.x <=1 && moveDirection.y<=1)
             return;
 
         int x = miniSquirrel.getPosition().x +moveDirection.x;
@@ -98,7 +98,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
         if(moveDirection==null)
             return;
-        if(moveDirection.x == 0 && moveDirection.y == 0)
+        if(moveDirection.x == 0 && moveDirection.y == 0 && moveDirection.x <=1 && moveDirection.y<=1)
             return;
 
         int x = goodBeast.getPosition().x +moveDirection.x;
@@ -119,7 +119,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
         if(moveDirection==null)
             return;
-        if(moveDirection.x == 0 && moveDirection.y == 0)
+        if(moveDirection.x == 0 && moveDirection.y == 0 && moveDirection.x <=1 && moveDirection.y<=1)
             return;
 
         int x = badBeast.getPosition().x +moveDirection.x;
@@ -152,7 +152,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
         if(moveDirection==null)
             return;
-        if(moveDirection.x == 0 && moveDirection.y == 0)
+        if(moveDirection.x == 0 && moveDirection.y == 0 && moveDirection.x <=1 && moveDirection.y<=1)
             return;
 
         //aktuelle Position holen

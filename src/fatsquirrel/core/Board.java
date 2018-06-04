@@ -13,8 +13,8 @@ import java.util.logging.Level;
 
 public class Board {
     private EntitySet entitySet = new EntitySet();
-    private final int height;
-    private final int width;
+    public final int height;
+    public final int width;
     private Entity[][] entities;
     private Logging logging = new Logging(this.getClass().getName());
 
@@ -126,7 +126,7 @@ public class Board {
     }
 
     public boolean moveEntity(Entity entity, XY newPos){
-        if(entities[newPos.x][newPos.y] == null){
+        if(entities[newPos.x][newPos.y] == null && entity != null){
             entities[newPos.x][newPos.y] = entity;
             entities[entity.getPosition().x][entity.getPosition().y] = null;
             entity.setPosition(newPos);
