@@ -24,6 +24,11 @@ public class Board {
         entities = new Entity[width][height];
         createRandomBoard();
     }
+    public Board(int height, int width) {
+        this.height = height;
+        this.width = width;
+        entities = new Entity[width][height];
+    }
     public void updateEntitySet() throws IOException {
         entitySet.nextStep(flatten());
     }

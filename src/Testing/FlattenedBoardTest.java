@@ -28,6 +28,11 @@ public class FlattenedBoardTest {
     }
 
     @Test
+    public void BadMeetsBeast(){
+        
+    }
+
+    @Test
     public void getSize() {
     }
 
