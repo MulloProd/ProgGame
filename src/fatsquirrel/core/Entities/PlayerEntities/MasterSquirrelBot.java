@@ -81,6 +81,7 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
         @Override
         public EntityType getEntityAt(XY xy) throws OutOfViewException {
+            System.out.println(xy.toString());
             if(xy.x < getViewLowerLeft().x || xy.x > getViewUpperRight().x ||
                     xy.y< getViewUpperRight().y || xy.y > getViewLowerLeft().y)
                 throw new OutOfViewException();

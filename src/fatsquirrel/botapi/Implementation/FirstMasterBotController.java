@@ -40,8 +40,6 @@ public class FirstMasterBotController implements BotController {
         else
             moveRandom();
 
-
-
         int energyNewMini = 100;
 
         if(new Random().nextInt(10) < 2){
@@ -96,13 +94,14 @@ public class FirstMasterBotController implements BotController {
     }
 
     private void moveRandom(){
-        boolean success = false;
-        while(!success){
+        int success = 10;
+        while(success>0){
+            success--;
             XY dir = XYsupport.randomVector();
             try {
-                if(view.getEntityAt(view.locate().plus(dir)) == EntityType.NONE){
+                if(view.getEntityAt(view.locate().plus(dir)) == EntityType.NONE) {
                     view.move(dir);
-                    success = true;
+                    success = 0;
                 }
             } catch (OutOfViewException e) {
                 e.printStackTrace();

@@ -12,7 +12,7 @@ public class BadBeast extends Entity {
     public BadBeast(int id, int energy, XY position) {
         super(id, energy, position);
         this.position = position;
-        setNextStepCounter(4);
+        setNextStepCounter(1);
     }
 
     @Override

@@ -20,36 +20,41 @@ public class GoodBeast extends Entity {
         //nextStep nur bei jedem 4. Schritt
         if(getNextStepCounter() == 4) {
             PlayerEntity playerEntity = entityContext.nearestPlayerEntity(position);
-            XY playerEntityXY = playerEntity.getPosition();
 
-            //Höhen- und Breitenunterschied
-            int xDiff = playerEntityXY.x - this.getPosition().x;
-            int yDiff = playerEntityXY.y - this.getPosition().y;
+            if(playerEntity != null) {
+                XY playerEntityXY = playerEntity.getPosition();
 
-            //Vektor bestimmen
-            int xVector=0;
-            int yVector=0;
+                //Höhen- und Breitenunterschied
+                int xDiff = playerEntityXY.x - this.getPosition().x;
+                int yDiff = playerEntityXY.y - this.getPosition().y;
 
-            if(xDiff<0)
-                xVector=1;
-            else if(xDiff>0)
-                xVector=-1;
+                //Vektor bestimmen
+                int xVector = 0;
+                int yVector = 0;
 
-            if(yDiff<0)
-                yVector=1;
-            else if(yDiff>0)
-                yVector=-1;
+                if (xDiff < 0)
+                    xVector = 1;
+                else if (xDiff > 0)
+                    xVector = -1;
 
-            //Differenzen summieren
-            int sumDiff = xDiff+yDiff;
+                if (yDiff < 0)
+                    yVector = 1;
+                else if (yDiff > 0)
+                    yVector = -1;
 
-            //Wenn näher als 6 Steps zum Squirrel, dann lauf weg vom Squirrel, sonst random
-            if(sumDiff<=6){
-                entityContext.tryMove(this, new XY(xVector, yVector));
+                //Differenzen summieren
+                int sumDiff = xDiff + yDiff;
+
+                //Wenn näher als 6 Steps zum Squirrel, dann lauf weg vom Squirrel, sonst random
+                if (sumDiff <= 6) {
+                    entityContext.tryMove(this, new XY(xVector, yVector));
+                } else {
+                    entityContext.tryMove(this, XYsupport.randomVector());
+                }
             }
-            else{
+            else
                 entityContext.tryMove(this, XYsupport.randomVector());
-            }
+
             setNextStepCounter(-1);
         }
         else if(getNextStepCounter() == 1){
