@@ -83,18 +83,52 @@ public class FlattenedBoardTest {
     }
 
     @Test
-    public void GoodBeastMeetsEntity(){
+    public void GoodBeastMeetsPlayer(){
+        Board board = new Board(2,2);
+        FlattenedBoard flattenedBoard = new FlattenedBoard(2,2, board);
+        board.setNewEntity(0,0,EntityType.GOOD_BEAST);
+        Entity goodBeast = board.getEntity(0,0);
+        board.setNewMasterSquirrel(1,1, HandOperatedMasterSquirrel.class);
+        Entity other = board.getEntity(1,1);
+        int oldEnergy= other.getEnergy();
+        flattenedBoard.tryMove((GoodBeast)goodBeast,new XY(1,1));
+        assertEquals(board.getEntity(1,1), other);
+        assertEquals(board.getEntity(0,0), goodBeast);
+        assertNotEquals(oldEnergy, other.getEnergy());
 
-        Entity goodBeast = new GoodBeast(0,100,new XY(new Random().nextInt(board.width), new Random().nextInt(board.height)));
-        XY moveDirection = new XY(new Random().nextInt(board.width),new Random().nextInt(board.height));
+    }
 
+    @Test
+    public void GoodBeastPlant_Wall_Beast(){
+        Board board = new Board(2,2);
+        FlattenedBoard flattenedBoard = new FlattenedBoard(2,2, board);
+        board.setNewEntity(0,0,EntityType.GOOD_BEAST);
+        Entity goodBeast = board.getEntity(0,0);
 
-        assertFalse(moveDirection==null);
-        assertFalse(moveDirection.x == 0 && moveDirection.y == 0 && moveDirection.x <=1 && moveDirection.y<=1);
+        board.setNewEntity(1,1, EntityType.BAD_BEAST);
+        Entity other = board.getEntity(1,1);
+        GoodBeastPlant_Wall_Beast_Helper(goodBeast,other,flattenedBoard,board);
 
-        int x = goodBeast.getPosition().x +moveDirection.x;
-        int y = goodBeast.getPosition().y +moveDirection.y;
+        board.setNewEntity(1,1, EntityType.GOOD_PLANT);
+        other = board.getEntity(1,1);
+        GoodBeastPlant_Wall_Beast_Helper(goodBeast,other,flattenedBoard,board);
 
+        board.setNewEntity(1,1, EntityType.BAD_PLANT);
+        other = board.getEntity(1,1);
+        GoodBeastPlant_Wall_Beast_Helper(goodBeast,other,flattenedBoard,board);
+
+        board.setNewEntity(1,1, EntityType.WALL);
+        other = board.getEntity(1,1);
+        GoodBeastPlant_Wall_Beast_Helper(goodBeast,other,flattenedBoard,board);
+    }
+
+    private void GoodBeastPlant_Wall_Beast_Helper(Entity goodBeast, Entity other, FlattenedBoard flattenedBoard, Board board){
+        int oldEnergy= other.getEnergy();
+        flattenedBoard.tryMove((GoodBeast)goodBeast,new XY(1,1));
+        assertEquals(board.getEntity(1,1), other);
+        assertEquals(board.getEntity(0,0), goodBeast);
+        assertEquals(oldEnergy, other.getEnergy());
+        board.removeEntity(other);
     }
 
     @Test
