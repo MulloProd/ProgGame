@@ -20,6 +20,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
+import static org.hamcrest.CoreMatchers.anyOf;
 import static org.junit.Assert.*;
 
 import static org.jmock.internal.Cardinality.exactly;
@@ -29,7 +30,6 @@ public class nextStepTest {
     Mockery context = new Mockery();
     EntityContext entityContext = context.mock(EntityContext.class);
     ControllerContext controllerContext = context.mock(ControllerContext.class);
-    Entity entity = new BadBeast(0,100,XY.ZERO_ZERO);
 
 
     @Test
