@@ -61,7 +61,7 @@ public abstract class Entity {
         return ID;
     }
 
-    public int updateEnergy(int value){
+        public int updateEnergy(int value){
         if(value==0){
             logging.getLogger().fine("Changed energy from " + energy + " to " + energy);
             return 0;

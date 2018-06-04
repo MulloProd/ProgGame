@@ -18,5 +18,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="Arquillian JUnit:Release" level="project" />
+    <orderEntry type="library" name="jmock-2.6.0-jars" level="project" />
+    <orderEntry type="library" name="jmock-2.6" level="project" />
   </component>
 </module>
