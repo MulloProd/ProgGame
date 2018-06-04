@@ -61,18 +61,22 @@ public class BoardTest {
     }
 
     @Test
-    public void setNewMiniSquirrel() {
+    public void setNewMiniSquirrel() throws Exception {
+
+        Board board = new Board();
 
         int x = 2;
         int y = 1;
         int energy = 100;
 
         assertFalse("Out of bounds", x<0||y<0||x>width||y>height);
-        assertFalse("Other entity on this place",entities[x][y] != null);
+        assertFalse("Other entity on this place",board.entities[x][y] != null);
 
         Entity entity = new MiniSquirrelBot(entitySet.getNextFreeID(), energy, new XY(x,y), masterSquirrel);
         entities[x][y] = entity;
         entitySet.addEntity(entity);
+
+        assertTrue(board.setNewMiniSquirrel(x,y,energy,masterSquirrel));
 
     }
 
