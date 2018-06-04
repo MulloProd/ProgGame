@@ -43,29 +43,6 @@ public class BoardTest {
     }
 
     @Test
-    public void removeEntity() {
-    }
-
-    @Test
-    public void setNewMasterSquirrel() {
-    }
-
-    @Test
-    public void setNewMiniSquirrel() throws Exception {
-    }
-
-    @Test
-    public void getEntity() {
-    }
-
-    @Test
-    public void getEntity1() {
-    }
-
-    @Test
-    public void flatten() {
-    }
-    @Test
     public void setNewEntity() throws Exception {
         Board board = new Board();
         XY freePos = null;
