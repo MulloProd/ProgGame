@@ -75,6 +75,9 @@ public class FlattenedBoardTest {
 
         assertEquals("int x = 2",2, masterSquirrel.getPosition().x +direction.x);
         assertEquals("int y = 1", 1, masterSquirrel.getPosition().y +direction.y);
+
+        flattenedBoard.spawn_Mini(direction,energy,masterSquirrel);
+
         //board.setNewMiniSquirrel(x, y, energy, masterSquirrel);
     }
 
