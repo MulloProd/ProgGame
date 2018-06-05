@@ -77,8 +77,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
 
                 board.moveEntity(miniSquirrel, miniSquirrel.getPosition().plus(moveDirection));
             }
-            else if(board.getEntity(x,y) instanceof GoodBeast
-                    || board.getEntity(x,y) instanceof BadBeast){
+            else if(board.getEntity(x,y) instanceof GoodBeast){
                 miniSquirrel.updateEnergy(board.getEntity(x,y).getEnergy());
                 killAndReplace(board.getEntity(x,y));
 
@@ -86,6 +85,24 @@ public class FlattenedBoard implements EntityContext, BoardView {
                     kill(miniSquirrel);
                 else
                     board.moveEntity(miniSquirrel, miniSquirrel.getPosition().plus(moveDirection));
+            }
+            else if(board.getEntity(x,y) instanceof BadBeast){
+                BadBeast badBeast = (BadBeast)board.getEntity(x,y);
+                if(badBeast.getBiteCounter()>1){
+                    miniSquirrel.updateEnergy(badBeast.getEnergy());
+                    badBeast.decreaseBiteCounter();
+                }
+                else if(badBeast.getBiteCounter()==1){
+                    miniSquirrel.updateEnergy(badBeast.getEnergy());
+                    badBeast.decreaseBiteCounter(); //Reset BiteCounter
+                    killAndReplace(badBeast);
+                }
+            }
+            else if(board.getEntity(x,y) instanceof Wall){
+                miniSquirrel.updateEnergy(-10);
+
+                if(miniSquirrel.getEnergy()<=0)
+                    kill(miniSquirrel);
             }
         }
         else if (miniSquirrel.getEnergy() <= 0) {
@@ -199,7 +216,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
                 kill(board.getEntity(x,y));
             }
             else{
-                masterSquirrel.updateEnergy(150);
+                masterSquirrel.updateEnergy(board.getEntity(x,y).getEnergy());
                 kill(board.getEntity(x,y));
             }
 

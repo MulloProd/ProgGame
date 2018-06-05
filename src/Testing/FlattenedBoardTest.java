@@ -97,7 +97,7 @@ public class FlattenedBoardTest {
     }
 
     @Test
-    public void MasterPlant_GoodBeast(){
+    public void MasterPlant_Plant_GoodBeast(){
         Board board = new Board(5,5);
         FlattenedBoard flattenedBoard = new FlattenedBoard(5,5, board);
         board.setNewMasterSquirrel(0,0, HandOperatedMasterSquirrel.class);
@@ -172,6 +172,41 @@ public class FlattenedBoardTest {
     }
 
     @Test
+    public void Master_Mini(){
+        Board board = new Board(5,5);
+        FlattenedBoard flattenedBoard = new FlattenedBoard(5,5, board);
+        board.setNewMasterSquirrel(0,0, HandOperatedMasterSquirrel.class);
+        Entity master = board.getEntity(0,0);
+
+        board.setNewMiniSquirrel(1,1, 250,new HandOperatedMasterSquirrel(0,1000,new XY(2,2)));
+        Entity other = board.getEntity(1,1);
+        int oldEnergy= master.getEnergy();
+        int otherEnergy = other.getEnergy();
+        flattenedBoard.tryMove((MasterSquirrel) master,new XY(1,1));
+        assertEquals(board.getEntity(1,1), master);
+        assertEquals(board.getEntity(0,0), null);
+        assertEquals(oldEnergy+otherEnergy, master.getEnergy());
+    }
+
+    @Test
+    public void Master_Master(){
+        Board board = new Board(5,5);
+        FlattenedBoard flattenedBoard = new FlattenedBoard(5,5, board);
+        board.setNewMasterSquirrel(0,0, HandOperatedMasterSquirrel.class);
+        Entity master = board.getEntity(0,0);
+
+        board.setNewMasterSquirrel(1,1, HandOperatedMasterSquirrel.class);
+        Entity other = board.getEntity(1,1);
+        int oldEnergy= master.getEnergy();
+        int otherEnergy = other.getEnergy();
+        flattenedBoard.tryMove((MasterSquirrel) master,new XY(1,1));
+        assertEquals(board.getEntity(1,1), other);
+        assertEquals(board.getEntity(0,0), master);
+        assertEquals(oldEnergy, master.getEnergy());
+        assertEquals(otherEnergy, other.getEnergy());
+    }
+
+    @Test
     public void GoodBeastMaster(){
         Board board = new Board(3,3);
         FlattenedBoard flattenedBoard = new FlattenedBoard(3,3, board);
@@ -200,7 +235,7 @@ public class FlattenedBoardTest {
         int oldEnergy= other.getEnergy();
         flattenedBoard.tryMove((GoodBeast) goodBeast,new XY(1,1));
         assertEquals(board.getEntity(1,1), other);
-        assertEquals(board.getEntity(0,0), goodBeast);
+        assertNotEquals(board.getEntity(0,0), goodBeast);
         assertNotEquals(oldEnergy, other.getEnergy());
 
     }
@@ -243,50 +278,134 @@ public class FlattenedBoardTest {
     }
 
     @Test
-    public void getSize() {
+    public void Mini_Master(){
+        Board board = new Board(5,5);
+        FlattenedBoard flattenedBoard = new FlattenedBoard(5,5, board);
+        board.setNewMiniSquirrel(0,0, 250,new HandOperatedMasterSquirrel(0,1000,new XY(2,2)));
+        Entity mini = board.getEntity(0,0);
+
+        board.setNewMasterSquirrel(1,1, HandOperatedMasterSquirrel.class);
+        Entity other = board.getEntity(1,1);
+        flattenedBoard.tryMove((MiniSquirrel) mini,new XY(1,1));
+        assertEquals(board.getEntity(1,1), other);
+        assertEquals(board.getEntity(0,0), null);
     }
 
     @Test
-    public void tryMove() {
+    public void Mini_Mini() {
+        Board board = new Board(5, 5);
+        FlattenedBoard flattenedBoard = new FlattenedBoard(5, 5, board);
+        MasterSquirrel master = new HandOperatedMasterSquirrel(0, 1000, new XY(2, 2));
+        board.setNewMiniSquirrel(0, 0, 250, master);
+        Entity mini = board.getEntity(0, 0);
+
+        board.setNewMiniSquirrel(1, 1, 250, new HandOperatedMasterSquirrel(0, 1000, new XY(2, 3)));
+        Entity other = board.getEntity(1, 1);
+        flattenedBoard.tryMove((MiniSquirrel) mini, new XY(1, 1));
+
+        assertEquals(board.getEntity(1, 1), null);
+        assertEquals(board.getEntity(0, 0), null);
+
+        board.setNewMiniSquirrel(0, 0, 250, master);
+        mini = board.getEntity(0, 0);
+        board.setNewMiniSquirrel(1, 1, 250, master);
+        other = board.getEntity(1, 1);
+        flattenedBoard.tryMove((MiniSquirrel) mini, new XY(1, 1));
+
+        assertEquals(board.getEntity(1, 1), other);
+        assertEquals(board.getEntity(0, 0), mini);
     }
 
     @Test
-    public void tryMove1() {
+    public void Mini_Wall(){
+        Board board = new Board(5, 5);
+        FlattenedBoard flattenedBoard = new FlattenedBoard(5, 5, board);
+        MasterSquirrel master = new HandOperatedMasterSquirrel(0, 1000, new XY(2, 2));
+        board.setNewMiniSquirrel(0, 0, 19, master);
+        Entity mini = board.getEntity(0, 0);
+
+        board.setNewEntity(1,1, EntityType.WALL);
+        Entity other = board.getEntity(1,1);
+        int oldEnergy = mini.getEnergy();
+        flattenedBoard.tryMove((MiniSquirrel)mini,new XY(1,1));
+        assertEquals(oldEnergy-10,mini.getEnergy());
+        assertEquals(board.getEntity(1, 1), other);
+        assertEquals(board.getEntity(0, 0), mini);
+
+        mini.updateEnergy(-10);
+        flattenedBoard.tryMove((MiniSquirrel)mini,new XY(1,1));
+        assertEquals(0,mini.getEnergy());
+        assertEquals(board.getEntity(1, 1), other);
+        assertEquals(board.getEntity(0, 0), null);
+
     }
 
     @Test
-    public void tryMove2() {
+    public void Mini_Plant_GoodBeast(){
+        Board board = new Board(5,5);
+        FlattenedBoard flattenedBoard = new FlattenedBoard(5,5, board);
+        MasterSquirrel master = new HandOperatedMasterSquirrel(0, 1000, new XY(2, 2));
+        board.setNewMiniSquirrel(0, 0, 300, master);
+        Entity mini = board.getEntity(0, 0);
+
+        board.setNewEntity(1,1, EntityType.GOOD_PLANT);
+        Entity other = board.getEntity(1,1);
+        int oldEnergy= mini.getEnergy();
+        int otherEnergy = other.getEnergy();
+        flattenedBoard.tryMove((MiniSquirrel) mini,new XY(1,1));
+        assertEquals(board.getEntity(1,1), mini);
+        assertEquals(board.getEntity(0,0), null);
+        assertEquals(oldEnergy+otherEnergy, mini.getEnergy());
+
+        board.moveEntity(mini, new XY(0,0));
+        board.setNewEntity(1,1, EntityType.BAD_PLANT);
+        other = board.getEntity(1,1);
+        oldEnergy= mini.getEnergy();
+        otherEnergy = other.getEnergy();
+        flattenedBoard.tryMove((MiniSquirrel) mini,new XY(1,1));
+        assertEquals(board.getEntity(1,1), mini);
+        assertEquals(board.getEntity(0,0), null);
+        assertEquals(oldEnergy+otherEnergy, mini.getEnergy());
+
+        board.moveEntity(mini, new XY(0,0));
+        board.setNewEntity(1,1, EntityType.GOOD_BEAST);
+        other = board.getEntity(1,1);
+        oldEnergy= mini.getEnergy();
+        otherEnergy = other.getEnergy();
+        flattenedBoard.tryMove((MiniSquirrel) mini,new XY(1,1));
+        assertEquals(board.getEntity(1,1), mini);
+        assertEquals(board.getEntity(0,0), null);
+        assertEquals(oldEnergy+otherEnergy, mini.getEnergy());
+
     }
 
     @Test
-    public void tryMove3() {
+    public void Mini_BadBeast(){
+        Board board = new Board(5, 5);
+        FlattenedBoard flattenedBoard = new FlattenedBoard(5, 5, board);
+        MasterSquirrel master = new HandOperatedMasterSquirrel(0, 1000, new XY(2, 2));
+        board.setNewMiniSquirrel(0, 0, 500, master);
+        Entity mini = board.getEntity(0, 0);
+
+        board.setNewEntity(1, 1, EntityType.BAD_BEAST);
+        Entity other = board.getEntity(1, 1);
+        int oldEnergy = mini.getEnergy();
+        int otherEnergy = other.getEnergy();
+        int beastBiteCounter = ((BadBeast)other).getBiteCounter();
+        flattenedBoard.tryMove((MiniSquirrel) mini, new XY(1, 1));
+        assertEquals(board.getEntity(1, 1), other);
+        assertEquals(board.getEntity(0, 0), mini);
+        assertEquals(oldEnergy + otherEnergy, mini.getEnergy());
+        assertEquals(beastBiteCounter-1,((BadBeast)other).getBiteCounter());
     }
 
     @Test
-    public void nearestPlayerEntity() {
-    }
-
-    @Test
-    public void kill() {
-    }
-
-    @Test
-    public void killAndReplace() {
-    }
-
-    @Test
-    public void getEntityType() {
-    }
-
-    @Test
-    public void getEntityType1() {
-    }
-
-    @Test
-    public void allEntitiesToString() {
-    }
-
-    @Test
-    public void getEntityAt() {
+    public void Kill(){
+        Board board = new Board(5,5);
+        FlattenedBoard flattenedBoard = new FlattenedBoard(5,5, board);
+        board.setNewEntity(0,0, EntityType.BAD_BEAST);
+        Entity entity = board.getEntity(0,0);
+        flattenedBoard.kill(entity);
+        assertEquals(board.getEntity(0,0),null);
     }
 }
