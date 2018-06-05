@@ -175,15 +175,16 @@ public class FlattenedBoardTest {
     }
 
     @Test
-    public void GoodBeastMeetsPlayer(){
+    public void GoodBeastPlayer(){
         Board board = new Board(2,2);
         FlattenedBoard flattenedBoard = new FlattenedBoard(2,2, board);
         board.setNewEntity(0,0,EntityType.GOOD_BEAST);
         Entity goodBeast = board.getEntity(0,0);
+
         board.setNewMasterSquirrel(1,1, HandOperatedMasterSquirrel.class);
         Entity other = board.getEntity(1,1);
         int oldEnergy= other.getEnergy();
-        flattenedBoard.tryMove((GoodBeast)goodBeast,new XY(1,1));
+        flattenedBoard.tryMove((GoodBeast) goodBeast,new XY(1,1));
         assertEquals(board.getEntity(1,1), other);
         assertEquals(board.getEntity(0,0), goodBeast);
         assertNotEquals(oldEnergy, other.getEnergy());
@@ -197,8 +198,12 @@ public class FlattenedBoardTest {
         board.setNewEntity(0,0,EntityType.GOOD_BEAST);
         Entity goodBeast = board.getEntity(0,0);
 
-        board.setNewEntity(1,1, EntityType.BAD_BEAST);
+        board.setNewEntity(1,1, EntityType.GOOD_BEAST);
         Entity other = board.getEntity(1,1);
+        GoodBeastPlant_Wall_Beast_Helper(goodBeast,other,flattenedBoard,board);
+
+        board.setNewEntity(1,1, EntityType.BAD_BEAST);
+        other = board.getEntity(1,1);
         GoodBeastPlant_Wall_Beast_Helper(goodBeast,other,flattenedBoard,board);
 
         board.setNewEntity(1,1, EntityType.GOOD_PLANT);
@@ -219,7 +224,7 @@ public class FlattenedBoardTest {
         flattenedBoard.tryMove((GoodBeast)goodBeast,new XY(1,1));
         assertEquals(board.getEntity(1,1), other);
         assertEquals(board.getEntity(0,0), goodBeast);
-        assertEquals(oldEnergy, other.getEnergy());
+        assertEquals(oldEnergy, other.getEnergy()); //Energie bleibt gleich, da keine Kollisonsregeln verfügbar
         board.removeEntity(other);
     }
 
