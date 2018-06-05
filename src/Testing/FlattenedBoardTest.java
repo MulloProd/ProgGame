@@ -9,10 +9,7 @@ import fatsquirrel.core.Entities.BadBeast;
 import fatsquirrel.core.Entities.Entity;
 import fatsquirrel.core.Entities.EntityContext;
 import fatsquirrel.core.Entities.EntityType;
-import fatsquirrel.core.Entities.PlayerEntities.HandOperatedMasterSquirrel;
-import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
-import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrelBot;
-import fatsquirrel.core.Entities.PlayerEntities.PlayerEntity;
+import fatsquirrel.core.Entities.PlayerEntities.*;
 import fatsquirrel.core.FlattenedBoard;
 import org.jmock.Mockery;
 import org.junit.Test;
@@ -175,13 +172,30 @@ public class FlattenedBoardTest {
     }
 
     @Test
-    public void GoodBeastPlayer(){
-        Board board = new Board(2,2);
-        FlattenedBoard flattenedBoard = new FlattenedBoard(2,2, board);
+    public void GoodBeastMaster(){
+        Board board = new Board(3,3);
+        FlattenedBoard flattenedBoard = new FlattenedBoard(3,3, board);
         board.setNewEntity(0,0,EntityType.GOOD_BEAST);
         Entity goodBeast = board.getEntity(0,0);
 
         board.setNewMasterSquirrel(1,1, HandOperatedMasterSquirrel.class);
+        Entity other = board.getEntity(1,1);
+        int oldEnergy= other.getEnergy();
+        flattenedBoard.tryMove((GoodBeast) goodBeast,new XY(1,1));
+        assertEquals(board.getEntity(1,1), other);
+        assertNotEquals(board.getEntity(0,0), goodBeast);
+        assertNotEquals(oldEnergy, other.getEnergy());
+
+    }
+
+    @Test
+    public void GoodBeastMini(){
+        Board board = new Board(3,3);
+        FlattenedBoard flattenedBoard = new FlattenedBoard(3,3, board);
+        board.setNewEntity(0,0,EntityType.GOOD_BEAST);
+        Entity goodBeast = board.getEntity(0,0);
+
+        board.setNewMiniSquirrel(1,1, 50,new HandOperatedMasterSquirrel(0,1000,new XY(2,2)));
         Entity other = board.getEntity(1,1);
         int oldEnergy= other.getEnergy();
         flattenedBoard.tryMove((GoodBeast) goodBeast,new XY(1,1));
