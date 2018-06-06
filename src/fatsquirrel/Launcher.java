@@ -27,6 +27,9 @@ public class Launcher extends Application{
     private static Logging logging = new Logging(Launcher.class.getName());
 
     public static void main(String[] args) throws Exception {
+
+        BoardConfig.loadConfig();
+
         board = new Board();
         state = new State(board);
 
@@ -61,6 +64,7 @@ public class Launcher extends Application{
     public void start(Stage primaryStage) throws Exception{
 
         FxUI fxUI = FxUI.createInstance(BoardConfig.getSize());
+
 
         if(gameMode == GameMode.BOT) {
             game = new BotGameImpl(new State(board), fxUI);

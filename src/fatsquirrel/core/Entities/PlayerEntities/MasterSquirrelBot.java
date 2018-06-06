@@ -3,6 +3,7 @@ package fatsquirrel.core.Entities.PlayerEntities;
 import fatsquirrel.XY;
 import fatsquirrel.botapi.*;
 import fatsquirrel.botapi.Implementation.botControllerFactory;
+import fatsquirrel.core.BoardConfig;
 import fatsquirrel.core.Entities.Entity;
 import fatsquirrel.core.Entities.EntityContext;
 import fatsquirrel.core.Entities.EntityType;
@@ -13,7 +14,7 @@ import java.lang.reflect.Proxy;
 
 public class MasterSquirrelBot extends MasterSquirrel {
     private final BotControllerFactory botControllerFactory;
-    private final BotController botController;
+    private BotController botController;
     private final Logging logging;
 
     public MasterSquirrelBot(int id, int energy, XY position) {
@@ -81,7 +82,6 @@ public class MasterSquirrelBot extends MasterSquirrel {
 
         @Override
         public EntityType getEntityAt(XY xy) throws OutOfViewException {
-            System.out.println(xy.toString());
             if(xy.x < getViewLowerLeft().x || xy.x > getViewUpperRight().x ||
                     xy.y< getViewUpperRight().y || xy.y > getViewLowerLeft().y)
                 throw new OutOfViewException();

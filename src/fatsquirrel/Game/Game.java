@@ -3,6 +3,7 @@ package fatsquirrel.Game;
 import fatsquirrel.Logging;
 import fatsquirrel.State;
 import fatsquirrel.UIs.UI;
+import fatsquirrel.core.BoardConfig;
 
 import java.io.IOException;
 import java.util.Timer;
@@ -21,7 +22,6 @@ public abstract class Game {
     }
 
     public void run(boolean newVersion) throws IOException, InterruptedException {
-
         if(newVersion){
             Timer renderTimer = new Timer();
             Timer processTimer = new Timer();
@@ -30,16 +30,19 @@ public abstract class Game {
             renderTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    while(true){
-                        try {
-                            update();
-                            render();
-                            Thread.sleep(1000/FPS);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        } catch (IOException e){
-                            e.printStackTrace();
+                    while(true) {
+                        for (int i = 0; i < BoardConfig.getRounds(); i++) {
+                            try {
+                                update();
+                                render();
+                                Thread.sleep(1000 / FPS);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
+                        state.resetState();
                     }
                 }
             }, 1000);
@@ -48,24 +51,27 @@ public abstract class Game {
             processTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    while(true){
-                        try {
-                            processInput();
-                            Thread.sleep(1000/FPS);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        } catch (IOException e){
-                            e.printStackTrace();
+                    while(true) {
+                        for (int i = 0; i < BoardConfig.getRounds(); i++) {
+                            try {
+                                processInput();
+                                Thread.sleep(1000 / FPS);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
             }, 1000);
-
         }else{
-            while (true){
-                render();
-                processInput();
-                update();
+            while(true) {
+                for (int i = 0; i < BoardConfig.getRounds(); i++) {
+                    render();
+                    processInput();
+                    update();
+                }
             }
         }
     }

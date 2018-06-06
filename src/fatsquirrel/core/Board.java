@@ -8,6 +8,7 @@ import fatsquirrel.core.Entities.PlayerEntities.*;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 
@@ -24,11 +25,13 @@ public class Board {
         entities = new Entity[width][height];
         createRandomBoard();
     }
+
     public Board(int height, int width) {
         this.height = height;
         this.width = width;
         entities = new Entity[width][height];
     }
+
     public void updateEntitySet() throws IOException {
         entitySet.nextStep(flatten());
     }
@@ -253,5 +256,15 @@ public class Board {
 
     public String allEntitiesToString(){
         return entitySet.toString();
+    }
+
+    public ArrayList<Entity> getBots(){
+        return entitySet.getBots();
+    }
+
+    public void resetBoard(){
+        entitySet = new EntitySet();
+        entities = new Entity[width][height];
+        createRandomBoard();
     }
 }

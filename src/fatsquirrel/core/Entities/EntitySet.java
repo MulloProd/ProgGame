@@ -2,6 +2,7 @@ package fatsquirrel.core.Entities;
 
 import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrel;
 import fatsquirrel.Logging;
+import fatsquirrel.core.Entities.PlayerEntities.MasterSquirrelBot;
 
 import java.io.IOException;
 import java.util.*;
@@ -9,6 +10,7 @@ import java.util.*;
 public class EntitySet {
 
     public List<Entity> set = new ArrayList<Entity>();
+
     private int nextID = 0;
     private Logging logging = new Logging(this.getClass().getName());
 
@@ -51,6 +53,15 @@ public class EntitySet {
             if(entity!=null && set.contains(entity))
                 entity.nextStep(entityContext);
         }
+    }
+
+    public ArrayList getBots(){
+        ArrayList<Entity> botList = null;
+        for(int i=0; i<set.size(); i++){
+            if(set.get(i) instanceof MasterSquirrelBot)
+                botList.add(set.get(i));
+        }
+        return botList;
     }
 
     public String toString(){
