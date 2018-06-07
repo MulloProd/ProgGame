@@ -53,17 +53,22 @@ public class FirstMasterBotController implements BotController {
 
     private List<XY> findEntityType(EntityType entityType) {
         List<XY> list = new ArrayList<>();
-        for (int x = 0; x < Math.abs(view.getViewUpperRight().x - view.getViewLowerLeft().x); x++) {
-            for (int y = 0; y < Math.abs(view.getViewUpperRight().y - view.getViewLowerLeft().y); y++) {
+        int counter = 0;
+        for (int x = 1; x < Math.abs(view.getViewUpperRight().x - view.getViewLowerLeft().x); x++) {
+            for (int y = 1; y < Math.abs(view.getViewUpperRight().y - view.getViewLowerLeft().y); y++) {
+                counter++;
                 try {
                     if (view.getEntityAt(view.getViewLowerLeft().plus(new XY(x, -y))) == entityType) {
                         list.add(view.getViewLowerLeft().plus(new XY(x, -y)));
                     }
                 } catch (OutOfViewException e) {
                     e.printStackTrace();
+                }catch (ArrayIndexOutOfBoundsException e) {
+                    e.printStackTrace();
                 }
             }
         }
+        System.out.println(counter);
         return list;
     }
 
