@@ -294,25 +294,7 @@ public class FlattenedBoard implements EntityContext, BoardView {
                     break;
                 case "GoodBeast":
                     type = EntityType.GOOD_BEAST;
-                    break;/*
-                case "HandOperatedMasterSquirrel":
-                    type = EntityType.HandOperatedMasterSquirrel;
                     break;
-                case "MasterSquirrelBot":
-                    type = EntityType.MasterSquirrelBot;
-                    break;
-                case "MasterSquirrel":
-                    type = EntityType.MASTER_SQUIRREL;
-                    break;
-                case "MiniSquirrel":
-                    type = EntityType.MINI_SQUIRREL;
-                    break;
-                case "MiniSquirrelBot":
-                    type = EntityType.MiniSquirrelBot;
-                    break;
-                case "StandardMiniSquirrel":
-                    type = EntityType.StandardMiniSquirrel;
-                    break;*/
             }
             if (board.getEntity(xy.x, xy.y) instanceof MasterSquirrel)
                 type = EntityType.MASTER_SQUIRREL;

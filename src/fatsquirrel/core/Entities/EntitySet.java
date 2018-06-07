@@ -56,7 +56,7 @@ public class EntitySet {
     }
 
     public ArrayList getBots(){
-        ArrayList<Entity> botList = null;
+        ArrayList<Entity> botList = new ArrayList<>();
         for(int i=0; i<set.size(); i++){
             if(set.get(i) instanceof MasterSquirrelBot)
                 botList.add(set.get(i));
