@@ -4,8 +4,9 @@ import fatsquirrel.Logging;
 import fatsquirrel.State;
 import fatsquirrel.UIs.UI;
 import fatsquirrel.core.BoardConfig;
+import fatsquirrel.core.Highscore;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -15,6 +16,7 @@ public abstract class Game {
     private UI ui;
     private final int FPS = 1;
     protected Logging logging = new Logging(this.getClass().getName());
+    private Highscore highscore = new Highscore();
 
     public Game(State state, UI ui){
         this.state = state;
@@ -26,24 +28,32 @@ public abstract class Game {
             Timer renderTimer = new Timer();
             Timer processTimer = new Timer();
 
+            //Import vom Highscore
+            FileReader fileReader = new FileReader("file.txt");
+            String importedHighscore = new BufferedReader(fileReader).readLine();
+            fileReader.close();
+
+
             //1. Thread fürs Rendern
             renderTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    while(true) {
-                        for (int i = 0; i < BoardConfig.getRounds(); i++) {
-                            try {
-                                update();
-                                render();
-                                Thread.sleep(1000 / FPS);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                int round = 0;
+                while(true) {
+                    for (int i = 0; i < BoardConfig.getRounds(); i++) {
+                        try {
+                            update();
+                            render();
+                            Thread.sleep(1000 / FPS);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                        state.resetState();
                     }
+                    round++;
+                    highscore = state.resetState(round, importedHighscore);
+                }
                 }
             }, 1000);
 
@@ -51,18 +61,18 @@ public abstract class Game {
             processTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    while(true) {
-                        for (int i = 0; i < BoardConfig.getRounds(); i++) {
-                            try {
-                                processInput();
-                                Thread.sleep(1000 / FPS);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                while(true) {
+                    for (int i = 0; i < BoardConfig.getRounds(); i++) {
+                        try {
+                            processInput();
+                            Thread.sleep(1000 / FPS);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     }
+                }
                 }
             }, 1000);
         }else{
@@ -74,6 +84,20 @@ public abstract class Game {
                 }
             }
         }
+
+        //Wegspeichern beim Schließen der Anwendung
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+                try {
+                    FileWriter fileWriter = new FileWriter("file.txt");
+                    fileWriter.write(highscore.toString());
+                    fileWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, "Shutdown-thread"));
     }
 
     private void update() throws IOException {

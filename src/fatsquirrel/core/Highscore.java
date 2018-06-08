@@ -11,20 +11,35 @@ import java.util.HashMap;
 
 public class Highscore {
 
-    public static void showHighscore(EntitySet entitySet) {
+    private static Map<String, Map<Integer, Integer>> score = new HashMap();
 
-        //Key: Botname, Value: Key:Runde, Value: Highscore
-        Map<String, Map<Integer, Integer>> scores = new HashMap();
-        ArrayList<Entity> botList = entitySet.getBots();
+    public Highscore(){
+        for(String botName : BoardConfig.getBotNames())
+            score.put(botName, new HashMap());
+    }
 
-        for(int i = 0; i < BoardConfig.getBotNames().length; i++){
-            for(int j=0; j<botList.size(); j++){
-                if(botList.get(j).toString().contains(BoardConfig.getBotNames()[i])){
-                    //Fehlt noch: bisher erreichte Highscores einer Entität in eine Liste packen und dem Value
-                    //in der Hashmap hinzufügen
-                    //scores.put(BoardConfig.getBotNames()[i], botList);
-                }
-            }
+    public static void calculateHighscore(ArrayList<Entity> entityList, int round, String importedHighscore) {
+
+        //Convert String to Highscore
+        //...
+
+
+        //Key: Botname, Value: (Key:Runde, Value: Highscore)
+
+        String[] botNames = BoardConfig.getBotNames();
+        Map<Integer,Integer> mapTemp = new HashMap<>();
+
+        for(int i = 0; i<entityList.size(); i++) {
+            mapTemp.put(round,entityList.get(i).getEnergy());
+            score.put(botNames[i], mapTemp);
+            mapTemp = new HashMap<>();
         }
+        System.out.println(score);
+
+
+    }
+
+    public String toString(){
+        return score.toString();
     }
 }

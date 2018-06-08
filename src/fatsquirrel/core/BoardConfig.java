@@ -14,12 +14,12 @@ public class BoardConfig {
     //Wird per Config-File gesetzt
     private static String[] botNames={""};
     private static XY size = new XY(0,0);
-    private static int rounds;
-    private static int wallCount;
-    private static int beastCount;
-    private static int plantCount;
-    private static int handOperatedMasterSquirrelCount;
-    private static int botMasterSquirrelCount;
+    private static int rounds = 10;
+    private static int wallCount= size.x *2 + (size.y -2)*2 + 10;
+    private static int beastCount = 2;
+    private static int plantCount = 2;
+    private static int handOperatedMasterSquirrelCount = 0;
+    private static int botMasterSquirrelCount =1;
 
     public static XY getSize(){return size;}
     public static int getWallCount(){return wallCount;}
