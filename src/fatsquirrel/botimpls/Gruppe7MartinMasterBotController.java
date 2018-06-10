@@ -41,7 +41,7 @@ public class Gruppe7MartinMasterBotController implements BotController {
 
         int energyNewMini = 100;
 
-        if(new Random().nextInt(10) < 2){
+        if(true){
             try {
                 view.spawnMiniBot(XYsupport.randomVector(), energyNewMini);
             } catch (SpawnException e) {

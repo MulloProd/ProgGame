@@ -6,6 +6,8 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
@@ -13,6 +15,7 @@ public class BoardConfig {
 
     //Wird per Config-File gesetzt
     private static String[] botNames={""};
+    private static Integer nextBotIndex= 0;
     private static XY size = new XY(0,0);
     private static int rounds = 10;
     private static int wallCount= size.x *2 + (size.y -2)*2 + 10;
@@ -29,6 +32,19 @@ public class BoardConfig {
     public static int getPlantCount(){return plantCount;}
     public static String[] getBotNames(){
         return botNames;
+    }
+    public static String getNextBotName() {
+        if(nextBotIndex<botNames.length-1) {
+            nextBotIndex++;
+            return botNames[nextBotIndex-1];
+        }
+        else if(nextBotIndex==botNames.length-1){
+            nextBotIndex=0;
+            return botNames[botNames.length-1];
+        }
+        else {
+            return "";
+        }
     }
     public static int getRounds() {
         return rounds;
@@ -61,6 +77,6 @@ public class BoardConfig {
             botMasterSquirrelCount=Integer.parseInt(properties.getProperty("botMasterSquirrelCount"));
         if(properties.getProperty("botNames").length()>0)
             botNames = properties.getProperty("botNames").split(",");
-    }
 
+    }
 }
