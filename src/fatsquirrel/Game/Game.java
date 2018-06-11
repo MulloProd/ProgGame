@@ -8,7 +8,6 @@ import fatsquirrel.core.Highscore;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public abstract class Game {
 
@@ -34,22 +33,23 @@ public abstract class Game {
             renderTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                int round = 0;
-                while(true) {
-                    for (int i = 0; i < BoardConfig.getRounds(); i++) {
-                        try {
-                            update();
-                            render();
-                            Thread.sleep(1000 / FPS);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                    int round = 0;
+
+                    for (int rounds = 0; rounds < BoardConfig.getRounds(); rounds++) {
+                        for(int steps = 0; steps < BoardConfig.getSteps(); steps++) {
+                            try {
+                                update();
+                                render();
+                                Thread.sleep(1000 / FPS);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
+                        round++;
+                        highscore = state.resetState(round, highscore);
                     }
-                    round++;
-                    highscore = state.resetState(round, highscore);
-                }
                 }
             }, 1000);
 
@@ -57,8 +57,8 @@ public abstract class Game {
             processTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                while(true) {
-                    for (int i = 0; i < BoardConfig.getRounds(); i++) {
+                for (int rounds = 0; rounds < BoardConfig.getRounds(); rounds++) {
+                    for(int steps = 0; steps < BoardConfig.getSteps(); steps++) {
                         try {
                             processInput();
                             Thread.sleep(1000 / FPS);
@@ -72,8 +72,8 @@ public abstract class Game {
                 }
             }, 1000);
         }else{
-            while(true) {
-                for (int i = 0; i < BoardConfig.getRounds(); i++) {
+            for (int rounds = 0; rounds < BoardConfig.getRounds(); rounds++) {
+                for(int steps = 0; steps < BoardConfig.getSteps(); steps++) {
                     render();
                     processInput();
                     update();

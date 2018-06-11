@@ -6,10 +6,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
-import java.util.Random;
 
 public class BoardConfig {
 
@@ -18,6 +15,7 @@ public class BoardConfig {
     private static Integer nextBotIndex= 0;
     private static XY size = new XY(0,0);
     private static int rounds = 10;
+    private static int steps = 5;
     private static int wallCount= size.x *2 + (size.y -2)*2 + 10;
     private static int beastCount = 2;
     private static int plantCount = 2;
@@ -49,6 +47,7 @@ public class BoardConfig {
     public static int getRounds() {
         return rounds;
     }
+    public static int getSteps(){return steps;}
 
     public static void loadConfig() throws IOException {
         File propertiesFile = new File("./src/fatsquirrel/config.properties");
@@ -63,6 +62,8 @@ public class BoardConfig {
             //Werte aus Config-File parsen
             if (Integer.parseInt(properties.getProperty("rounds")) > 0)
                 rounds = Integer.parseInt(properties.getProperty("rounds"));
+            if (Integer.parseInt(properties.getProperty("steps")) > 0)
+                steps = Integer.parseInt(properties.getProperty("steps"));
             if (Integer.parseInt(properties.getProperty("boardSizeX")) > 0 && Integer.parseInt(properties.getProperty("boardSizeY")) > 0)
                 size = new XY(Integer.parseInt(properties.getProperty("boardSizeX")), Integer.parseInt(properties.getProperty("boardSizeY")));
             if (Integer.parseInt(properties.getProperty("wallCount")) >= 0)

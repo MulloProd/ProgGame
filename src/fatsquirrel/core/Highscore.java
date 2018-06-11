@@ -1,12 +1,8 @@
 package fatsquirrel.core;
 
-import fatsquirrel.core.BoardConfig;
 import fatsquirrel.core.Entities.Entity;
-import fatsquirrel.core.Entities.EntitySet;
-import org.jmock.Mockery;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.Map;
 import java.util.HashMap;
