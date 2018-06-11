@@ -10,6 +10,7 @@ import java.util.HashMap;
 public class Highscore {
 
     private static Map<String, ArrayList<Integer>> scores = new HashMap();
+    private static ArrayList<Entity> botList = new ArrayList<>();
 
     public Highscore(){
         for(String botName : BoardConfig.getBotNames())
@@ -17,7 +18,7 @@ public class Highscore {
     }
 
     public Highscore calculateHighscore(ArrayList<Entity> entityList, int round) {
-
+        botList = entityList;
         String[] botNames = BoardConfig.getBotNames();
         ArrayList<Integer> tempList;
         for(int i = 0; i<entityList.size(); i++){
@@ -41,8 +42,6 @@ public class Highscore {
         }catch(Exception e){
             e.printStackTrace();
         }
-
-        System.out.println("Bisherige Highscores: "+scores);
     }
 
     public void loadHighscores(){
@@ -60,8 +59,6 @@ public class Highscore {
                 scores.put(m.getKey(),m.getValue());
             }
 
-            System.out.println("Alle Highscores" + scores);
-
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -72,6 +69,15 @@ public class Highscore {
     }
 
     public String toString(){
-        return scores.toString();
+
+        String[] botNames = BoardConfig.getBotNames();
+        ArrayList<Integer> tempList;
+        for(int i = 0; i<botList.size(); i++){
+            tempList = (scores.get(botNames[i]));
+            Collections.sort(tempList);
+            scores.put(botNames[i],tempList);
+        }
+
+        return "Highscores: " + scores.toString();
     }
 }

@@ -50,6 +50,9 @@ public abstract class Game {
                         round++;
                         highscore = state.resetState(round, highscore);
                     }
+
+                    System.out.println(highscore.toString());
+                    System.exit(1);
                 }
             }, 1000);
 
