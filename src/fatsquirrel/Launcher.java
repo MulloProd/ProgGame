@@ -16,9 +16,6 @@ import javafx.stage.WindowEvent;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Launcher extends Application{
 

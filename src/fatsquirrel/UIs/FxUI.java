@@ -15,9 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import sun.awt.resources.awt.*;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class FxUI extends Scene implements UI {
@@ -28,7 +26,11 @@ public class FxUI extends Scene implements UI {
     private static MoveCommand moveCommand;
     private static Label statusLabel;
     private static String[] botNames = BoardConfig.getBotNames();
-    private static int round = 0;
+    private static int step = 0;
+    private static int round = 1;
+    private static int maxSteps = BoardConfig.getSteps();
+    private static int maxRounds = BoardConfig.getRounds();
+
 
     public FxUI(Parent parent, Canvas boardCanvas, Label msgLabel) {
         super(parent);
@@ -78,8 +80,6 @@ public class FxUI extends Scene implements UI {
         return fxUI;
     }
 
-
-
     @Override
     public void render(final BoardView view) {
         Platform.runLater(new Runnable() {
@@ -96,10 +96,13 @@ public class FxUI extends Scene implements UI {
     }
 
     private void repaintBoardCanvas(BoardView view) {
-        if(round==BoardConfig.getRounds())
-            round=0;
-        round++;
-        statusLabel.setText("Runde: " + round + " von " + BoardConfig.getRounds());
+        if(step == maxSteps){
+            step=0;
+            round++;
+        }
+        step++;
+
+        statusLabel.setText("Step " + step + " von " + maxSteps + " (Round " + round + " von " +  maxRounds + ")");
         GraphicsContext gc = boardCanvas.getGraphicsContext2D();
         gc.clearRect(0, 0, boardCanvas.getWidth(), boardCanvas.getHeight());
         gc.setFill(Color.BLACK);
@@ -115,27 +118,27 @@ public class FxUI extends Scene implements UI {
             for(int x = 0; x<viewSize.x; x++) {
                 switch(view.getEntityType(x,y)){
                     case WALL:
-                        gc.drawImage((imageWall), x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                        gc.drawImage(imageWall, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         //gc.setFill(Color.CHOCOLATE);
                         //gc.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         break;
                     case BAD_BEAST:
-                        gc.drawImage((imageBadBeast), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                        gc.drawImage(imageBadBeast, x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         //gc.setFill(Color.DARKRED);
                         //gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
                     case GOOD_BEAST:
-                        gc.drawImage((imageGoodBeast), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                        gc.drawImage(imageGoodBeast, x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         //gc.setFill(Color.FORESTGREEN);
                         //gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
                     case BAD_PLANT:
-                        gc.drawImage((imageBadPlant), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                        gc.drawImage(imageBadPlant, x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         //gc.setFill(Color.INDIANRED);
                         //gc.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
                     case GOOD_PLANT:
-                        gc.drawImage((imageGoodPlant), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                        gc.drawImage(imageGoodPlant, x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         //gc.setFill(Color.LIGHTGREEN);
                         //gc.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
