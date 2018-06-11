@@ -38,7 +38,7 @@ public class Launcher extends Application{
         }
         board = new Board();
         state = new State(board);
-        
+
         if(gameMode.equals(gameMode.BOT) || gameMode.equals(gameMode.SOLO))
             Application.launch(args);
         else if (gameMode.equals(gameMode.CONSOLE)) {

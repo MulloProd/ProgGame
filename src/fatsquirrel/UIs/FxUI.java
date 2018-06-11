@@ -15,14 +15,16 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import sun.awt.resources.awt.*;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class FxUI extends Scene implements UI {
 
     private Canvas boardCanvas;
     private Label msgLabel;
-    private static final int CELL_SIZE = 30;
+    private static final int CELL_SIZE = 50;
     private static MoveCommand moveCommand;
     private static Label statusLabel;
     private static String[] botNames = BoardConfig.getBotNames();
@@ -103,38 +105,43 @@ public class FxUI extends Scene implements UI {
         gc.setFill(Color.BLACK);
         XY viewSize = view.getSize();
 
+        Image imageWall = new Image(getClass().getResourceAsStream("..\\Images\\wall.jpg"));
+        Image imageBadBeast = new Image(getClass().getResourceAsStream("..\\Images\\badbeast.gif"));
+        Image imageGoodBeast = new Image(getClass().getResourceAsStream("..\\Images\\goodbeast.gif"));
+        Image imageBadPlant = new Image(getClass().getResourceAsStream("..\\Images\\badplant.gif"));
+        Image imageGoodPlant = new Image(getClass().getResourceAsStream("..\\Images\\goodplant.gif"));
+
         for(int y = 0; y<viewSize.y; y++){
             for(int x = 0; x<viewSize.x; x++) {
                 switch(view.getEntityType(x,y)){
                     case WALL:
-                        gc.drawImage(new Image(getClass().getResourceAsStream("..\\Images\\wall.jpg")), x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                        gc.drawImage((imageWall), x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         //gc.setFill(Color.CHOCOLATE);
                         //gc.fillRect(x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         break;
                     case BAD_BEAST:
-                        //gc.drawImage(new Image(getClass().getResourceAsStream("..\\Images\\badbeast.gif")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
-                        gc.setFill(Color.DARKRED);
-                        gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                        gc.drawImage((imageBadBeast), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                        //gc.setFill(Color.DARKRED);
+                        //gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
                     case GOOD_BEAST:
-                        gc.setFill(Color.FORESTGREEN);
-                        gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                        gc.drawImage((imageGoodBeast), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                        //gc.setFill(Color.FORESTGREEN);
+                        //gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
                     case BAD_PLANT:
-                        //gc.drawImage(new Image(getClass().getResourceAsStream("Images\\badplant.jpg")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
-                        gc.setFill(Color.INDIANRED);
-                        gc.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                        gc.drawImage((imageBadPlant), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                        //gc.setFill(Color.INDIANRED);
+                        //gc.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
                     case GOOD_PLANT:
-                        //gc.drawImage(new Image(getClass().getResourceAsStream("Images\\goodplant.png")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
-                        gc.setFill(Color.LIGHTGREEN);
-                        gc.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                        gc.drawImage((imageGoodPlant), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
+                        //gc.setFill(Color.LIGHTGREEN);
+                        //gc.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                         break;
                     case MASTER_SQUIRREL:
-                        //gc.drawImage(new Image(getClass().getResourceAsStream("Images\\squirrel.png")), x*CELL_SIZE,y*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         gc.setFill(Color.DARKSLATEBLUE);
                         gc.fillOval(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-                        //statusLabel.setText("Energie: " + view.getEntityAt(x, y).getEnergy());
                         break;
                     case MINI_SQUIRREL:
                         gc.setFill(Color.SKYBLUE);
