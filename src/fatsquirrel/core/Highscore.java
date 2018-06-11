@@ -5,41 +5,77 @@ import fatsquirrel.core.Entities.Entity;
 import fatsquirrel.core.Entities.EntitySet;
 import org.jmock.Mockery;
 
+import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.Map;
 import java.util.HashMap;
 
 public class Highscore {
 
-    private static Map<String, Map<Integer, Integer>> score = new HashMap();
+    private static Map<String, ArrayList<Integer>> scores = new HashMap();
 
     public Highscore(){
         for(String botName : BoardConfig.getBotNames())
-            score.put(botName, new HashMap());
+            scores.put(botName, new ArrayList());
     }
 
-    public static void calculateHighscore(ArrayList<Entity> entityList, int round, String importedHighscore) {
-
-        //Convert String to Highscore
-        //...
-
-
-        //Key: Botname, Value: (Key:Runde, Value: Highscore)
+    public Highscore calculateHighscore(ArrayList<Entity> entityList, int round) {
 
         String[] botNames = BoardConfig.getBotNames();
-        Map<Integer,Integer> mapTemp = new HashMap<>();
-
-        for(int i = 0; i<entityList.size(); i++) {
-            mapTemp.put(round,entityList.get(i).getEnergy());
-            score.put(botNames[i], mapTemp);
-            mapTemp = new HashMap<>();
+        ArrayList<Integer> tempList;
+        for(int i = 0; i<entityList.size(); i++){
+            tempList = (scores.get(botNames[i]));
+            tempList.add(entityList.get(i).getEnergy());
+            scores.put(botNames[i],tempList);
         }
-        System.out.println(score);
+        return this;
+    }
 
+    public void saveHighscores(){
+        try{
+            File fileOne=new File("./src/fatsquirrel/Output/highscores.map");
+            FileOutputStream fos=new FileOutputStream(fileOne);
+            ObjectOutputStream oos=new ObjectOutputStream(fos);
 
+            oos.writeObject(this.getMap());
+            oos.flush();
+            oos.close();
+            fos.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        System.out.println("Bisherige Highscores: "+scores);
+    }
+
+    public void loadHighscores(){
+        try{
+            File toRead=new File("./src/fatsquirrel/Output/fixhighscores.map");
+            FileInputStream fis=new FileInputStream(toRead);
+            ObjectInputStream ois=new ObjectInputStream(fis);
+
+            HashMap<String,ArrayList<Integer>> mapInFile=(HashMap<String,ArrayList<Integer>>)ois.readObject();
+
+            ois.close();
+            fis.close();
+
+            for(Map.Entry<String,ArrayList<Integer>> m :mapInFile.entrySet()){
+                scores.put(m.getKey(),m.getValue());
+            }
+
+            System.out.println("Alle Highscores" + scores);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public Map getMap(){
+        return scores;
     }
 
     public String toString(){
-        return score.toString();
+        return scores.toString();
     }
 }

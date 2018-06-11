@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class State {
     private Board board;
-    private Highscore highscore = new Highscore();
 
     public State(Board board){
         this.board = board;
@@ -25,9 +24,9 @@ public class State {
         return board.flatten();
     }
 
-    public Highscore resetState(int round, String importedHighscore){
+    public Highscore resetState(int round, Highscore highscore){
         ArrayList<Entity> botList = board.getBots();
-        highscore.calculateHighscore(botList,round, importedHighscore);
+        highscore = highscore.calculateHighscore(botList,round);
         board.resetBoard();
         return highscore;
     }

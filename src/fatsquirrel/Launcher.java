@@ -14,7 +14,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -27,12 +29,16 @@ public class Launcher extends Application{
     private static Logging logging = new Logging(Launcher.class.getName());
 
     public static void main(String[] args) throws Exception {
-
-        BoardConfig.loadConfig();
-
+        try {
+            BoardConfig.loadConfig();
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        } catch (NumberFormatException e){
+            e.printStackTrace();
+        }
         board = new Board();
         state = new State(board);
-
+        
         if(gameMode.equals(gameMode.BOT) || gameMode.equals(gameMode.SOLO))
             Application.launch(args);
         else if (gameMode.equals(gameMode.CONSOLE)) {
@@ -62,9 +68,7 @@ public class Launcher extends Application{
     }
 
     public void start(Stage primaryStage) throws Exception{
-
         FxUI fxUI = FxUI.createInstance(BoardConfig.getSize());
-
 
         if(gameMode == GameMode.BOT) {
             game = new BotGameImpl(new State(board), fxUI);

@@ -58,25 +58,25 @@ public class BoardConfig {
             BufferedInputStream bis = new BufferedInputStream(new FileInputStream(propertiesFile));
             properties.load(bis);
             bis.close();
+
+
+            //Werte aus Config-File parsen
+            if (Integer.parseInt(properties.getProperty("rounds")) > 0)
+                rounds = Integer.parseInt(properties.getProperty("rounds"));
+            if (Integer.parseInt(properties.getProperty("boardSizeX")) > 0 && Integer.parseInt(properties.getProperty("boardSizeY")) > 0)
+                size = new XY(Integer.parseInt(properties.getProperty("boardSizeX")), Integer.parseInt(properties.getProperty("boardSizeY")));
+            if (Integer.parseInt(properties.getProperty("wallCount")) >= 0)
+                wallCount = size.x * 2 + (size.y - 2) * 2 + Integer.parseInt(properties.getProperty("wallCount"));
+            if (Integer.parseInt(properties.getProperty("beastCount")) >= 0)
+                beastCount = Integer.parseInt(properties.getProperty("beastCount"));
+            if (Integer.parseInt(properties.getProperty("plantCount")) >= 0)
+                plantCount = Integer.parseInt(properties.getProperty("plantCount"));
+            if (Integer.parseInt(properties.getProperty("handOperatedMasterSquirrelCount")) >= 0)
+                handOperatedMasterSquirrelCount = Integer.parseInt(properties.getProperty("handOperatedMasterSquirrelCount"));
+            if (Integer.parseInt(properties.getProperty("botMasterSquirrelCount")) >= 0)
+                botMasterSquirrelCount = Integer.parseInt(properties.getProperty("botMasterSquirrelCount"));
+            if (properties.getProperty("botNames").length() > 0)
+                botNames = properties.getProperty("botNames").split(",");
         }
-
-        //Werte aus Config-File parsen
-        if(Integer.parseInt(properties.getProperty("rounds"))>0)
-            rounds=Integer.parseInt(properties.getProperty("rounds"));
-        if(Integer.parseInt(properties.getProperty("boardSizeX"))>0 && Integer.parseInt(properties.getProperty("boardSizeY"))>0)
-            size = new XY(Integer.parseInt(properties.getProperty("boardSizeX")), Integer.parseInt(properties.getProperty("boardSizeY")));
-        if(Integer.parseInt(properties.getProperty("wallCount"))>=0)
-            wallCount= size.x *2 + (size.y -2)*2 + Integer.parseInt(properties.getProperty("wallCount"));
-        if(Integer.parseInt(properties.getProperty("beastCount"))>=0)
-            beastCount=Integer.parseInt(properties.getProperty("beastCount"));
-        if(Integer.parseInt(properties.getProperty("plantCount"))>=0)
-            plantCount=Integer.parseInt(properties.getProperty("plantCount"));
-        if(Integer.parseInt(properties.getProperty("handOperatedMasterSquirrelCount"))>=0)
-            handOperatedMasterSquirrelCount=Integer.parseInt(properties.getProperty("handOperatedMasterSquirrelCount"));
-        if(Integer.parseInt(properties.getProperty("botMasterSquirrelCount"))>=0)
-            botMasterSquirrelCount=Integer.parseInt(properties.getProperty("botMasterSquirrelCount"));
-        if(properties.getProperty("botNames").length()>0)
-            botNames = properties.getProperty("botNames").split(",");
-
     }
 }
