@@ -43,8 +43,17 @@ public class Gruppe7MartinMasterBotController implements BotController {
 
         if(true){
             try {
-                view.spawnMiniBot(XYsupport.randomVector(), energyNewMini);
+                XY dir = XYsupport.randomVector();
+                int counter = 3;
+                while(view.getEntityAt(view.locate().plus(dir)) != EntityType.NONE && counter>0){
+                    counter--;
+                    dir = XYsupport.randomVector();
+                }
+                if(view.getEntityAt(view.locate().plus(dir)) == EntityType.NONE)
+                view.spawnMiniBot(dir, energyNewMini);
             } catch (SpawnException e) {
+                e.printStackTrace();
+            } catch (OutOfViewException e) {
                 e.printStackTrace();
             }
         }
