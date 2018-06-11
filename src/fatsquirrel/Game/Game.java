@@ -7,8 +7,8 @@ import fatsquirrel.core.BoardConfig;
 import fatsquirrel.core.Highscore;
 
 import java.io.*;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public abstract class Game {
 
@@ -28,11 +28,7 @@ public abstract class Game {
             Timer renderTimer = new Timer();
             Timer processTimer = new Timer();
 
-            //Import vom Highscore
-            FileReader fileReader = new FileReader("file.txt");
-            String importedHighscore = new BufferedReader(fileReader).readLine();
-            fileReader.close();
-
+            highscore.loadHighscores();
 
             //1. Thread fürs Rendern
             renderTimer.schedule(new TimerTask() {
@@ -52,7 +48,7 @@ public abstract class Game {
                         }
                     }
                     round++;
-                    highscore = state.resetState(round, importedHighscore);
+                    highscore = state.resetState(round, highscore);
                 }
                 }
             }, 1000);
@@ -88,14 +84,7 @@ public abstract class Game {
         //Wegspeichern beim Schließen der Anwendung
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
-                try {
-                    FileWriter fileWriter = new FileWriter("file.txt");
-                    fileWriter.write(highscore.toString());
-                    fileWriter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+                highscore.saveHighscores();
             }
         }, "Shutdown-thread"));
     }
