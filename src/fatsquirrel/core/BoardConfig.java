@@ -16,6 +16,7 @@ public class BoardConfig {
     private static XY size = new XY(0,0);
     private static int rounds = 10;
     private static int steps = 5;
+    private static int currentSteps = 0;
     private static int wallCount= size.x *2 + (size.y -2)*2 + 10;
     private static int beastCount = 2;
     private static int plantCount = 2;
@@ -48,6 +49,10 @@ public class BoardConfig {
         return rounds;
     }
     public static int getSteps(){return steps;}
+    public static int getCurrentSteps(){return currentSteps;}
+    public static void setCurrentSteps(int newcurrentSteps){
+        currentSteps = newcurrentSteps;
+    }
 
     public static void loadConfig() throws IOException {
         File propertiesFile = new File("./src/fatsquirrel/config.properties");

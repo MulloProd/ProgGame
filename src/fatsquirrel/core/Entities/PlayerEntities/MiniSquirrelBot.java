@@ -3,6 +3,7 @@ package fatsquirrel.core.Entities.PlayerEntities;
 import fatsquirrel.XY;
 import fatsquirrel.botapi.*;
 import fatsquirrel.botapi.Implementation.botControllerFactory;
+import fatsquirrel.core.BoardConfig;
 import fatsquirrel.core.Entities.*;
 import fatsquirrel.core.Entities.EntityContext;
 import fatsquirrel.core.Entities.EntityType;
@@ -69,12 +70,9 @@ public class MiniSquirrelBot extends MiniSquirrel{
         }
 
         @Override
-        public boolean isMine(XY xy) {
-            try {
+        public boolean isMine(XY xy) throws OutOfViewException {
+
                 getEntityAt(xy);
-            } catch (OutOfViewException e) {
-                e.printStackTrace();
-            }
 
             if(entityContext.getEntityAt(xy.x,xy.y).equals(EntityType.MASTER_SQUIRREL)){
                 if(MiniSquirrelBot.this.getMasterSquirrel().equals((entityContext.getEntityAt(xy.x,xy.y))))
@@ -201,7 +199,8 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
         @Override
         public long getRemainingSteps() {
-            return 0;
+
+            return BoardConfig.getSteps()-BoardConfig.getCurrentSteps();
         }
 
     }

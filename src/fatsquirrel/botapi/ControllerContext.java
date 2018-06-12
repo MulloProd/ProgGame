@@ -45,7 +45,7 @@ import fatsquirrel.core.Entities.EntityType;
      * @return true, if entity at xy is my master or one of my minis resp.
      * @throws OutOfViewException if xy is outside the view
      */
-    boolean isMine(XY xy);
+    boolean isMine(XY xy) throws OutOfViewException;
 
     /**
      *
