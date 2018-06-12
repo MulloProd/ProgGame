@@ -38,6 +38,7 @@ public abstract class Game {
                     for (int rounds = 0; rounds < BoardConfig.getRounds(); rounds++) {
                         for(int steps = 0; steps < BoardConfig.getSteps(); steps++) {
                             try {
+                                BoardConfig.setCurrentSteps(steps);
                                 update();
                                 render();
                                 Thread.sleep(1000 / FPS);

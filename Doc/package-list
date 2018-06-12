@@ -1,0 +1,12 @@
+Testing
+fatsquirrel
+fatsquirrel.CommandScanner
+fatsquirrel.Console
+fatsquirrel.Game
+fatsquirrel.UIs
+fatsquirrel.botapi
+fatsquirrel.botapi.Implementation
+fatsquirrel.botimpls
+fatsquirrel.core
+fatsquirrel.core.Entities
+fatsquirrel.core.Entities.PlayerEntities
